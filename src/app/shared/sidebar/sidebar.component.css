@@ -1,0 +1,43 @@
+section{
+    display: none;
+}
+aside{
+    position: sticky;
+    top: 2rem;
+    background-color: white;
+    border-radius: .5rem;
+    padding: 2.5rem 2rem;
+    height: fit-content;
+    width: 15rem;
+    margin-right: 2rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+a{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #353535;
+}
+
+.active{
+    color: var(--primaryColor);
+}
+
+button {
+    background-color: var(--primaryColor);
+    border: transparent;
+    padding-block: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    border-radius: .5rem;
+    margin-top: 1rem;
+}
+
+@media screen and (min-width:1000px) {
+    section{
+        display: block;
+        height: 100%;
+    }
+}

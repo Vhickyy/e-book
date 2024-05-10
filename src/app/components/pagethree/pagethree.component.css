@@ -1,0 +1,41 @@
+.main{
+    text-align: center;
+    font-size: 14px;
+}
+h4 {
+    font-size: 1rem;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+button{
+    background-color: var(--primaryColor);
+    color: white;
+    padding: .8rem 2rem;
+    border: none;
+    border-radius: .3rem;
+}
+.footer p{
+    color: var(--primaryColor);
+    cursor: pointer;
+}
+.detail{
+    border-bottom: 1px solid var(--primaryColor);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.interest{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+img{
+    width: 9rem;
+    height: 8rem;
+    object-fit: cover;
+}

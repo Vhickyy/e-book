@@ -1,0 +1,179 @@
+.flex-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 2rem;
+    width: min(90%,var(--maxWidth));
+    margin-inline: auto;
+}
+
+.icon-div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+}
+
+.icon-container{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    background-color: rgba(249, 231, 255, 1);
+}
+.aside-2{
+    background-color: whitesmoke;
+    padding-block: 3rem 7rem;
+    display: grid;
+    gap: 7rem;
+}
+.books{
+    width: min(90%,var(--maxWidth));
+    margin-inline: auto;
+}
+
+h4{
+    /* font-weight: 600; */
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
+}
+.book-row{
+    /* background-color: green; */
+    display: grid;
+    /* grid-template-columns: repeat(4,1fr); */
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 1rem;
+}
+
+.book-card{
+    background-color: white;
+    padding: .2rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    /* border: 1px solid transparent; */
+    border: 2px solid rgba(187, 41, 235, 0.15)
+}
+
+.book-card:hover{
+    border: 2px solid var(--primaryColor);
+    box-shadow: 1px 4px 25px rgba(0, 0, 0, 0.13);
+}
+
+.book-card>img{
+    width: 100%;
+    height: 11rem;
+    /* object-fit: center; */
+}
+.detail{
+    padding: 1rem;
+    background-color: white;
+    display: grid;
+    gap: .5rem;
+}
+.title{
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.price{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.author{
+    font-weight: 400;
+    font-size: .9rem;
+    color: rgba(30, 0, 40, 0.58);
+}
+
+.aside-3{
+    background-color: rgba(0, 0, 0, 0.79);
+    padding-block: 7rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+.dive{
+    width: min(90%,var(--maxWidth));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+.dive > p {
+    position: relative;
+    /* z-index: 1; */
+    color: rgba(255, 255, 255, 1);
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+    font-family: 'Playball',cursive;
+}
+.dive > button{
+    background-color: rgba(145, 44, 178, 1);
+    color: white;
+    border: 2px solid white;
+    position: relative;
+    border-radius: .3rem;
+    padding: .5rem 1rem;
+}
+
+.circle1{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 100%;
+    background-color: rgba(0, 172, 255, 1);
+    height: 10rem;
+    width: 20%;
+    filter: blur(5rem);
+}
+.circle2{
+    position: absolute;
+    bottom: -2rem;
+    right: 10rem;
+    border-radius: 100%;
+    background-color: rgba(254, 79, 119, 1);
+    height: 10rem;
+    width: 20%;
+    filter: blur(5rem);
+}
+.circle3{
+    position: absolute;
+    top: -2rem;
+    /* right: 50%; */
+    left: 40%;
+    border-radius: 100%;
+    background-color: rgba(246, 112, 124, 1);
+    height: 10rem;
+    width: 20%;
+    filter: blur(5rem);
+}
+.circle4{
+    position: absolute;
+    bottom: -2rem;
+    left: 20%;
+    border-radius: 100%;
+    background-color: rgba(254, 197, 158, 1);
+    height: 10rem;
+    width: 20%;
+    filter: blur(5rem);
+}
+.circle5{
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    border-radius: 100%;
+    background-color: rgba(18, 8, 92, 1); 
+    height: 10rem;
+    width: 20%;
+    filter: blur(5rem);
+}
+.overlay-home{
+    position: absolute;
+    background-color: rgba(129, 14, 167, 0.44);
+    inset: 0;
+}

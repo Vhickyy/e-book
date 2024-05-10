@@ -1,0 +1,80 @@
+.head-section{
+    padding-block: 4rem;
+    background: url("../../../assets/secongbgimg.png") center  no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 15rem;
+}
+
+h3{
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+main{
+    background-color: #F8F9FA;
+    padding-block: 2rem 5rem;
+}
+
+
+.top-section{
+    width: min(90%,50rem);
+    margin-inline: auto;
+    background: white;
+    padding: 2.5rem 2rem;
+    margin-top: -6rem;
+    display: grid;
+    border-radius: .5rem;
+    border: 1px solid #DEE2E7;
+}
+
+.author-info{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 2px solid var(--primaryColor);
+    padding-bottom: 2rem;
+}
+.pic{
+    height: 4rem;
+    width: 4rem;
+    display: block;
+    border-radius: 100%;
+}
+aside{
+    display: grid;
+    gap: 1.5rem;
+    padding-top: 2rem;
+}
+
+label{
+    display: block;
+    margin-bottom: .5rem;
+}
+input,textarea{
+    /* height: 100%; */
+    padding: .5rem;
+    width: 60%;
+    font-size: 1rem;
+    outline: none;
+    border: 1px solid #E8E9EA;
+    border-radius: .3rem;
+}
+textarea{
+    width: 100%;
+    resize: none;
+    height: 15rem;
+}
+input::placeholder, textarea::placeholder{
+    color: #949CA9;
+}
+button{
+    background-color: var(--primaryColor);
+    color: white;
+    border: transparent;
+    padding: .9rem 4rem;
+    border-radius: .5rem;
+    justify-self: end;
+}

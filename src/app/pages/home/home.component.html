@@ -1,0 +1,90 @@
+<app-header></app-header>
+<main>
+    <section>
+        <aside class="flex-row">
+            <div class="icon-div">
+                <div class="icon-container">
+                    <img src="../../../assets/Vector.svg" alt="">
+                </div>
+                <p>Large Collections</p>
+            </div>
+            <div class="icon-div">
+                <div class="icon-container">
+                    <img src="../../../assets/Vector.svg" alt="">
+                </div>
+                <p>Simple, Secure Payment</p>
+            </div>
+            <div class="icon-div">
+                <div class="icon-container">
+                    <img src="../../../assets/Vector.svg" alt="">
+                </div>
+                <p>Best Quality Materials</p>
+            </div>
+        </aside>
+        <aside class="aside-2">
+            <div class="books">
+                <h4>Best Selling Books</h4>
+                <div class="book-row">     
+                    <div *ngFor="let book of bestSelling" class="book-card">
+                        <img [src]="book.img" alt="">
+                        <div class="detail">
+                            <p class="title">{{book.title}}</p>
+                            <p class="author">{{book.author}}</p>
+                            <div class="price">
+                                <p class="title">{{book.price}}</p>
+                                <!-- <img src="../../../assets/Vector.svg" alt=""> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="books">
+                <h4>Best Selling Books</h4>
+                <div class="book-row">     
+                    <div *ngFor="let book of bestSelling" class="book-card">
+                        <img [src]="book.img" alt="">
+                        <div class="detail">
+                            <p class="title">{{book.title}}</p>
+                            <p class="author">{{book.author}}</p>
+                            <div class="price">
+                                <p class="title">{{book.price}}</p>
+                                <!-- <img src="../../../assets/Vector.svg" alt=""> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="books">
+                <h4>Best Selling Books</h4>
+                <div class="book-row">     
+                    <div *ngFor="let book of bestSelling" class="book-card">
+                        <img [src]="book.img" alt="">
+                        <div class="detail">
+                            <p class="title">{{book.title}}</p>
+                            <p class="author">{{book.author}}</p>
+                            <div class="price">
+                                <p class="title">{{book.price}}</p>
+                                <!-- <img src="../../../assets/Vector.svg" alt=""> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <aside class="aside-3">
+            <div class="dive">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+                <div class="circle4"></div>
+                <div class="circle5"></div>
+                <div class="overlay-home"></div>
+                <p>Dive into the world of warm books</p>
+                <button routerLink="/books">
+                    Explore Book Library
+                </button>
+            </div>
+        </aside>
+    </section>
+</main>
+<app-footer></app-footer>

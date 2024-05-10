@@ -1,0 +1,15 @@
+<nav>
+    <section>
+        <img src="../../../assets/logo.svg" alt="book-logo">
+        <div class="flex" >
+            <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of links">{{link.name}}</a>
+            <!-- <a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Home</a>
+            <a routerLink="/about" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">About</a>
+            <a routerLink="/book" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Book</a> -->
+        </div>
+        <button routerLink="/cart">Cart {{cartLength$ | async}}</button>
+        <button routerLink="/register" *ngIf="!(user$ | async)">Sign in</button>
+        <button *ngIf="user$ | async">{{(user$ | async)?.email || "null"}}</button>
+        
+    </section>
+</nav>

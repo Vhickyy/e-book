@@ -60,7 +60,8 @@
               "buildTarget": "e-book:build:production"
             },
             "development": {
-              "buildTarget": "e-book:build:development"
+              "buildTarget": "e-book:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

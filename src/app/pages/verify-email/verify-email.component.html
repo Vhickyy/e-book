@@ -1,0 +1,5 @@
+<app-verify>
+    <img src="../../../assets/reg-logo.svg" alt="">
+    <h4>Code sent to email</h4>
+    <p>{{!forgotPassword ? "A verification" : "An"}} email has been sent to {{email}}. check your email to complete {{!forgotPassword ? "verification" : "process"}} or click <a [routerLink]="'/verify-otp'"  [queryParams]="!forgotPassword ? {email} : {email, 'forgot-password':'true'}">here</a></p>
+</app-verify>

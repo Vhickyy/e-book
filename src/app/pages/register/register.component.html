@@ -1,0 +1,31 @@
+<div class="body">
+    <app-navbar></app-navbar>
+    <main>
+        <div class="head">
+            <img src="../../../assets/reg-logo.svg" alt="">
+            <p>Create An Account</p>
+        </div>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div [ngClass]="{page:true}">
+                <p [ngClass]="{color: page <= 3}"><span>1</span> Personal Information</p>
+                <p [ngClass]="{color: page >= 2}"><span>2</span> Interest</p>
+                <p [ngClass]="{color: page == 3}"><span>3</span> Preveiew details</p>
+                <div class="page-overlay" [ngStyle]="{
+                    width: page == 1 ? '38%' : page == 2 ? '66%' : '100%'}" [ngClass]="{noRadius: page == 3}"></div>
+            </div>
+            <div class="page-2 color">
+                <p *ngIf="page == 1" ><span>1</span> Personal Information</p>
+                <p *ngIf="page == 2"><span>2</span> Interest</p>
+                <p *ngIf="page == 3"><span>3</span> Preveiew details</p>
+            </div>
+            <div class="form-content">
+                <!-- [fullname]="registerForm.get('fullname')?.value" [email]="registerForm.get('email')?.value" [password]="registerForm.get('password')?.value" -->
+                <app-pageone *ngIf="page == 1" (changePage)="changePage()" (image)="image($event)" [registerForm]="registerForm" [imageUrl]="imageUrl"></app-pageone>
+                <app-pagetwo *ngIf="page == 2" (changePage)="changePage()"></app-pagetwo>
+                <app-pagethree *ngIf="page == 3" (changePage)="changePage()" [registerForm]="registerForm" [imageUrl]="imageUrl" (register)="register()"></app-pagethree>
+            </div>
+        </form>
+        <div class="overlay"></div>
+    </main>
+    <app-footer></app-footer>
+</div>

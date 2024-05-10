@@ -1,0 +1,21 @@
+section{
+    background: rgba(45, 45, 45, 1);
+    color: white;
+}
+.dark{
+    width: min(90%,var(--maxWidth));
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem;
+}
+.gap{
+    display: grid;
+    gap: 1rem;
+}
+.last{
+    text-align: center;
+    background-color: #8F26B2;
+    color: white;
+    padding-block: .5rem;
+}

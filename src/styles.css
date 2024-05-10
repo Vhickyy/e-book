@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --maxWidth: 1900px;
+    --primaryColor: #810EA7;
+}
+html::-webkit-scrollbar{
+    width: 1vw;
+}
+html::-webkit-scrollbar-thumb{
+    background-color: var(--primaryColor);
+}
+body,html{
+    height: 100%;
+    background-color: whitesmoke;
+    font-family: 'Poppins',sans-serif;
+    /* position: relative; */
+    /* scrollbar-width: normal; */
+
+}
+a{
+    text-decoration: none;
+    color: var(--primaryColor);
+}
+
+.flex-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grid{
+    display: grid;
+}
+li{
+    list-style: none;
+}
+button{
+    cursor: pointer;
+}
+/* button:disabled{
+    color: rgba(183, 137, 198, 0.565);
+    background-color: #fff;
+} */
+.body{
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+.overlay{
+    position: absolute;
+    inset: 0;
+    /* background-color: black; */
+    background: #810EA799;
+    opacity: .5;
+    z-index: -1;
+}

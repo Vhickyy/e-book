@@ -1,0 +1,55 @@
+<header>
+    <app-navbar></app-navbar>
+    <section class="head-section">
+        <h3>Author Profile</h3>
+        <!-- <div class="search">
+            <p>S</p>
+            <input type="text" placeholder="Search For A Book">
+            <button>Search</button>
+        </div> -->
+    </section>
+</header>
+<main>
+    <section class="top-section">
+        <aside>
+            <img class="img" src="../../../assets/profilepic.png" alt="">
+        </aside>
+        <aside class="about">
+            <div class="flex-info">
+                <div>
+                    <h4>Matthew Aniekan</h4>
+                    <p>Uyo, Nigeria</p>
+                </div>
+                <button *ngIf="!isAuthor" routerLink="/author/send-message">Message</button>
+                <div *ngIf="isAuthor" class="btn-container">
+                    <button routerLink="/dashboard/author/edit-profile" class="btn">Edit Profile</button>
+                    <button routerLink="/dashboard/add-book">Add Book</button>
+                </div>
+            </div>
+            <div>
+                <h4>About</h4>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia dolore quisquam iusto sunt nobis blanditiis ipsum, nesciunt a maiores, cumque autem, veniam adipisci ratione fugiat exercitationem perspiciatis necessitatibus quis sequi ullam pariatur! Assumenda nihil ipsam velit molestias placeat rem facilis ducimus ipsa fuga rerum quas, minima repellendus quos, quo labore, quod dolorum unde dignissimos ea corrupti nostrum error neque? Sapiente veritatis distinctio, ducimus cupiditate praesentium voluptate odit?</p>
+            </div>
+        </aside>
+    </section>
+    <section class="book-section">
+        <aside class="flex-info">
+            <h4>Books</h4>
+            <h4>15 Books</h4>
+        </aside>
+        <aside class="book-row">
+                <div *ngFor="let book of [1,2,3,4,5,6,7,8,9,10]" class="book-card">
+                    <img src="../../../assets/Rectangle 10.png" alt="">
+                    <div class="detail">
+                        <p class="title">The Revival</p>
+                        <p class="author">Morris Johnson</p>
+                        <div class="price">
+                            <p class="title">N 23,400</p>
+                            <img src="../../../assets/Vector.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+        </aside>
+    </section>
+</main>
+<app-footer></app-footer>

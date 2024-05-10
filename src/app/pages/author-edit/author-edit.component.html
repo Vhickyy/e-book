@@ -1,0 +1,52 @@
+<header>
+    <app-navbar></app-navbar>
+    <section class="head-section">
+        <h3>Edit Profile</h3>
+    </section>
+</header>
+<main>
+    <section class="top-section">
+        <aside class="img">
+            <img  src="../../../assets/noimg.svg" alt="">
+            <h4>Drop your image here, or browse</h4>
+            <p>JPG and PNG  files are allowed</p>
+        </aside>
+        <aside class="about">
+            <div class="edit-input">
+                <div>
+                    <label for="name">Full Name</label>
+                    <input type="text" name="name" placeholder="Full Name" id="name">
+                </div>
+                <div>
+                    <label for="name">Full Name</label>
+                    <input type="text" name="name" placeholder="Full Name" id="name">
+                </div>
+            </div>
+            <div class="textarea">
+                <label for="about">About</label>
+                <textarea name="about" id="about" placeholder="Describe Yourself"></textarea>
+            </div>
+        </aside>
+    </section>
+    <section class="book-section">
+        <aside class="flex-info">
+            <h4>Books</h4>
+            <h4>15 Books</h4>
+        </aside>
+        <aside class="book-row">
+                <div *ngFor="let book of [1,2,3,4,5,6,7,8,9,10]" class="book-card">
+                    <img src="../../../assets/Rectangle 10.png" alt="">
+                    <div class="detail">
+                        <p class="title">The Revival</p>
+                        <p class="author">Morris Johnson</p>
+                        <p class="title">N 23,400</p>
+                        <div class="price">
+                            <img src="../../../assets/delete.svg" alt="">
+                            <img src="../../../assets/edit.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+        </aside>
+    </section>
+</main>
+<app-footer></app-footer>

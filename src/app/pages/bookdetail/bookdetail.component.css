@@ -1,0 +1,248 @@
+main{
+    background-color: #F8F9FA;
+    padding-block: 2rem 5rem;
+}
+
+section{
+    width: min(90%,var(--maxWidth));
+    margin-inline: auto;
+    /* gap: 3rem; */
+}
+
+.top-section{
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(3,1fr);
+    background-color: white;
+    border: 1px solid #DEE2E7;
+    border-radius: .3rem;
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+}
+.top-section > aside {
+    border: none;
+    padding: 0;
+}
+aside{
+    background-color: white;
+    border: 1px solid #DEE2E7;
+    border-radius: .3rem;
+    padding: 2rem 1rem;
+}
+.img-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding-top: 1rem;
+    gap: .5rem;
+}
+.main-img{
+    display: block;
+    height: 20rem;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.img{
+    height: 6rem;
+    width: 100%;
+    display: block;
+    padding: .3rem;
+    border: 1px solid #DEE2E7;
+    border-radius: 5px;
+}
+.top-detail{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1.5rem .5rem;
+}
+.has-border{
+    border-block: 1px solid #E0E0E0;
+    display: grid;
+    gap: .5rem;
+}
+.has-padding{
+    padding-block: .5rem;
+}
+.buy{
+    display: grid;
+    gap: .5rem;
+    padding: 2rem;
+    border: 1px solid #DEE2E7;
+    border-radius: .5rem;
+}
+.buy p {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.middle-section{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 1.5rem;
+    margin-top: 3rem;
+}
+.middle-section > aside{
+    padding: 0;
+    color: #505050;
+}
+.middle-section .content{
+    padding-block: 2rem;
+}
+.middle-section .content p{
+    width: 95%;
+    line-height: 1.5rem;
+}
+.middle-header{
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    /* border-bottom: 1px solid #505050; */
+}
+
+.tab{
+    margin-block: 2rem;
+    display: grid;
+    width: 50%;
+    grid-template-columns: auto 1fr;
+}
+.cat{
+    background-color: bisque;
+}
+.cat, .spec{
+    gap: 0;
+}
+.cat li, .spec li{
+    border: 1px solid #E0E7E9;
+}
+.cat li{
+    padding: .6rem 3rem .6rem 1rem;
+}
+.spec li{
+    display: grid;
+    place-items: center;
+}
+.cat{
+    background-color: #EFF2F4;
+}
+
+ul{
+    display: grid;
+    gap: 1rem;
+}
+.rate{
+    display: grid;
+    gap: 1.5rem;
+    font-weight: 600;
+    color: black;
+}
+h4{
+    font-size: 1.2rem;
+}
+.content{
+    padding: 1rem;
+}
+
+.fit{
+    height: fit-content;
+}
+.author-info-container{
+    width: 50%;
+}
+.author-det{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+}
+.author-info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.pic{
+    height: 4rem;
+    width: 4rem;
+    display: block;
+    border-radius: 100%;
+}
+.contact-btn{
+    background-color: white;
+    color: var(--primaryColor);
+    width: 100%;
+    padding-block: .7rem;
+    border-radius: .3rem;
+    border: 1px solid #DEE2E7;
+    margin-top: .5rem;
+}
+.btn{
+    width: 100%;
+    padding-block: .7rem;
+    background-color: var(--primaryColor);
+    border: transparent;
+    color: white;
+    border-radius: .3rem;
+}
+.top-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 3rem 2rem;
+}
+.top-card > p{
+    color: var(--primaryColor);
+    font-weight: 600;
+}
+.book-row{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+    gap: 3rem 1rem;
+}
+
+.book-card{
+    background-color: white;
+    padding: .2rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    /* border: 1px solid transparent; */
+    border: 2px solid rgba(187, 41, 235, 0.15)
+}
+
+.book-card:hover{
+    border: 2px solid var(--primaryColor);
+    box-shadow: 1px 4px 25px rgba(0, 0, 0, 0.13);
+}
+
+.book-card>img{
+    width: 100%;
+    height: 11rem;
+    /* object-fit: center; */
+}
+.detail{
+    padding: 1rem;
+    background-color: white;
+    display: grid;
+    gap: .5rem;
+}
+.title{
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.price{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.author{
+    font-weight: 400;
+    font-size: .9rem;
+    color: rgba(30, 0, 40, 0.58);
+}

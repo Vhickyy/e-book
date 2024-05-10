@@ -1,0 +1,28 @@
+<div class="body">
+    <app-navbar></app-navbar>
+    <main>
+        <section>
+            <div>
+                <img src="../../../assets/contack.png" alt="">
+            </div>
+            <form>
+                <div>
+                    <h3>Frequently Asked Questions</h3>
+                    <p>These are few questions people frequently ask</p>
+                </div>
+                <div>
+                   <div *ngFor="let faq of faqs">
+                        <aside>
+                            <p>{{faq.question}}</p>
+                        </aside>
+                        <aside>
+                            <p>{{faq.answer}}</p>
+                        </aside>
+                   </div>
+                </div>
+            </form>
+        </section>
+        <div class="overlay"></div>
+    </main>
+    <app-footer></app-footer>
+</div>

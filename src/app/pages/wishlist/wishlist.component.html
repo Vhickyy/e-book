@@ -1,0 +1,37 @@
+<div class="body">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <app-dashboard-layout>
+            <section >
+                <div *ngFor="let list of wishList" class="grid">
+                    <div class="img-container">
+                        <img [src]="list.img" alt="list.title" class="img">
+                    </div>
+                    <div>
+                        <p>{{list.title}}</p>
+                        <p>{{list.author}}</p>
+                        <p >56777</p>
+                        <div class="with-btn desk">
+                            <button>Add To Cart</button>
+                            <img src="../../../assets/edit.svg" alt="delete-icon">
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <p>{{list.title}}</p>
+                        <p>{{list.author}}</p>
+                    </div>
+                    <div>
+                        <button>Add To Cart</button>
+                        <button>Remove</button> -->
+                    <!-- </div> -->
+                    <div class="mobile btn-container">
+                        <button>Buy</button>
+                        <!-- <button >Remove</button> -->
+                        <button class="button">Remove</button>
+                    </div>
+                </div>
+            </section>
+        </app-dashboard-layout>
+    </div>
+    <app-footer></app-footer>
+</div>

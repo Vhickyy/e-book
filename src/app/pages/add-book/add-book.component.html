@@ -1,0 +1,140 @@
+<app-navbar></app-navbar>
+<main>
+    <div class="main">
+        <h2>Add Book</h2>
+        <section>
+            <form [formGroup]="addBookForm" (ngSubmit)="addBookSubmit()">
+                <div class="form">
+                    <div class="grid">
+                        <div>
+                            <label for="title">Book Title</label>
+                            <input type="text" formControlName="title" id="title" placeholder="Book Title">
+                            <small *ngIf="addBookForm.get('title')?.invalid && addBookForm.get('title')?.touched">Title must be 10-26 characters</small>
+                        </div>
+                        <div>
+                            <label for="category">Category</label>
+                            <select name="category" id="" formControlName="category">
+                                <option *ngFor="let cat of categories" [value]="cat.toLowerCase()">{{cat}}</option>
+                            </select>
+                            <!-- <input type="text" formControlName="category" id="category" placeholder="Category"> -->
+                        </div>
+                    </div>
+                    <div class="grid grid-3">
+                        <div>
+                            <label for="pages">Pages</label>
+                            <input type="text" formControlName="pages" id="pages" placeholder="Pages">
+                            <small>Must be between 10-1000</small>
+                        </div>
+                        <div>
+                            <label for="date">Publication Date</label>
+                            <input type="date" formControlName="dateOfPublication" id="date" placeholder="Publication Date">
+                        </div>
+                        <div>
+                            <label for="ISBN-NO">ISBN No.</label>
+                            <input type="text" formControlName="ISBN" id="ISBN-NO" placeholder="ISBN No.">
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div>
+                            <label for="publisher">Publisher</label>
+                            <input type="text" formControlName="publisher" id="publisher" placeholder="Publisher">
+                        </div>
+                        <div>
+                            <label for="price">Price</label>
+                            <input type="text" formControlName="price" id="price" placeholder="Price">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="description">Description</label>
+                        <textarea formControlName="description" id="description" placeholder="Description" ></textarea>
+                    </div>
+                    <div>
+                        <label for="Keywords">Keywords</label>
+                        <textarea formControlName="keywords" id="Keywords" placeholder="Keywords" ></textarea>
+                    </div>
+                </div>
+                <section class="upload-section">
+                    <div class="file">
+                        <div>
+                            <h3>Upload Book</h3>
+                            <p>Upload image of front cover</p>
+                            <div class="img-content">
+                                <input type="file" class="hide" #pdf (change)="handleFileInput($event,'pdf')">
+                                <img src="../../../assets/bookicon.svg" alt="null-img">
+                                <p>Drop your image here, or <span (click)="upload('pdf')">browse</span></p>
+                                <p>JPG and PNG  files are allowed</p>
+                                <div class="progress">
+                                    <div class="progress-bar" [style.width.%]="progress$ | async"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside>
+                        <h2>Upload Images</h2>
+                        <div class="upload">
+                            <div>
+                                <p>Upload image of front cover</p>
+                                <div class="img-content">
+                                    <input type="file" #front class="hide" (change)="handleFileInput($event,'front')">
+                                    <img [src]="frontCoverUrl || '../../../assets/nullpng.svg'" alt="null-img">
+                                    <p>Drop your image here, or <span (click)="upload('front')">browse</span></p>
+                                    <p>JPG and PNG  files are allowed</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Upload image of front cover</p>
+                                <div class="img-content"  >
+                                    <input type="file" #back class="hide" (change)="handleFileInput($event,'back')">
+                                    <img [src]="backCoverUrl || '../../../assets/nullpng.svg'"  alt="null-img">
+                                    <p>Drop your image here, or <span (click)="upload('back')">browse</span></p>
+                                    <p>JPG and PNG  files are allowed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </section>
+                <!-- <button type="submit" [disabled]="!addBookForm.valid">Add Book</button> -->
+                <button type="submit">Add Book</button>
+            </form>
+            <!-- <section class="upload-section">
+                <div class="file">
+                    <div>
+                        <h3>Upload Book</h3>
+                        <p>Upload image of front cover</p>
+                        <div class="img-content">
+                            <img src="../../../assets/bookicon.svg" alt="null-img">
+                            <p>Drop your image here, or browse</p>
+                            <p>JPG and PNG  files are allowed</p>
+                            <div class="progress">
+                                <div class="progress-bar" [style.width.%]="progress$ | async"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <aside>
+                    <h2>Upload Images</h2>
+                    <div class="upload">
+                        <div>
+                            <p>Upload image of front cover</p>
+                            <div class="img-content">
+                                <img src="../../../assets/nullpng.svg" alt="null-img">
+                                <p>Drop your image here, or browse</p>
+                                <p>JPG and PNG  files are allowed</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Upload image of front cover</p>
+                            <div class="img-content">
+                                <img src="../../../assets/nullpng.svg" alt="null-img">
+                                <p>Drop your image here, or browse</p>
+                                <p>JPG and PNG  files are allowed</p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </section> -->
+        </section>
+    </div>
+</main>
+<app-footer></app-footer>
+

@@ -1,0 +1,40 @@
+div{
+    width: 100%;
+    display: flex;
+    /* background-color: green; */
+    padding-block: .5rem;
+    gap: .4rem;
+}
+input{
+    width: 18%;
+    padding: .8rem;
+    /* height: 2.5rem; */
+    border: 1px solid var(--primaryColor);
+    border-radius: .5rem;
+    outline-color: var(--primaryColor);
+    font-size: 1.2rem;
+    text-align: center;
+}
+input:focus{
+    outline-color: var(--primaryColor);
+}
+form{
+    display: grid;
+    gap: 1.5rem;
+    place-items: center;
+    text-align: center;
+}
+
+span{
+    color: var(--primaryColor);
+    cursor: pointer;
+}
+
+.loader{
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border: .5rem solid whitesmoke;
+    border-top: .5rem solid var(--primaryColor);
+    border-radius: 50%;
+}

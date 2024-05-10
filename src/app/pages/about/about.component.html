@@ -1,0 +1,111 @@
+<div class="body">
+<app-navbar></app-navbar>
+<main>
+    <section class="first-section">
+    </section>
+    <section class="top-section">
+        <aside class="top-aside">
+            <div>
+                <h3>About Us</h3>
+                <p>Embark on a literary journey with our e-book platform. Delve into a rich tapestry of stories, spanning diverse genres and captivating narratives. From celebrated bestsellers to hidden gems waiting to be discovered, our curated collection promises to ignite your imagination. Explore, indulge, and experience the magic of storytelling with us today..</p>
+                <button>Contact Us</button>
+            </div>
+            <div class="img-container">
+                <img src="../../../assets/mockup.png" alt="about-bg" class="img">
+            </div>
+        </aside>
+    </section>
+    <section class="second-section">
+        <div class="absolute"></div>
+        <div class="content">
+            <aside class="mission">
+                <h3>Our Vision</h3>
+                <p>
+                    Our mission at the e-book platform is simple yet profound: to democratize access to literature and empower readers worldwide. We aim to curate a diverse selection of e-books, catering to every taste and interest. By fostering a love for reading and promoting cultural exchange through stories, we strive to enrich lives and inspire minds across the globe.
+                </p>
+            </aside>
+            <aside class="quote">
+                <div class="relative">
+                    <img src="../../../assets/upquote.svg" alt="" class="up">
+                    <p>
+                        Unlock a world of benefits with our e-book platform. Enjoy instant access to a vast library of titles anytime, anywhere. Seamlessly switch between devices and customize your reading experience. 
+                    </p>
+                    <img src="../../../assets/downquote.svg" alt="" class="down">
+                </div>
+                <div>
+                    <img src="../../../assets/team.png" alt="ceo" class="img">
+                    <div>
+                        <h4>Terry Ifeanyi</h4>
+                        <p>CEO, Warm books</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+    <section class="third-section">
+        <div *ngFor="let card of [1,2,3]" class="card">
+            <img src="../../../assets/bookabt.svg" alt="">
+            <h3>Upload Book</h3>
+            <p>non convallis. adipiscing Nunc lorem. tincidunt eget hendrerit lorem. tincidunt elit convallis. risus libero, sed ex enim. venenatis orci leo. tincidunt libero,  </p>
+        </div>
+    </section>
+    <section class="second-section third">
+        <div class="absolute"></div>
+        <div class="content">
+            <aside>
+                <div>
+                    <img src="../../../assets/upquote.svg" alt="">
+                    <p>
+                        Unlock a world of benefits with our e-book platform. Enjoy instant access to a vast library of titles anytime, anywhere. Seamlessly switch between devices and customize your reading experience. Discover new authors, explore diverse genres, and save space with digital convenience. Join our community and elevate your reading journey today.
+                    </p>
+                    <img src="../../../assets/downquote.svg" alt="">
+                </div>
+            </aside>
+            <aside class="mission">
+                <h3>Our Mission</h3>
+                <p>
+                    Our mission at the e-book platform is simple yet profound: to democratize access to literature and empower readers worldwide. We aim to curate a diverse selection of e-books, catering to every taste and interest. By fostering a love for reading and promoting cultural exchange through stories, we strive to enrich lives and inspire minds across the globe.
+                </p>
+            </aside>
+        </div>
+    </section>
+
+    <section class="fifth-section">
+        <div>
+            <h4>Feedback</h4>
+            <h3>Hear From Our Users</h3>
+        </div>
+        <aside>
+            <div class="grid">
+                <div *ngFor="let card of [1,2,3]" class="card">
+                    <img src="../../../assets/team.png" alt="">
+                    <p>non convallis. adipiscing Nunc lorem. tincidunt eget hendrerit lorem. tincidunt elit convallis. risus libero, sed ex enim. venenatis orci leo. tincidunt libero,  </p>
+                    <p><span class="text">Ukay, </span> <span> uyo.</span></p>
+                </div>
+            </div>
+        </aside>
+    </section>
+    <section class="last">
+        <h3>Meet The Team</h3>
+        <aside class="ceo">
+            <img src="../../../assets/team.png" alt="person">
+            <div>
+                <p>non convallis. adipiscing Nunc lorem. tincidunt eget hendrerit lorem. tincidunt elit convallis. risus libero, sed ex enim. venenatis orci leo. tincidunt libero, faucibus Nullam sit non. orci non amet, eget tincidunt elementum nec Nunc risus nibh fringilla placerat sapien eu Donec </p>
+                <p class="text">Chris Koka Eze, <span>  CEO</span></p>
+            </div>
+        </aside>
+        <aside class="team">
+            <div>
+                <div *ngFor="let card of [1,2,3,4,5]" class="check">
+                    <img src="../../../assets/team.png" alt="">
+                    <div>
+                        <h3>Hope Chris</h3>
+                        <p>ui/ux designer</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </section>
+</main>
+<app-footer></app-footer>
+</div>

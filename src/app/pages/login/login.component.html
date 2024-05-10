@@ -1,0 +1,38 @@
+<div class="body">
+<app-navbar></app-navbar>
+<main>
+    <section>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <div class="head">
+                <img src="../../../assets/reg-logo.svg" alt="">
+                <h3>Welcome Back</h3>
+                <p>Please sign into your account</p>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" placeholder="Email" autocomplete="off" ngModel>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" ngModel>
+            </div>
+            <div class="text">
+                <p routerLink="/forgot-password">Forgot Password?</p>
+                <p routerLink="/register">Don't have an account?</p>
+            </div>
+            <button type="submit">{{!(loading$ | async) ? 'Sign In' : 'Loading'}}</button>
+            <div class="or">
+                <div></div>
+                <p>OR</p>
+                <div></div>
+            </div>
+            <button class="google">
+                <img src="../../../assets/logos_google-icon.svg" alt="google-icon">
+                Sign In With Google
+            </button>
+        </form>
+    </section>
+    <div class="overlay"></div>
+</main>
+<app-footer></app-footer>
+</div>

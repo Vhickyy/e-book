@@ -1,0 +1,25 @@
+<app-verify>
+    <form>
+        <h4>Input OTP</h4>
+        <!-- <p>{{code.toString()}}</p> -->
+        <div >
+            <input type="text" 
+            *ngFor="let inp of code; let i = index trackBy: trackByFn" 
+            [name]="'input' + i.toString()" 
+            [ngModel]="inp" 
+            (ngModelChange)="onValueChange($event,i)"
+            (keyup)="onBack($event,i)"
+            [disabled]="filled || !!(loading$ | async)"
+            #inputField >
+        </div>
+        <ng-container *ngIf="loading$ | async">
+            <div class="loader"></div>
+            <p>Confirming...</p>
+        </ng-container>
+        <ng-container *ngIf="!(loading$ | async)">
+            <p>Enter the code sent to your email: {{email}}</p>
+            <p *ngIf="count == 0">You didn't get code: <span (click)="resendOtp()">Resend code</span></p>
+            <p *ngIf="count">You can request for code in: <span>00:{{count > 10 ? count : ('0' + count)}}</span></p>
+        </ng-container>
+    </form>
+</app-verify>

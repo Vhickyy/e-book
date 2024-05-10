@@ -1,0 +1,28 @@
+<div class="main">
+    <h4>Preview</h4>
+    <p>Confirm your account details, if something is out of place you can <span>Edit</span></p>
+    <div>
+        <div class="detail">
+            <div>
+                <img [src]="imageUrl" alt="profile">
+            </div>
+            <div>
+                <p>{{registerForm.get('fullname')?.value}}</p>
+                <div>
+                    <p>{{registerForm.get('email')?.value}}</p>
+                    <div></div>
+                    <p>{{registerForm.get('phonenumber')?.value}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="interest">
+            <h4>Interest:</h4>
+            <p>Art, psychology, history, mathematics, science, </p>
+        </div>
+    </div>
+    <div class="footer">
+        <p (click)="onChangePage()">Edit</p>
+        <!-- <button type="button" (click)="onChangePage()">Create Account</button> -->
+        <button type="button" (click)="registerUser()">Create Account</button>
+    </div>
+</div>

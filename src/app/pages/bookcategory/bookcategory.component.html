@@ -1,0 +1,46 @@
+<header>
+    <app-navbar></app-navbar>
+    <section class="head-section">
+        <h3>BOOKS</h3>
+        <div class="search">
+            <p>S</p>
+            <input type="text" placeholder="Search For A Book">
+            <button>Search</button>
+        </div>
+    </section>
+</header>
+<main>
+    <div class="main">
+        <section class="filter">
+            <h5>Filter</h5>
+            <p>Category</p>
+            <p>All</p>
+            <p *ngFor="let cat of category">{{cat}}</p>
+        </section>
+        <section>
+            <!-- <aside class="aside-2"> -->
+                <div class="books">
+                    <div class="top-card">
+                        <h4>Science</h4>
+                        <p>More</p>
+                    </div>
+                    <div class="book-row">     
+                        <div *ngFor="let book of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]" class="book-card">
+                            <img src="../../../assets/Rectangle 10.png" alt="">
+                            <div class="detail">
+                                <p class="title">The Revival</p>
+                                <p class="author">Morris Johnson</p>
+                                <div class="price">
+                                    <p class="title">N 23,400</p>
+                                    <button ><img src="../../../assets/Vector.svg" alt=""></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </aside> -->
+            <!-- <img src="../../../assets/Rectangle 10.png" alt=""> -->
+        </section>
+    </div>
+</main>
+<app-footer></app-footer>

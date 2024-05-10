@@ -1,0 +1,38 @@
+<div class="main">
+    <h4>Personal Information</h4>
+    <p>Set up your account details in less than five minutes</p>
+    <div class="content contentlg" [formGroup]="registerForm">
+        <div class="">
+            <div>
+                <img [src]="imageUrl || '../../../assets/profile.png'" alt="profile" (click)="upload()">
+                <!-- <img src="../../../assets/profile.png" alt="profile" (click)="upload()"> -->
+                <input type="file" class="file" #file  (change)="handleFileInput($event)">
+            </div>
+            <p>Select Avatar</p>
+        </div>
+        <div class="content">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Full Name" formControlName="fullname">
+            </div>
+            <div>
+                <label for="phone">Phone</label>
+                <input type="text" placeholder="Phone no." formControlName="phonenumber">
+            </div>
+        </div>
+        <div class="content">
+            <div>
+                <label for="email">Email</label>
+                <input type="text" placeholder="Email" formControlName="email">
+            </div>
+            <div>
+                <label for="">Password</label>
+                <input type="text" placeholder="Password" formControlName="password">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <a routerLink="/login">Back to Login</a>
+        <button type="button" (click)="onChangePage()">Next</button>
+    </div>
+</div>

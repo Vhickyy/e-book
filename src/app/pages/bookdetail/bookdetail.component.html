@@ -1,0 +1,146 @@
+<app-navbar></app-navbar>
+<main>
+    <section class="top-section">
+        <aside>
+            <div>
+                <img class="main-img" src="../../../assets/bookdet.png" alt="">
+                <div class="img-container">
+                    <img class="img" *ngFor="let img of [1,2,3,4]" [src]="'../../../assets/bookdet.png'" alt="">
+                </div>
+            </div>
+        </aside>
+        <aside>
+            <div>
+                <h3>{{(book$ | async)?.title}}</h3>
+                <!-- <h3>Intergalactic War of The Tidal Maro of Zugal Race, A Book</h3> -->
+                <div class="flex">
+                    <p>rating</p>
+                    <p>{{(book$ | async)?.reviews.length }} review</p>
+                    <p>100 sold</p>
+                </div>
+                <div>
+                    <div>
+                        <div class="top-detail has-padding">
+                           <p>Category:</p>
+                           <p>Science Fiction</p> 
+                        </div>
+                        <div class="has-border  has-padding">
+                            <div class="top-detail">
+                                <p>Pages:</p>
+                                <p>{{(book$ | async)?.pages}}</p> 
+                             </div>
+                            <div class="top-detail">
+                                <p>Language:</p>
+                                <p>English</p> 
+                             </div>
+                            <div class="top-detail">
+                                <p>Publication Date:</p>
+                                <p>Date</p> 
+                             </div>
+                        </div>
+                        <div>
+                            <div class="top-detail has-padding">
+                                <p>ISBN No: </p> 
+                                <p>Category: </p> 
+                            </div>
+                            <div class="top-detail">
+                                <p>ISBN No: </p> 
+                                <p>Category: </p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <aside>
+            <div class="buy">
+                <p>N {{(book$ | async)?.price}}</p>
+                <button class="btn">Buy Now</button>
+                <!-- <button class="contact-btn" (click)="addToAnnonymousCart()">{{ (incart$ | async) ? 'Go To Cart' : 'Add To Cart' }}</button> -->
+                <!-- <button class="contact-btn">Add To Cart</button> -->
+                <button class="contact-btn" routerLink="/cart"  *ngIf="(incart$ | async)">Go To Cart</button>
+                <button class="contact-btn"  *ngIf="!(incart$ | async)$" (click)="addToCart()">Add To Cart</button>
+            </div>
+        </aside>
+    </section>
+    <section >
+        <aside class="author-info-container">
+            <h4>Author Information</h4>
+            <div class="author-det">
+                <div class="author-info">
+                    <img src="../../../assets/Rectangle 10.png" class="pic" alt="">
+                    <div>
+                        <p>{{(book$ | async)?.author.fullname}}</p>
+                        <p>Uyo, Nigeria.</p>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn" routerLink="/dashboard/author/send-message">Contact Author</button>
+                    <button class="contact-btn" routerLink="/author">Author's Profile</button>
+                </div>
+            </div>
+        </aside>
+    </section>
+    <section class="middle-section">
+        <aside>
+            <div class="middle-header">
+                <p>Description</p>
+                <p>Reviews</p>
+            </div>
+            <hr/>
+            <div class="content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                <div class="tab">
+                    <ul class="cat">
+                        <li>category</li>
+                        <li>categorygyuyy</li>
+                        <li>category</li>
+                        <li>category</li>
+                        <li>category</li>
+                    </ul>
+                    <ul class="spec">
+                        <li>category</li>
+                        <li>category</li>
+                        <li>category</li>
+                        <li>category</li>
+                        <li>category</li>
+                    </ul>
+                </div>
+                <ul>
+                    <li>Some great feature name here</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur</li>
+                    <li>Duis aute irure dolor in reprehenderit</li>
+                    <li>Some great feature name here</li>
+                </ul>
+            </div>
+        </aside>
+        <aside class="fit">
+            <div class="content rate">
+                <h4>Rating Summary</h4>
+                <p>4.0 out of 5 star</p>
+                <button class="btn">Write a review</button>
+            </div>
+        </aside>
+    </section>
+    <section>
+        <div class="top-card">
+            <h4>More Science Books</h4>
+            <p>More</p>
+        </div>
+        <div class="book-row">     
+            <div *ngFor="let book of [1,2,3,4,5]" class="book-card">
+                <img src="../../../assets/Rectangle 10.png" alt="">
+                <div class="detail">
+                    <p class="title">The Revival</p>
+                    <p class="author">Morris Johnson</p>
+                    <div class="price">
+                        <p class="title">N 23,400</p>
+                        <img src="../../../assets/Vector.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<app-footer></app-footer>
