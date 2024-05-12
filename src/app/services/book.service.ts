@@ -11,8 +11,8 @@ export class BookService {
   constructor() { }
 
   // book
-  getAllBook (category = "all",search: string) {
-    return this.http.get(`/api/v1/books?category=${category}&search=${search}`)
+  getAllBook (category = "all",search: string,page?:number) {
+    return this.http.get(`/api/v1/books?category=${category}&search=${search}&page=${page}`)
   }
 
   getBook (id:string | null) {

@@ -32,11 +32,11 @@ export const addBookEffect = createEffect((actions$ = inject(Actions),bookServic
 export const getAllBookEffect = createEffect((actions$ = inject(Actions), bookService = inject(BookService), router = inject(Router)) => {
     return actions$.pipe(
         ofType(bookAction.getBooks),
-        switchMap(({category,search}) => {
-            return bookService.getAllBook(category,search).pipe(
-                map((data:any)=>{
-                    console.log(data.data);
-                    return bookAction.getBooksSuccess({books:data.data.books})
+        switchMap(({category,search,page}) => {
+            return bookService.getAllBook(category,search,page).pipe(
+                map(({data}:any)=>{
+                    console.log(data.pageSize);
+                    return bookAction.getBooksSuccess({books:data.books,pageSize:data.pageSize})
                 }),
                 catchError((error:HttpErrorResponse) => {
                     console.log(error);

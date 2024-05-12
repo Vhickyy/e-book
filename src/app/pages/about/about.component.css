@@ -72,7 +72,7 @@
     height: 12rem;
     border-left: 0;
     z-index: 2;
-    font-size: 1.1rem;
+    /* font-size: 1.1rem; */
 }
 .mission h3{
     align-self: center;
@@ -164,7 +164,7 @@
     font-weight: 700;
 }
 .card p{
-    font-size: 1.1rem;
+    /* font-size: 1.1rem; */
     line-height: 1.7rem;
 }
 .card .text{
@@ -179,7 +179,7 @@ h3,h4{
     font-size: 1.8rem;
 }
 h4{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: rgba(129, 14, 167, 1);
     padding-bottom: .5rem;
 }
@@ -239,7 +239,7 @@ h4{
     width: 100%;
 }
 .text{
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
     font-weight: 600;
     padding-top: 2rem;
     color: rgba(0, 0, 0, 0.71);

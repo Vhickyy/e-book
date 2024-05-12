@@ -43,5 +43,10 @@
                 </div>
         </section>
     </div>
+    <div class="pagination">
+        <button (click)="prevPage()"><img src="../../../assets/arrowleft.svg" alt="arrowleft"></button>
+        <button (click)="active = i" *ngFor="let button of pageSizeArray; let i = index;" [ngClass]="{active: i == active}">{{button + 1}}</button>
+        <button (click)="nextPage()"><img src="../../../assets/arrowright.svg" alt="arrowright"></button>
+    </div>
 </main>
 <app-footer></app-footer>

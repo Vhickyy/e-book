@@ -49,7 +49,8 @@ input::placeholder{
     color: #912CB2;
 }
 main{
-    background-color: whitesmoke;
+    background-color: #F8F9FA;
+    ;
     padding-block: 4rem 7rem;
 }
 .main{
@@ -162,4 +163,26 @@ h4{
 
 .icon{
     background-color: transparent;
+}
+
+.pagination{
+    width: fit-content;
+    margin-inline: auto;
+    margin-top: 3rem;
+    display: flex;
+    gap: .8rem;
+}
+
+.pagination button{
+    background-color: #F5F5F5;
+    border: 1px solid #EEEEEE;
+    color: black;
+    padding: .8rem;
+    padding-inline: 1.2rem;
+    border-radius: .3rem;
+}
+
+.pagination .active{
+    background-color: var(--primaryColor);
+    color: white;
 }

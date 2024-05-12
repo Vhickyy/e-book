@@ -6,8 +6,8 @@ export const addBook = createAction('[Book] addBook', props<{book: IBook}>());
 export const addBookSuccess = createAction('[Book] addBookSuccess', props<{books: IBook[]}>());
 
 // Get All Books
-export const getBooks = createAction('[Book] getAllBooks',props<{category:string,search:string}>());
-export const getBooksSuccess = createAction('[Book] getAllBooksSuccess', props<{books: IBook[]}>());
+export const getBooks = createAction('[Book] getAllBooks',props<{category:string,search:string,page?:number}>());
+export const getBooksSuccess = createAction('[Book] getAllBooksSuccess', props<{books: IBook[],pageSize:number}>());
 
 // Get Book
 export const getBook = createAction('[Book] getBook', props<{id:string | null}>());

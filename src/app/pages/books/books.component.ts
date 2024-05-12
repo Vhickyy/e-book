@@ -7,7 +7,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { getBooks } from '../../store/book/book.actions';
-import {  selectBooks, selectIncart } from '../../store/book/book.selector';
+import {  selectBooks, selectIncart, selectPages } from '../../store/book/book.selector';
 import { addAnnonymousCart, addCart, addWishlist, removeWishlist } from '../../store/cart/cart.actions';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -30,12 +30,23 @@ export class BooksComponent implements OnInit {
   token = localStorage.getItem("token");
   selectedCategory = "all";
   search = '';
+  active = 0;
+  pageSize$ = this.store.select(selectPages)
+  pageSizeArray!: number[];
+
+  // constructor() {
+  //   // Initialize pageSizeArray
+  //   this.pageSize$.subscribe(values => {
+  //     console.log(values);
+      
+  //     // this.pageSizeArray = Array.from(values);
+  //   });
+  // }
 
   ngOnInit(): void {
-    // this.science = this.science.splice(0,3)
-    // this.http.get("/api/v1/book").subscribe((data :any)=>{
-    //   this.science = data.data
-    // })
+    this.pageSize$.subscribe(value => {
+      this.pageSizeArray = Array.from({length: value}, (_, index) => index);
+    });
     this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
   }
 
@@ -49,11 +60,13 @@ export class BooksComponent implements OnInit {
   
   changeCategory(cat: string){
     this.selectedCategory = cat.toLowerCase();
-    this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
+    this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}));
+    this.active = 0;
   }
 
   searchBook(){
-    this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
+    this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}));
+    this.active = 0;
   }
 
   addWishlist(id: string){
@@ -62,5 +75,21 @@ export class BooksComponent implements OnInit {
 
   removeFromWishlist(id:string){
     this.store.dispatch(removeWishlist({id}))
+  }
+
+  nextPage() {
+    if(this.active == this.pageSizeArray.length - 1) return;
+    if(this.active < this.pageSizeArray.length - 1){
+      this.active++
+      this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search,page:this.active + 1}));
+    }
+  }
+
+  prevPage() {
+    if(this.active == 0) return;
+    if(this.active < this.pageSizeArray.length){
+      this.active--
+      this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search,page:this.active}));
+    }
   }
 }

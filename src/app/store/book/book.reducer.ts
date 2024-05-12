@@ -24,6 +24,8 @@ export interface IBookState{
     reviews: null,
     book: any,
     incart: boolean | undefined
+    pageSize: number,
+    active: number
 }
 
 const initialState : IBookState = {
@@ -33,7 +35,9 @@ const initialState : IBookState = {
     message: null,
     reviews: null,
     book: null,
-    incart: false
+    incart: false,
+    pageSize: 0,
+    active: 0
 }
 
 export const bookReducer = createReducer(
@@ -47,7 +51,7 @@ export const bookReducer = createReducer(
     on(getBooks, (state) => ({...state,loading:true,error:null})),
     on(getBooksSuccess, (state,action) => {
         console.log(action.books);
-        return {...state,loading:false,books:action.books}
+        return {...state,loading:false,books:action.books,pageSize:action.pageSize}
     }),
 
     // get book

@@ -17,3 +17,8 @@ export const selectIncart = createSelector(
     selectBookState,
     (state) => state.incart
 )
+
+export const selectPages = createSelector(
+    selectBookState,
+    (state) => state.pageSize
+)
