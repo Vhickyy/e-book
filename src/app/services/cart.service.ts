@@ -36,16 +36,11 @@ export class CartService {
 
   getAnnonymousCart(){
     const uuid = localStorage.getItem("uuid") || "";
-    console.log(uuid);
-    
-    // if(uuid) return this.http.get(`/api/v1/annonymous-cart/${uuid}`);
     return this.http.get(`/api/v1/annonymous-cart/${uuid}`);
   }
 
   removeAnonymousCart(id:string) {
     const uuid = localStorage.getItem("uuid") || "";
-    console.log(id,uuid);
-    
     return this.http.patch(`/api/v1/annonymous-cart/${id}`,{uuid})
   }
 
@@ -54,6 +49,10 @@ export class CartService {
   }
 
   // wishlist
+  getWishlist () {
+    return this.http.get("/api/v1/wishlist")
+  }
+
   addToWishlist (id:string) {
     return this.http.post("/api/v1/wishlist",{book:id})
   }
@@ -63,4 +62,16 @@ export class CartService {
   }
 
   // orders
+  makePayment (cartId:string) {
+    // return this.http.post("/api/v1/payment",{email:"vee2@gmail.com",amount:200,name:"vee"})
+    return this.http.post("/api/v1/order",{cartId})
+  }
+
+  verifyPayment (reference:string | null) {
+    console.log(reference);
+    
+    // return this.http.post("/api/v1/payment",{email:"vee2@gmail.com",amount:200,name:"vee"})
+    return this.http.get(`/api/v1/order/${reference}`)
+  }
+  
 }

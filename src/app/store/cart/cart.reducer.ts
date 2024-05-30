@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import {  addAnnonymousCart, addAnnonymousCartSuccess, addCart, addCartSuccess, addWishlist, addWishlistSuccess, cartError, clearAnnonymousCart, clearAnnonymousCartSuccess, clearCart, clearCartSuccess, getAnnonymousCart, getAnnonymousCartSuccess, getCart, getCartSuccess, getWishlist, getWishlistSuccess, removeAnnonymousCart, removeAnnonymousCartSuccess, removeCart, removeCartSuccess, removeWishlist, removeWishlistSuccess, } from "./cart.actions";
+import {  addAnnonymousCart, addAnnonymousCartSuccess, addCart, addCartSuccess, addWishlist, addWishlistSuccess, cartError, clearAnnonymousCart, clearAnnonymousCartSuccess, clearCart, clearCartSuccess, getAnnonymousCart, getAnnonymousCartSuccess, getCart, getCartSuccess, getWishlist, getWishlistSuccess, orderBooks, orderBooksSuccess, removeAnnonymousCart, removeAnnonymousCartSuccess, removeCart, removeCartSuccess, removeWishlist, removeWishlistSuccess, verifyPayment, verifyPaymentSuccess, } from "./cart.actions";
 
 
 interface ICart  {
@@ -87,6 +87,15 @@ export const cartReducer = createReducer(
     on(removeWishlist, (state) => ({...state,loading:true,error:null})),
     on(removeWishlistSuccess, (state,{message,wishlist}) => ({...state,message,wishlist})),
 
+    // order book
+    on(orderBooks, (state) => ({...state,loading:true,error:null})),
+    on(orderBooksSuccess,(state) => ({...state})),
+
+    // verify book
+    on(verifyPayment, (state) => ({...state,loading:true,error:null})),
+    on(verifyPaymentSuccess,(state) => ({...state})),
+
 
     on(cartError,(state,action)=> ({...state,loading:false,error:action.error})),
+    
 )

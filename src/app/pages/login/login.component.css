@@ -1,6 +1,12 @@
+.body{
+    display: flex;
+    flex-direction: column;
+}
+
 main{
     background: linear-gradient(0deg,rgba(129, 14, 167, 0.6), rgba(129, 14, 167, 0.6)), url("../../../assets/anobg.png") center/cover fixed no-repeat;
     padding-block: 5rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;

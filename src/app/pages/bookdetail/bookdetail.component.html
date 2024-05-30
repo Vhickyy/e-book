@@ -5,7 +5,7 @@
             <div>
                 <img class="main-img" src="../../../assets/bookdet.png" alt="">
                 <div class="img-container">
-                    <img class="img" *ngFor="let img of [1,2,3,4]" [src]="'../../../assets/bookdet.png'" alt="">
+                    <img class="img" *ngFor="let img of [1,2]" [src]="'../../../assets/bookdet.png'" alt="">
                 </div>
             </div>
         </aside>
@@ -55,11 +55,13 @@
         <aside>
             <div class="buy">
                 <p>N {{(book$ | async)?.price}}</p>
-                <button class="btn">Buy Now</button>
+                <button class="btn" *ngIf="!((book$ | async)?.bought)">Buy Now</button>
+                <button class="btn" *ngIf="((book$ | async)?.bought)">Go to books</button>
                 <!-- <button class="contact-btn" (click)="addToAnnonymousCart()">{{ (incart$ | async) ? 'Go To Cart' : 'Add To Cart' }}</button> -->
                 <!-- <button class="contact-btn">Add To Cart</button> -->
-                <button class="contact-btn" routerLink="/cart"  *ngIf="(incart$ | async)">Go To Cart</button>
-                <button class="contact-btn"  *ngIf="!(incart$ | async)$" (click)="addToCart()">Add To Cart</button>
+                <button class="contact-btn" routerLink="/cart"  *ngIf="((book$ | async)?.inCart)">Go To Cart</button>
+                <button class="contact-btn"  *ngIf="!((book$ | async)?.inCart) && !((book$ | async)?.bought)" (click)="addToCart()">Add To Cart</button>
+                <button class="contact-btn"  *ngIf="((book$ | async)?.bought)">Start Reading</button>
             </div>
         </aside>
     </section>

@@ -186,3 +186,9 @@ h4{
     background-color: var(--primaryColor);
     color: white;
 }
+
+@media screen and (min-width: 1200px) {
+    .book-row{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

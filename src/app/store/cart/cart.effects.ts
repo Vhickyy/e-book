@@ -1,4 +1,4 @@
-import { inject } from "@angular/core";
+import { Inject, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { CartService } from "../../services/cart.service";
@@ -18,6 +18,8 @@ export const addCartEffect = createEffect((action$ = inject(Actions),router = in
             return cartService.addCart(id).pipe(
                 map((data:any) => {
                     console.log(data);
+                    console.log(data.data);
+                    
                     store.dispatch(placeInCart())
 
                     return cartAction.addCartSuccess({message:data.message,cart:data.data})
@@ -52,6 +54,8 @@ export const getCartEffect = createEffect( (action$ = inject(Actions), router = 
             localStorage.removeItem("uuid")
             return cartService.getCart().pipe(
                 map((data:any) => {
+                    console.log(data);
+                    
                     return cartAction.getCartSuccess({cart:data.data})
                 }),
                 catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
@@ -165,19 +169,20 @@ export const addWishlistEffect = createEffect ((action$ = inject(Actions), route
 },{functional:true});
 
 
-// export const getWishlistEffect = createEffect((action$ = inject(Actions), router = inject(Router), cartService = inject(CartService)) => {
-//     return action$.pipe(
-//         ofType(cartAction.removeWishlist),
-//         switchMap(data => {
-//             return cartService.removeFromWishlist().pipe(
-//                 map((data:any) => {
-//                     return cartAction.removeWishlistSuccess(data.message)
-//                 }),
-//                 catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
-//             )
-//         })
-//     )
-// },{functional:true});
+export const getWishlistEffect = createEffect((action$ = inject(Actions), router = inject(Router), cartService = inject(CartService)) => {
+    return action$.pipe(
+        ofType(cartAction.getWishlist),
+        switchMap(() => {
+            return cartService.getWishlist().pipe(
+                map(({data}:any) => {
+                    console.log(data.items);
+                    return cartAction.getWishlistSuccess({message:data.message,wishlist:data.items})
+                }),
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
+            )
+        })
+    )
+},{functional:true});
 
 
 export const removeWishlistEffect = createEffect((action$ = inject(Actions), router = inject(Router), cartService = inject(CartService), store=inject(Store)) => {
@@ -195,3 +200,39 @@ export const removeWishlistEffect = createEffect((action$ = inject(Actions), rou
         })
     )
 },{functional:true});
+
+
+export const orderBooks = createEffect((action$ = inject(Actions), router = inject(Router),  cartService = inject(CartService)) => {
+    return action$.pipe(
+        ofType(cartAction.orderBooks),
+        switchMap(({id}) => {
+            return cartService.makePayment(id).pipe(
+                map((data:any) => {
+                    console.log(data.order.authorization_url,data.order.reference);
+                    // router.navigate([`/dashboard/verify-payment`],{queryParams: { reference:data.order.reference },replaceUrl:true});
+                    const newUrl = `/dashboard/verify-payment?reference=${data.order.reference}`
+                    // history.pushState(null,'',newUrl);
+                    window.location.href = data.order.authorization_url;
+                    return cartAction.orderBooksSuccess(data)
+                })
+            )
+        }),
+        catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
+    )
+},{functional:true});
+
+
+export const verifyPayment = createEffect((action$ = inject(Actions), router = inject(Router), cartService = inject(CartService), store=inject(Store)) => {
+    return action$.pipe(
+        ofType(cartAction.verifyPayment),
+        switchMap(({reference}) => {
+            return cartService.verifyPayment(reference).pipe(
+                map(() => {
+                    store.dispatch(cartAction.getCart())
+                    return cartAction.verifyPaymentSuccess();
+                })
+            )
+        }),
+        catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
+    )
+},{functional:true})

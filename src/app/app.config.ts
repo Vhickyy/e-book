@@ -9,9 +9,11 @@ import { provideEffects } from '@ngrx/effects';
 import * as authEffect from './store/auth/auth.effect'
 import * as bookEffect from "./store/book/book.effect"
 import * as cartEffect from "./store/cart/cart.effects"
+import * as libraryEffect from "./store/library/library.effects"
 import { authInterceptor } from './authInterceptors';
 import { bookReducer } from './store/book/book.reducer';
 import { cartReducer } from './store/cart/cart.reducer';
+import { libraryReducer } from './store/library/library.reducer';
 
 
 export const appConfig: ApplicationConfig = {
@@ -33,6 +35,10 @@ export const appConfig: ApplicationConfig = {
       name: "cart",
       reducer : cartReducer
     }),
-    provideEffects(authEffect,bookEffect,cartEffect),
+    provideState({
+      name: "library",
+      reducer : libraryReducer
+    }),
+    provideEffects(authEffect,bookEffect,cartEffect,libraryEffect),
     ],
 };

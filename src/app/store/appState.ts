@@ -4,5 +4,6 @@ import { IBookState } from "./book/book.reducer";
 export interface AppState {
     auth: IAuthState,
     book: IBookState,
-    cart: any
+    cart: any,
+    library: any
 }

@@ -1,6 +1,7 @@
 section{
     background: rgba(45, 45, 45, 1);
     color: white;
+    margin-top: .8rem;
 }
 .dark{
     width: min(90%,var(--maxWidth));

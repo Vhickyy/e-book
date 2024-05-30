@@ -1,0 +1,23 @@
+<div class="body">
+    <app-navbar></app-navbar>
+    <main>
+        <section>
+            <h3>Confirm Your Order.</h3>
+            <p>Total: {{(cartItems$ | async)?.total}}</p>
+            <div>
+                <!-- {{cartItems$ | async}} -->
+                @for(item of (cartItems$ | async)?.items; track item){
+                    <div>
+                        <img [src]="item.frontCover.secureUrl" class="img" />
+                        <p>{{item.title}}</p>
+                        <p>{{item.author}}</p>
+                        <p>N {{item.price}}</p>
+                    </div>
+                }
+            </div>
+            <button (click)="makePayment()">Proceed To Payment</button>
+        </section>
+        <div class="overlay"></div>
+    </main>
+    <app-footer></app-footer>
+</div>

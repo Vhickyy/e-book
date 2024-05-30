@@ -35,7 +35,7 @@ export const getAllBookEffect = createEffect((actions$ = inject(Actions), bookSe
         switchMap(({category,search,page}) => {
             return bookService.getAllBook(category,search,page).pipe(
                 map(({data}:any)=>{
-                    console.log(data.pageSize);
+                    // console.log(data.pageSize);
                     return bookAction.getBooksSuccess({books:data.books,pageSize:data.pageSize})
                 }),
                 catchError((error:HttpErrorResponse) => {
@@ -56,27 +56,27 @@ export const getBookEffect = createEffect((actions$ = inject(Actions), bookServi
                 map((data:any)=>{
                     console.log(data,id);
                     let inCart;
-                    store.select(selectCart).subscribe(data => {
-                        console.log(data,"bookdata");  
-                        if(!data || !data.items) {
-                            inCart = false;
-                            return
-                        };
-                        const cart = data.items.find((item: any) => {
-                            return item._id == id || item == id
-                            // return item == id 
-                        });
-                        // console.log(cart);
+                    // store.select(selectCart).subscribe(data => {
+                    //     // console.log(data,"bookdata");  
+                    //     if(!data || !data.items) {
+                    //         inCart = false;
+                    //         return
+                    //     };
+                    //     const cart = data.items.find((item: any) => {
+                    //         return item._id == id || item == id
+                    //         // return item == id 
+                    //     });
+                    //     // console.log(cart);
                         
-                        if(cart){
-                            inCart = true;
-                            return
-                        }
-                        inCart = false;
-                    });
-                    console.log(inCart,data.data);
+                    //     if(cart){
+                    //         inCart = true;
+                    //         return
+                    //     }
+                    //     inCart = false;
+                    // });
+                    // console.log(inCart,data.data);
                     
-                    return bookAction.getBookSuccess({book:data.data,inCart})
+                    return bookAction.getBookSuccess({book:data.data})
                 }),
                 catchError((error:HttpErrorResponse) => {
                     return of(bookAction.bookFailure(error))

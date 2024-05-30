@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { BooksComponent } from './pages/books/books.component';
-import { BookcategoryComponent } from './pages/bookcategory/bookcategory.component';
 import { BookdetailComponent } from './pages/bookdetail/bookdetail.component';
 import { AuthorComponent } from './pages/author/author.component';
 import { AuthorEditComponent } from './pages/author-edit/author-edit.component';
@@ -20,6 +19,9 @@ import { VerifySuccessComponent } from './pages/verify-success/verify-success.co
 import { VerifyOtpComponent } from './pages/verify-otp/verify-otp.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { LibraryComponent } from './pages/library/library.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+import { VerifyPaymentComponent } from './pages/verify-payment/verify-payment.component';
 
 export const routes: Routes = [
     {path: "", component:HomeComponent},
@@ -32,7 +34,6 @@ export const routes: Routes = [
     {path:"reset-password",component:ResetPasswordComponent},
     {path:"verify-success",component:VerifySuccessComponent},
     {path:"books", component:BooksComponent},
-    // {path:"books/:category",component:BookcategoryComponent},
     {path:"books/:category/:id",component:BookdetailComponent},
     {path:"contact",component:ContactComponent},
     {path:"faq",component:FaqComponent},
@@ -44,5 +45,8 @@ export const routes: Routes = [
         {path:"author/send-message",component:SendMessageComponent},
         {path:"profile",component:ProfileComponent},
         {path:"wishlist",component:WishlistComponent},
+        {path:"library",component:LibraryComponent},
+        {path:"payment",component:PaymentComponent},
+        {path:"verify-payment",component:VerifyPaymentComponent}
     ]}
 ];

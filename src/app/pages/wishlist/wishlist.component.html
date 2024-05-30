@@ -3,9 +3,9 @@
     <div class="main">
         <app-dashboard-layout>
             <section >
-                <div *ngFor="let list of wishList" class="grid">
+                <div *ngFor="let list of wishList$ | async" class="grid">
                     <div class="img-container">
-                        <img [src]="list.img" alt="list.title" class="img">
+                        <img [src]="list.frontCover?.secureUrl" alt="list.title" class="img">
                     </div>
                     <div>
                         <p>{{list.title}}</p>
@@ -27,7 +27,7 @@
                     <div class="mobile btn-container">
                         <button>Buy</button>
                         <!-- <button >Remove</button> -->
-                        <button class="button">Remove</button>
+                        <button class="button" (click)="removeWishlist(list._id)">Remove</button>
                     </div>
                 </div>
             </section>

@@ -23,7 +23,7 @@ export interface IBookState{
     message: string | null,
     reviews: null,
     book: any,
-    incart: boolean | undefined
+    // incart: boolean | undefined
     pageSize: number,
     active: number
 }
@@ -35,7 +35,7 @@ const initialState : IBookState = {
     message: null,
     reviews: null,
     book: null,
-    incart: false,
+    // incart: false,
     pageSize: 0,
     active: 0
 }
@@ -56,9 +56,11 @@ export const bookReducer = createReducer(
 
     // get book
     on(getBook, (state) => ({...state,loading:true,error:null})),
-    on(getBookSuccess, (state,{book,inCart}) => {
-        const bool = inCart;
-        return {...state,loading:false,book,incart:bool}
+    on(getBookSuccess, (state,{book}) => {
+        // const bool = inCart;
+        console.log("booking");
+        
+        return {...state,loading:false,book}
     }),
 
     // edit book
@@ -72,7 +74,7 @@ export const bookReducer = createReducer(
     // place in cart
     on(placeInCart,(state) => {
         console.log("placing in cart");
-        return {...state,incart:true}
+        return {...state,book:{...state.book,inCart:true}}
     }),
 
     // add to wishlist

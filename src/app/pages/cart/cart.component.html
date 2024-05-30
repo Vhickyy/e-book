@@ -13,7 +13,7 @@
                         <div >
                             <div>
                                 <p class="title">{{item.title}}</p>
-                                <p>{{item.author}}</p>
+                                <p>{{item.author.fullname}}</p>
                             </div>
                         </div>
                         <p class="price">$ {{item.price}}</p>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="desk">
                         <p class="title">{{item.title}}</p>
-                        <p>{{item.author}}</p>
+                        <p>{{item.author.fullname}}</p>
                     </div>
                     <div class="flex desk">
                         <img src="../../../assets/Vector.svg" class="icon" alt="">
@@ -48,7 +48,7 @@
                     <p>00.00</p>
                 </div>
                 <div class="btn-container">
-                    <button [disabled]="!(cartItems$ | async)?.items?.length">Checkout</button>
+                    <button [disabled]="!(cartItems$ | async)?.items?.length" routerLink="/dashboard/payment">Checkout</button>
                     <button routerLink="/books">Go To Books</button>
                 </div>
             </div>

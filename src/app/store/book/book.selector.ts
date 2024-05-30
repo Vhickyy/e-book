@@ -13,10 +13,10 @@ export const selectBook = createSelector(
     (state) => state.book
 )
 
-export const selectIncart = createSelector(
-    selectBookState,
-    (state) => state.incart
-)
+// export const selectIncart = createSelector(
+//     selectBookState,
+//     (state) => state.incart
+// )
 
 export const selectPages = createSelector(
     selectBookState,

@@ -7,7 +7,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { getBooks } from '../../store/book/book.actions';
-import {  selectBooks, selectIncart, selectPages } from '../../store/book/book.selector';
+import {  selectBooks, selectPages } from '../../store/book/book.selector';
 import { addAnnonymousCart, addCart, addWishlist, removeWishlist } from '../../store/cart/cart.actions';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -34,14 +34,6 @@ export class BooksComponent implements OnInit {
   pageSize$ = this.store.select(selectPages)
   pageSizeArray!: number[];
 
-  // constructor() {
-  //   // Initialize pageSizeArray
-  //   this.pageSize$.subscribe(values => {
-  //     console.log(values);
-      
-  //     // this.pageSizeArray = Array.from(values);
-  //   });
-  // }
 
   ngOnInit(): void {
     this.pageSize$.subscribe(value => {
@@ -49,14 +41,6 @@ export class BooksComponent implements OnInit {
     });
     this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
   }
-
-  // addToAnnonymousCart(id:string){
-  //   console.log(id,this.token);
-  //   if(this.token){
-  //     return this.store.dispatch(addCart({id}));
-  //   }
-  //   return this.store.dispatch(addAnnonymousCart({id}));
-  // }
   
   changeCategory(cat: string){
     this.selectedCategory = cat.toLowerCase();
@@ -77,10 +61,18 @@ export class BooksComponent implements OnInit {
     this.store.dispatch(removeWishlist({id}))
   }
 
+  changeActive (index: number) {
+    if(this.active == index) return
+    this.active = index;
+    this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search,page:this.active + 1}));
+  }
+
   nextPage() {
     if(this.active == this.pageSizeArray.length - 1) return;
     if(this.active < this.pageSizeArray.length - 1){
+      console.log(this.active);
       this.active++
+      console.log(this.active);
       this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search,page:this.active + 1}));
     }
   }
@@ -88,8 +80,11 @@ export class BooksComponent implements OnInit {
   prevPage() {
     if(this.active == 0) return;
     if(this.active < this.pageSizeArray.length){
+      console.log(this.active);
       this.active--
-      this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search,page:this.active}));
+      console.log(this.active);
+      
+      this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search,page:this.active + 1}));
     }
   }
 }

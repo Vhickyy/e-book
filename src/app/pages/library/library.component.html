@@ -1,0 +1,38 @@
+<div class="body">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <app-dashboard-layout>
+            <section>
+                <aside>
+                    <div>
+                        <input type="text" placeholder="Seach For A Book">
+                        <div class="btn">
+                            <button>Search</button>
+                            <img src="../../../assets/ArrowCircleRight.svg" alt="">
+                        </div>
+                    </div>
+                    <!-- <button>Explore Books</button> -->
+                </aside>
+                <p>Recently Opened</p>
+                <p>Your Books</p>
+                <div class="book-row">
+                    @for(book of library$ | async; track book){
+                        <div class="card">
+                            <!-- {{book | json}} -->
+                            <img [src]='book.book.frontCover?.secureUrl' alt="library">
+                            <p>{{book.book.title}}</p>
+                        </div>
+                    }
+                </div>
+                <div class="pagination">
+                    <button><img src="../../../assets/arrowleft.svg" alt="arrowleft"></button>
+                    @for(button of [1,2,3,4]; track button){
+                        <button>{{button}}</button>
+                    }
+                    <button ><img src="../../../assets/arrowright.svg" alt="arrowright"></button>
+                </div>
+            </section>
+        </app-dashboard-layout>
+    </div>
+    <app-footer></app-footer>
+</div>

@@ -6,7 +6,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getBook } from '../../store/book/book.actions';
 import { Subscription } from 'rxjs';
-import { selectBook, selectIncart } from '../../store/book/book.selector';
+import { selectBook } from '../../store/book/book.selector';
 import { addAnnonymousCart, addCart } from '../../store/cart/cart.actions';
 
 @Component({
@@ -24,7 +24,7 @@ export class BookdetailComponent implements OnInit {
   book$ = this.store.select(selectBook);
   id! :string | null;
   token = localStorage.getItem("token");
-  incart$ = this.store.select(selectIncart);
+  // incart$ = this.store.select(selectIncart);
 
   ngOnInit(): void {
     console.log("loadind");

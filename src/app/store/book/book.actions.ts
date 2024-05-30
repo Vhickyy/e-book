@@ -11,7 +11,7 @@ export const getBooksSuccess = createAction('[Book] getAllBooksSuccess', props<{
 
 // Get Book
 export const getBook = createAction('[Book] getBook', props<{id:string | null}>());
-export const getBookSuccess = createAction('[Book] getBookSuccess', props<{book: IBook,inCart:boolean | undefined}>());
+export const getBookSuccess = createAction('[Book] getBookSuccess', props<{book: IBook}>());
 
 // Edit Book
 export const editBook = createAction('[Book] editBook', props<{id:string}>());
