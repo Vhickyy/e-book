@@ -5,7 +5,7 @@ import { tap } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
 
-  // console.log(request);
+  console.log('request');
   
   const frontendUrl = window.location.href
   console.log(frontendUrl);
@@ -17,6 +17,7 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
     // console.log(request);
     
     // console.log(frontendUrl.includes("dashboard") && token);
+    console.log({token});
     
     if(token){
       const modifiedReq = request.clone({headers : request.headers.append("Authorization", "Bearer " + token)});

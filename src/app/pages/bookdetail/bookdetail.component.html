@@ -55,8 +55,10 @@
         <aside>
             <div class="buy">
                 <p>N {{(book$ | async)?.price}}</p>
-                <button class="btn" *ngIf="!((book$ | async)?.bought)">Buy Now</button>
-                <button class="btn" *ngIf="((book$ | async)?.bought)">Go to books</button>
+                <!-- routerLink="/dashboard/payment?buy-now=true" -->
+                <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="['/dashboard/payment']" 
+                [queryParams]="{ 'buy-now': true,id : (book$ | async)?._id }" >Buy Now</button>
+                <button class="btn" *ngIf="((book$ | async)?.bought)" routerLink="/books" >Go to books</button>
                 <!-- <button class="contact-btn" (click)="addToAnnonymousCart()">{{ (incart$ | async) ? 'Go To Cart' : 'Add To Cart' }}</button> -->
                 <!-- <button class="contact-btn">Add To Cart</button> -->
                 <button class="contact-btn" routerLink="/cart"  *ngIf="((book$ | async)?.inCart)">Go To Cart</button>

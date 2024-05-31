@@ -205,13 +205,18 @@ export const removeWishlistEffect = createEffect((action$ = inject(Actions), rou
 export const orderBooks = createEffect((action$ = inject(Actions), router = inject(Router),  cartService = inject(CartService)) => {
     return action$.pipe(
         ofType(cartAction.orderBooks),
-        switchMap(({id}) => {
-            return cartService.makePayment(id).pipe(
+        switchMap(({id,single}) => {
+            return cartService.makePayment({id,single}).pipe(
                 map((data:any) => {
+                    console.log("making payment");
+                    
                     console.log(data.order.authorization_url,data.order.reference);
                     // router.navigate([`/dashboard/verify-payment`],{queryParams: { reference:data.order.reference },replaceUrl:true});
-                    const newUrl = `/dashboard/verify-payment?reference=${data.order.reference}`
-                    // history.pushState(null,'',newUrl);
+                    console.log(single,id);
+                    
+                    const newUrl = `/dashboard/verify-payment?reference=${data.order.reference}`;
+                    // history.replaceState(null,'',newUrl);
+                    history.pushState(null,'',newUrl);
                     window.location.href = data.order.authorization_url;
                     return cartAction.orderBooksSuccess(data)
                 })

@@ -22,6 +22,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { LibraryComponent } from './pages/library/library.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { VerifyPaymentComponent } from './pages/verify-payment/verify-payment.component';
+import { authGaurd } from './gaurds/auth-gaurd.guard';
 
 export const routes: Routes = [
     {path: "", component:HomeComponent},
@@ -39,7 +40,7 @@ export const routes: Routes = [
     {path:"faq",component:FaqComponent},
     {path:"author",component:AuthorComponent},
     {path:"cart",component:CartComponent},
-    {path:'dashboard',children:[
+    {path:'dashboard',canActivate:[authGaurd],children:[
         {path:"add-book", component:AddBookComponent},
         {path:"author/edit-profile",component:AuthorEditComponent},
         {path:"author/send-message",component:SendMessageComponent},

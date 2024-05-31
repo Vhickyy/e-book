@@ -3,19 +3,33 @@
     <main>
         <section>
             <h3>Confirm Your Order.</h3>
-            <p>Total: {{(cartItems$ | async)?.total}}</p>
-            <div>
-                <!-- {{cartItems$ | async}} -->
-                @for(item of (cartItems$ | async)?.items; track item){
+            <!-- <p>Total: {{(cartItems$ | async)?.total}}</p> -->
+            <!-- <div> -->
+                <!-- {{items$ | async | json}} -->
+                <!-- {{item | json}} -->
+                @if(!single){
+                    <p>Total:{{item.total}}</p>
+                    @for(item of item?.items; track item){
+                        <div>
+                            <img [src]="item.frontCover.secureUrl" class="img" />
+                            <p>{{item.title}}</p>
+                            <p>{{item.author.fullname}}</p>
+                            <p>N {{item.price}}</p>
+                        </div>
+                    }
+                }
+                @else{
+                    <p>Total: {{item?.price}}</p>
                     <div>
-                        <img [src]="item.frontCover.secureUrl" class="img" />
-                        <p>{{item.title}}</p>
-                        <p>{{item.author}}</p>
-                        <p>N {{item.price}}</p>
+                        <img [src]="item?.frontCover.secureUrl" class="img" />
+                        <p>N {{item?.author.fullname}}</p>
+                        <p>N {{item?.price}}</p>
                     </div>
                 }
-            </div>
-            <button (click)="makePayment()">Proceed To Payment</button>
+                <p routerLink="/cart">Go To Cart</p>
+                <p routerLink="/books">Go To Books</p>
+            <!-- </div> -->
+            <button (click)="makePayment(item._id)">Proceed To Payment</button>
         </section>
         <div class="overlay"></div>
     </main>

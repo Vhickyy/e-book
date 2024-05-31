@@ -61,17 +61,22 @@ export class CartService {
     return this.http.delete(`/api/v1/wishlist/${id}`)
   }
 
-  // orders
-  makePayment (cartId:string) {
-    // return this.http.post("/api/v1/payment",{email:"vee2@gmail.com",amount:200,name:"vee"})
-    return this.http.post("/api/v1/order",{cartId})
+  // orders single:boolean = false
+  makePayment ({id,single}:{id:string,single:boolean}) {
+    if(!single){
+      return this.http.post("/api/v1/order",{cartId:id});
+    }
+    console.log("gssg");
+    return this.http.post("/api/v1/order",{bookId:id});
   }
 
   verifyPayment (reference:string | null) {
-    console.log(reference);
-    
-    // return this.http.post("/api/v1/payment",{email:"vee2@gmail.com",amount:200,name:"vee"})
+    // console.log(reference,bookId);
+    // if(bookId){
+    //   return this.http.get(`/api/v1/order/${reference}?bookId=${bookId}`)
+    // }
     return this.http.get(`/api/v1/order/${reference}`)
+    // return this.http.post("/api/v1/payment",{email:"vee2@gmail.com",amount:200,name:"vee"})
   }
   
 }

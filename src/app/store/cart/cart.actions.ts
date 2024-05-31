@@ -52,7 +52,7 @@ export const clearWishlist = createAction('[Cart] clearWishlist', props<{id:stri
 export const clearWishlistSuccess = createAction('[Cart] clearWishlistSuccess', props<{message:string,wishlist:any}>());
 
 // order books
-export const orderBooks = createAction('[Order] orderBooks',props<{id:string}>())
+export const orderBooks = createAction('[Order] orderBooks',props<{id:string,single:boolean}>())
 export const orderBooksSuccess = createAction('[Order] orderBooksSuccess',props<{data:any}>());
 
 // verify payment

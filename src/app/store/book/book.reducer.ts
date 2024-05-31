@@ -79,13 +79,9 @@ export const bookReducer = createReducer(
 
     // add to wishlist
     on(addWishlist,(state,{id}) => {
-        console.log("hoo");
-        
         const books = state.books.map((book: any,i: any) => {
             return book._id == id ? {...book,inWishlist:true} : book
-        })
-        console.log(books);
-        
+        });
         return {...state,books}
     }),
 
