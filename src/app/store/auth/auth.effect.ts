@@ -75,7 +75,9 @@ export const loginEffect = createEffect((actions$ = inject(Actions), authService
                     localStorage.setItem("token", data.token)
                     localStorage.removeItem("uuid");
                     console.log(data);
-                    store.dispatch(addCartSuccess({cart:data.carts}))
+                    if(data.carts){
+                        store.dispatch(addCartSuccess({cart:data.carts}))
+                    }
                     router.navigate(['/dashboard/wishlist'])
                     return authAction.loginSuccess({user:data.user});
                 }),

@@ -26,10 +26,7 @@ export const cartReducer = createReducer(
     // add cart
     on(addCart,(state) => ({...state,loading:true,error:null})),
     on(addCartSuccess,(state,{message,cart}) => {
-        // const count = state.cartLength + 1;
-        console.log(cart);
-        const count = cart.items.length;
-        console.log(count,cart.items.length);
+        const count = cart?.items?.length || 0;
         return {...state,loading:false,message,cartLength:count,cart}
     }),
 

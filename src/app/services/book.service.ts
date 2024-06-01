@@ -16,7 +16,8 @@ export class BookService {
   }
 
   getBook (id:string | null) {
-    return this.http.get(`/api/v1/books/${id}`)
+    const uuid = localStorage.getItem("uuid")
+    return this.http.get(`/api/v1/books/${id}?uuid=${uuid}`)
   }
 
   addBook (book: any) {
