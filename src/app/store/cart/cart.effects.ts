@@ -158,9 +158,11 @@ export const addWishlistEffect = createEffect ((action$ = inject(Actions), route
             // console.log(id);
             return cartService.addToWishlist(id).pipe(
                 map( ({data}:any) => {
-                    console.log(data);
+                    console.log({data});
+                    
+                    // update inWishlist for book
                     store.dispatch(addWishlist({id}))
-                    return cartAction.addWishlistSuccess({message:data.message,wishlist:data.wishlist})
+                    return cartAction.addWishlistSuccess({message:data.message,wishlist:data})
                 }),
                 catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
             )
@@ -192,8 +194,9 @@ export const removeWishlistEffect = createEffect((action$ = inject(Actions), rou
             return cartService.removeFromWishlist(id).pipe(
                 map((data:any) => {
                     console.log(data);
+                    // update inWishlist for book
                     store.dispatch(removeWishlist({id}))
-                    return cartAction.removeWishlistSuccess(data.message)
+                    return cartAction.removeWishlistSuccess({message:data.message,id})
                 }),
                 catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
             )
@@ -208,14 +211,7 @@ export const orderBooks = createEffect((action$ = inject(Actions), router = inje
         switchMap(({id,single}) => {
             return cartService.makePayment({id,single}).pipe(
                 map((data:any) => {
-                    console.log("making payment");
-                    
-                    console.log(data.order.authorization_url,data.order.reference);
-                    // router.navigate([`/dashboard/verify-payment`],{queryParams: { reference:data.order.reference },replaceUrl:true});
-                    console.log(single,id);
-                    
                     const newUrl = `/dashboard/verify-payment?reference=${data.order.reference}`;
-                    // history.replaceState(null,'',newUrl);
                     history.pushState(null,'',newUrl);
                     window.location.href = data.order.authorization_url;
                     return cartAction.orderBooksSuccess(data)
@@ -235,6 +231,20 @@ export const verifyPayment = createEffect((action$ = inject(Actions), router = i
                 map(() => {
                     store.dispatch(cartAction.getCart())
                     return cartAction.verifyPaymentSuccess();
+                })
+            )
+        }),
+        catchError((error:HttpErrorResponse) => of(cartAction.cartError(error)))
+    )
+},{functional:true})
+
+export const getOrders = createEffect((action$ = inject(Actions), router = inject(Router), cartService = inject(CartService), store=inject(Store)) => {
+    return action$.pipe(
+        ofType(cartAction.getOrders),
+        switchMap(()=>{
+            return cartService.getOrders().pipe(
+                map((data:any) => {
+                    return cartAction.getOrdersSuccess({orders:data.data})
                 })
             )
         }),

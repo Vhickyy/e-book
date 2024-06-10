@@ -9,26 +9,27 @@
                     </div>
                     <div>
                         <p>{{list.title}}</p>
-                        <p>{{list.author}}</p>
-                        <p >56777</p>
+                        <p>{{list.author.fullname}}</p>
+                        <p>N {{list.price}}</p>
                         <div class="with-btn desk">
                             <button>Add To Cart</button>
                             <img src="../../../assets/edit.svg" alt="delete-icon">
                         </div>
                     </div>
-                    <!-- <div>
-                        <p>{{list.title}}</p>
-                        <p>{{list.author}}</p>
-                    </div>
-                    <div>
-                        <button>Add To Cart</button>
-                        <button>Remove</button> -->
-                    <!-- </div> -->
+                    <p>N {{list.price}}</p>
                     <div class="mobile btn-container">
-                        <button>Buy</button>
-                        <!-- <button >Remove</button> -->
+                        @if(list.inLib){
+                            <button>Buy</button>
+                        }@else{
+                            <button>Read</button>
+                        }
                         <button class="button" (click)="removeWishlist(list._id)">Remove</button>
                     </div>
+                    <!-- <p>N {{list.price}}</p>
+                    <div class=" btn-container">
+                        <button>Buy Now</button>
+                        <button class="button" (click)="removeWishlist(list._id)">Remove</button>
+                    </div> -->
                 </div>
             </section>
         </app-dashboard-layout>

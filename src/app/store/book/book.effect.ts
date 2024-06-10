@@ -47,6 +47,26 @@ export const getAllBookEffect = createEffect((actions$ = inject(Actions), bookSe
     )
 },{functional:true})
 
+export const getAuthorBookEffect = createEffect((actions$ = inject(Actions), bookService = inject(BookService), router = inject(Router)) => {
+    return actions$.pipe(
+        ofType(bookAction.getAuthorBooks),
+        switchMap(({authorId}) => {
+            return bookService.getAuthorBooks(authorId).pipe(
+                map(({data}:any)=>{
+                    // console.log(data.pageSize);
+                    console.log(data.books,{data});
+                    
+                    return bookAction.getAuthorBooksSuccess({authorBooks:data.books})
+                }),
+                catchError((error:HttpErrorResponse) => {
+                    console.log(error);
+                    return of(bookAction.bookFailure(error))
+                })
+            )
+        })
+    )
+},{functional:true})
+
 
 export const getBookEffect = createEffect((actions$ = inject(Actions), bookService = inject(BookService), router = inject(Router), store = inject(Store)) => {
     return actions$.pipe(
@@ -54,28 +74,6 @@ export const getBookEffect = createEffect((actions$ = inject(Actions), bookServi
         switchMap(({id}:{id:string | null}) => {
             return bookService.getBook(id).pipe(
                 map((data:any)=>{
-                    console.log(data,id);
-                    let inCart;
-                    // store.select(selectCart).subscribe(data => {
-                    //     // console.log(data,"bookdata");  
-                    //     if(!data || !data.items) {
-                    //         inCart = false;
-                    //         return
-                    //     };
-                    //     const cart = data.items.find((item: any) => {
-                    //         return item._id == id || item == id
-                    //         // return item == id 
-                    //     });
-                    //     // console.log(cart);
-                        
-                    //     if(cart){
-                    //         inCart = true;
-                    //         return
-                    //     }
-                    //     inCart = false;
-                    // });
-                    // console.log(inCart,data.data);
-                    
                     return bookAction.getBookSuccess({book:data.data})
                 }),
                 catchError((error:HttpErrorResponse) => {
@@ -86,46 +84,44 @@ export const getBookEffect = createEffect((actions$ = inject(Actions), bookServi
     )
 },{functional:true})
 
-// export const getAllBookEffect = createEffect((actions$ = inject(Actions), bookService = inject(BookService), router = inject(Router), store = inject(Store)) => {
-//     return actions$.pipe(
-//         ofType(bookAction.getBooks),
-//         switchMap(() => {
-//             return bookService.getAllBook().pipe(
-//                 map((data:any)=>{
-//                     console.log(data.data);
-//                     return bookAction.getBooksSuccess({books:data.data.books})
-//                 }),
-//                 catchError((error:HttpErrorResponse) => {
-//                     console.log(error);
-//                     return of(bookAction.bookFailure(error))
-//                 })
-//             )
-//         })
-//     )
-// },{functional:true})
+
+export const editBookEffect = createEffect((actions$ = inject(Actions),bookService = inject(BookService), router = inject(Router)) => {
+    return actions$.pipe(
+        ofType(bookAction.editBook),
+        switchMap(({id,book})=>{
+            return bookService.updateBook(id,book).pipe(
+                map((data: any)=>{
+                    console.log(data);
+                    router.navigate(["/"])
+                    return bookAction.editBookSuccess({message:data.message,id,book})
+                }),
+                catchError((error:HttpErrorResponse)=> {
+                    console.log(error);
+                    return of(bookAction.bookFailure(error));
+                })
+            )
+        })
+    )
+},{functional:true});
 
 
-// export const getBookEffect = createEffect((actions$ = inject(Actions), bookService = inject(BookService), router = inject(Router), store = inject(Store)) => {
-//     return actions$.pipe(
-//         ofType(bookAction.getBook),
-//         switchMap(({id}:{id:string | null}) => {
-//             withLatestFrom(store.pipe(select(selectCart))),
-//             return bookService.getBook(id).pipe(
-//                 map((data:any)=>{
-//                     console.log(data);
-//                     let cart;
-//                     store.select(selectCart).subscribe(data => {
-//                         cart = data
-//                     });
-//                     // cart.subscribe()
-//                     console.log(cart);
-                    
-//                     return bookAction.getBookSuccess({book:data.data})
-//                 }),
-//                 catchError((error:HttpErrorResponse) => {
-//                     return of(bookAction.bookFailure(error))
-//                 })
-//             )
-//         })
-//     )
-// },{functional:true})
+export const deleteBookEffect = createEffect((actions$ = inject(Actions),bookService = inject(BookService), store = inject(Store), router = inject(Router)) => {
+    return actions$.pipe(
+        ofType(bookAction.deleteBook),
+        switchMap(({id})=>{
+            return bookService.deleteBook(id).pipe(
+                map((data: any)=>{
+                    console.log(data);
+                    // router.navigate(["/"])
+                    store.dispatch(bookAction.removeId({id}))
+                    return bookAction.deleteBookSuccess({message:data.message,id})
+                }),
+                catchError((error:HttpErrorResponse)=> {
+                    console.log(error);
+                    store.dispatch(bookAction.removeId({id}))
+                    return of(bookAction.bookFailure(error));
+                })
+            )
+        })
+    )
+},{functional:true});

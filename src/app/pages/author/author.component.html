@@ -10,6 +10,8 @@
     </section>
 </header>
 <main>
+    <!-- {{authorBook$ | async | json}} -->
+    <!-- {{user$ | async | json}} -->
     <section class="top-section">
         <aside>
             <img class="img" src="../../../assets/profilepic.png" alt="">
@@ -20,9 +22,9 @@
                     <h4>Matthew Aniekan</h4>
                     <p>Uyo, Nigeria</p>
                 </div>
-                <button *ngIf="!isAuthor" routerLink="/author/send-message">Message</button>
-                <div *ngIf="isAuthor" class="btn-container">
-                    <button routerLink="/dashboard/author/edit-profile" class="btn">Edit Profile</button>
+                <button *ngIf="((user$ | async)?._id !== authorId)" routerLink="/dashboard/author/send-message">Message</button>
+                <div *ngIf="((user$ | async)?._id == authorId)" class="btn-container">
+                    <button [routerLink]="'/dashboard/author/edit-profile/' + (user$ | async)?._id " class="btn">Edit Profile</button>
                     <button routerLink="/dashboard/add-book">Add Book</button>
                 </div>
             </div>
@@ -38,14 +40,23 @@
             <h4>15 Books</h4>
         </aside>
         <aside class="book-row">
-                <div *ngFor="let book of [1,2,3,4,5,6,7,8,9,10]" class="book-card">
-                    <img src="../../../assets/Rectangle 10.png" alt="">
+                <div *ngFor="let book of (authorBook$ | async)" class="book-card">
+                    <img [src]="book.frontCover.image" [routerLink]="'/books/science/' + book._id" alt="">
                     <div class="detail">
-                        <p class="title">The Revival</p>
-                        <p class="author">Morris Johnson</p>
+                        <p class="title">{{book.title}}</p>
+                        <!-- <p class="author">{{(user$ | async)?.fullname}}</p> -->
                         <div class="price">
-                            <p class="title">N 23,400</p>
-                            <img src="../../../assets/Vector.svg" alt="">
+                            <p class="title">N {{book.price}}</p>
+                            <!-- <img src="../../../assets/Vector.svg" alt=""> -->
+                        </div>
+                        <div class="price" *ngIf="((user$ | async)?._id == authorId)">
+                            <img src="../../../assets/delete.svg" [routerLink]="'/dashboard/edit-book/' + book._id" alt="">
+                            <!-- {{id$ | async | json}} -->
+                            @if((id$ | async)?.includes(book._id)){
+                                <div class="loader"></div>
+                            }@else{
+                                <img src="../../../assets/edit.svg" (click)="deleteBook(book._id)" alt="">
+                            }
                         </div>
                     </div>
                 </div>

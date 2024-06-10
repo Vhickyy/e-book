@@ -50,7 +50,6 @@ input::placeholder{
 }
 main{
     background-color: #F8F9FA;
-    ;
     padding-block: 4rem 7rem;
 }
 .main{
@@ -59,18 +58,27 @@ main{
     /* background-color: red; */
     display: grid;
     grid-template-columns: auto 1fr;
+    gap: 2rem;
+}
+.main2{
+    grid-template-columns: 1fr;
 }
 
 .filter{
     background-color: white;
     border-radius: .5rem;
     padding: 2rem 1.5rem;
-    width: 14rem;
+    width: 17rem;
     height: fit-content;
     position: sticky;
     top: 2rem;
     border: 1px solid #810EA71F;
     /* background-color: green; */
+}
+.filterCon{
+    position: sticky;
+    top: 2rem;
+    /* background-color: red; */
 }
 h4{
     text-align: center;
@@ -92,7 +100,8 @@ h4{
 .books{
     /* width: min(90%,var(--maxWidth)); */
     /* margin-inline: auto; */
-    padding-left: 2rem;
+    /* padding-left: 2rem; */
+    /* background-color: red; */
 }
 .top-card{
     display: flex;
@@ -111,7 +120,7 @@ h4{
 }
 .book-row{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(330px,1fr));
     gap: 1rem;
     row-gap: 2.5rem;
 }
@@ -187,7 +196,7 @@ h4{
     color: white;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1600px) {
     .book-row{
         grid-template-columns: 1fr 1fr 1fr;
     }

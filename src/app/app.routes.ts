@@ -23,6 +23,9 @@ import { LibraryComponent } from './pages/library/library.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { VerifyPaymentComponent } from './pages/verify-payment/verify-payment.component';
 import { authGaurd } from './gaurds/auth-gaurd.guard';
+import { authorGuard } from './gaurds/author.guard';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { EditBookComponent } from './pages/edit-book/edit-book.component';
 
 export const routes: Routes = [
     {path: "", component:HomeComponent},
@@ -38,14 +41,16 @@ export const routes: Routes = [
     {path:"books/:category/:id",component:BookdetailComponent},
     {path:"contact",component:ContactComponent},
     {path:"faq",component:FaqComponent},
-    {path:"author",component:AuthorComponent},
+    {path:"author/:name/:id",component:AuthorComponent},
     {path:"cart",component:CartComponent},
     {path:'dashboard',canActivate:[authGaurd],children:[
         {path:"add-book", component:AddBookComponent},
-        {path:"author/edit-profile",component:AuthorEditComponent},
+        {path:"edit-book/:id", component:EditBookComponent},
+        {path:"author/edit-profile/:id",canActivate:[authorGuard],component:AuthorEditComponent},
         {path:"author/send-message",component:SendMessageComponent},
         {path:"profile",component:ProfileComponent},
         {path:"wishlist",component:WishlistComponent},
+        {path:"orders",component:OrdersComponent},
         {path:"library",component:LibraryComponent},
         {path:"payment",component:PaymentComponent},
         {path:"verify-payment",component:VerifyPaymentComponent}

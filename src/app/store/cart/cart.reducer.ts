@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import {  addAnnonymousCart, addAnnonymousCartSuccess, addCart, addCartSuccess, addWishlist, addWishlistSuccess, cartError, clearAnnonymousCart, clearAnnonymousCartSuccess, clearCart, clearCartSuccess, getAnnonymousCart, getAnnonymousCartSuccess, getCart, getCartSuccess, getWishlist, getWishlistSuccess, orderBooks, orderBooksSuccess, removeAnnonymousCart, removeAnnonymousCartSuccess, removeCart, removeCartSuccess, removeWishlist, removeWishlistSuccess, verifyPayment, verifyPaymentSuccess, } from "./cart.actions";
+import {  addAnnonymousCart, addAnnonymousCartSuccess, addCart, addCartSuccess, addWishlist, addWishlistSuccess, cartError, clearAnnonymousCart, clearAnnonymousCartSuccess, clearCart, clearCartSuccess, getAnnonymousCart, getAnnonymousCartSuccess, getCart, getCartSuccess, getOrders, getOrdersSuccess, getWishlist, getWishlistSuccess, orderBooks, orderBooksSuccess, removeAnnonymousCart, removeAnnonymousCartSuccess, removeCart, removeCartSuccess, removeWishlist, removeWishlistSuccess, verifyPayment, verifyPaymentSuccess, } from "./cart.actions";
 
 
 interface ICart  {
@@ -9,6 +9,7 @@ interface ICart  {
     error : string | null,
     message?: string | null
     cartLength: number
+    orders: any
 }
 
 const initialState: ICart = {
@@ -17,7 +18,8 @@ const initialState: ICart = {
     cart: [],
     wishlist: [],
     error: null,
-    message: null
+    message: null,
+    orders: null
 }
 
 export const cartReducer = createReducer(
@@ -74,23 +76,37 @@ export const cartReducer = createReducer(
     
     // add wishlist
     on(addWishlist, (state) => ({...state,loading:true,error:null})),
-    on(addWishlistSuccess, (state,{message,wishlist}) => ({...state,loading:false,message,wishlist})),
+    on(addWishlistSuccess, (state,{message,wishlist}) => {
+        console.log({wishlist});
+        
+        const wishlistItems = [wishlist,...state.wishlist,]
+        console.log({wishlist: state.wishlist});
+        return {...state,loading:false,message,wishlist:wishlistItems}
+    }),
 
     // get wishlist
     on(getWishlist, (state) => ({...state,loading:true,error:null})),
-    on(getWishlistSuccess, (state,{message,wishlist}) => ({...state,message,wishlist})),
+    on(getWishlistSuccess, (state,{message,wishlist}) => ({...state,loading:false,message,wishlist})),
     
     // remove wishlist
     on(removeWishlist, (state) => ({...state,loading:true,error:null})),
-    on(removeWishlistSuccess, (state,{message,wishlist}) => ({...state,message,wishlist})),
+    on(removeWishlistSuccess, (state,{message,id}) => {
+        console.log({wishlist: state.wishlist});
+        
+        const wishlist = state.wishlist?.filter((book:any) => book._id !== id)
+        return {...state,loading:false,message,wishlist}
+    }),
 
     // order book
     on(orderBooks, (state) => ({...state,loading:true,error:null})),
-    on(orderBooksSuccess,(state) => ({...state})),
+    on(orderBooksSuccess,(state) => ({...state,loading:false})),
 
     // verify book
     on(verifyPayment, (state) => ({...state,loading:true,error:null})),
-    on(verifyPaymentSuccess,(state) => ({...state})),
+    on(verifyPaymentSuccess,(state) => ({...state,loading:false})),
+
+    on(getOrders, (state) => ({...state,loading:true,error:null})),
+    on(getOrdersSuccess, (state,{orders}) => ({...state,loading:false,orders})),
 
 
     on(cartError,(state,action)=> ({...state,loading:false,error:action.error})),

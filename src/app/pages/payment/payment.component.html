@@ -11,7 +11,7 @@
                     <p>Total:{{item.total}}</p>
                     @for(item of item?.items; track item){
                         <div>
-                            <img [src]="item.frontCover.secureUrl" class="img" />
+                            <img [src]="item.frontCover.image" class="img" />
                             <p>{{item.title}}</p>
                             <p>{{item.author.fullname}}</p>
                             <p>N {{item.price}}</p>

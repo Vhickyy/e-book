@@ -114,6 +114,8 @@ img{
     place-items: center;
 }
 
+
+
 @media screen and (min-width:900px) {
     section{
         display: grid;

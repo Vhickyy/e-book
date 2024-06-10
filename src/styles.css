@@ -18,6 +18,7 @@ body,html{
     height: 100%;
     background-color: whitesmoke;
     font-family: 'Poppins',sans-serif;
+    overflow-x: hidden;
     /* position: relative; */
     /* scrollbar-width: normal; */
 
@@ -58,4 +59,12 @@ button{
     background: #810EA799;
     opacity: .5;
     z-index: -1;
+}
+
+.loader{
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    border: 4px solid var(--primaryColor);
 }

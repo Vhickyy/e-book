@@ -8,7 +8,7 @@
             <div class="box" *ngIf="(cartItems$ | async)?.items?.length">
                 <p>No of Items: {{(cartItems$ | async)?.items?.length}}</p>
                 <div class="flex-1" *ngFor="let item of (cartItems$ | async)?.items">
-                    <img [src]="item.frontCover.secureUrl" [alt]="item.title">
+                    <img [src]="item.frontCover.image" [alt]="item.title">
                     <div class="second">
                         <div >
                             <div>
@@ -19,7 +19,11 @@
                         <p class="price">$ {{item.price}}</p>
                     </div>
                     <div class="second">
-                        <img src="../../../assets/edit.svg" class="icon" alt="" (click)="removeFromCart(item._id)">
+                        @if((loading$ | async) && id == item._id){
+                            <div class="loader"></div>
+                         }@else{
+                            <img src="../../../assets/edit.svg" class="icon" alt="" (click)="removeFromCart(item._id)">
+                        }
                         <img src="../../../assets/Vector.svg" class="icon" alt="">
                     </div>
                     <div class="desk">
@@ -31,7 +35,14 @@
                         <p class="wish">Add to wishlist</p>
                     </div>
                     <p class="desk price">$ {{item.price}}</p>
-                    <button class="button" (click)="removeFromCart(item._id)">Remove</button>
+                    <!-- <div class="loader"></div> -->
+                    <button class="button" (click)="removeFromCart(item._id)">
+                       @if((loading$ | async) && id == item._id){
+                           <div class="loader"></div>
+                        }@else{
+                           Remove
+                       }
+                    </button>
                 </div>
             </div>
             <div class="box box-2">

@@ -8,6 +8,8 @@ import { getBook } from '../../store/book/book.actions';
 import { Subscription } from 'rxjs';
 import { selectBook } from '../../store/book/book.selector';
 import { addAnnonymousCart, addCart } from '../../store/cart/cart.actions';
+import { seletCartLoading } from '../../store/cart/cart.selector';
+import { selectUser } from '../../store/auth/auth.selector';
 
 @Component({
   selector: 'app-bookdetail',
@@ -24,6 +26,8 @@ export class BookdetailComponent implements OnInit {
   book$ = this.store.select(selectBook);
   id! :string | null;
   token = localStorage.getItem("token");
+  loadingCart$ = this.store.select(seletCartLoading);
+  user$ =this.store.select(selectUser);
   // incart$ = this.store.select(selectIncart);
 
   ngOnInit(): void {

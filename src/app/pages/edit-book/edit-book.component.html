@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 <main>
     <div class="main">
-        <h2>Add Book</h2>
+        <h2>Edit Book</h2>
         <section>
-            <form [formGroup]="addBookForm" (ngSubmit)="addBookSubmit($event)">
+            <form [formGroup]="addBookForm" (ngSubmit)="editBookSubmit($event)">
                 <div class="form">
                     <div class="grid">
                         <div>
@@ -53,6 +53,7 @@
                         <textarea formControlName="keywords" id="Keywords" placeholder="Keywords" ></textarea>
                     </div>
                 </div>
+                <!-- @if() -->
                 <section class="upload-section">
                     <div class="file">
                         <div>
@@ -94,50 +95,13 @@
                     </aside>
                 </section>
                 @if(!(loadingBook$ | async)){
-                    <button type="submit" >Add Book</button>
+                    <button type="submit" >Edit Book</button>
                 }@else{
                     <button>
                         <div class="loader"></div>
                     </button>
                 }
             </form>
-            <!-- <section class="upload-section">
-                <div class="file">
-                    <div>
-                        <h3>Upload Book</h3>
-                        <p>Upload image of front cover</p>
-                        <div class="img-content">
-                            <img src="../../../assets/bookicon.svg" alt="null-img">
-                            <p>Drop your image here, or browse</p>
-                            <p>JPG and PNG  files are allowed</p>
-                            <div class="progress">
-                                <div class="progress-bar" [style.width.%]="progress$ | async"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <aside>
-                    <h2>Upload Images</h2>
-                    <div class="upload">
-                        <div>
-                            <p>Upload image of front cover</p>
-                            <div class="img-content">
-                                <img src="../../../assets/nullpng.svg" alt="null-img">
-                                <p>Drop your image here, or browse</p>
-                                <p>JPG and PNG  files are allowed</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Upload image of front cover</p>
-                            <div class="img-content">
-                                <img src="../../../assets/nullpng.svg" alt="null-img">
-                                <p>Drop your image here, or browse</p>
-                                <p>JPG and PNG  files are allowed</p>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-            </section> -->
         </section>
     </div>
 </main>

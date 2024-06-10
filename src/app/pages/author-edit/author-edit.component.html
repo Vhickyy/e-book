@@ -34,12 +34,11 @@
             <h4>15 Books</h4>
         </aside>
         <aside class="book-row">
-                <div *ngFor="let book of [1,2,3,4,5,6,7,8,9,10]" class="book-card">
-                    <img src="../../../assets/Rectangle 10.png" alt="">
+                <div *ngFor="let book of (authorBook$ | async)" class="book-card">
+                    <img [src]="book.frontCover.secureUrl" alt="">
                     <div class="detail">
-                        <p class="title">The Revival</p>
-                        <p class="author">Morris Johnson</p>
-                        <p class="title">N 23,400</p>
+                        <p class="title">{{book.title}}</p>
+                        <p class="title">N {{book.price}}</p>
                         <div class="price">
                             <img src="../../../assets/delete.svg" alt="">
                             <img src="../../../assets/edit.svg" alt="">

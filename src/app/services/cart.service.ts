@@ -9,7 +9,8 @@ export class CartService {
   http = inject(HttpClient)
   constructor() { }
 
-  // cart
+  // -------------------- CART ---------------------- //
+
   addCart(id:string | null): Observable<any> {
     console.log(id);
     
@@ -28,7 +29,9 @@ export class CartService {
     return this.http.delete(`/api/v1/cart/clear-cart/${id}`)
   }
 
-  // anonymous cart
+
+ // -------------------- ANONYMOUS CART ---------------------- //
+
   addAnonymousCart(id:string | null,uuid:string): Observable<any> {
     console.log(id,{uuid});
     return this.http.post("/api/v1/annonymous-cart",{book:id,uuid})
@@ -48,7 +51,9 @@ export class CartService {
     return this.http.delete(`/api/v1/cart/clear-cart/${id}`)
   }
 
-  // wishlist
+
+  // -------------------- WISHLIST ---------------------- //
+
   getWishlist () {
     return this.http.get("/api/v1/wishlist")
   }
@@ -61,7 +66,9 @@ export class CartService {
     return this.http.delete(`/api/v1/wishlist/${id}`)
   }
 
-  // orders single:boolean = false
+
+  // -------------------- PAYMENT ---------------------- //
+
   makePayment ({id,single}:{id:string,single:boolean}) {
     if(!single){
       return this.http.post("/api/v1/order",{cartId:id});
@@ -71,12 +78,14 @@ export class CartService {
   }
 
   verifyPayment (reference:string | null) {
-    // console.log(reference,bookId);
-    // if(bookId){
-    //   return this.http.get(`/api/v1/order/${reference}?bookId=${bookId}`)
-    // }
-    return this.http.get(`/api/v1/order/${reference}`)
-    // return this.http.post("/api/v1/payment",{email:"vee2@gmail.com",amount:200,name:"vee"})
+    return this.http.get(`/api/v1/order/${reference}`);
+  }
+
+
+  // -------------------- ORDERS ---------------------- //
+
+  getOrders () {
+    return this.http.get("/api/v1/order");
   }
   
 }

@@ -45,7 +45,7 @@ export const getWishlistSuccess = createAction('[Cart] getWishlistSuccess', prop
 
 // remove wishlist
 export const removeWishlist = createAction('[Cart] removeWishlist', props<{id:string}>());
-export const removeWishlistSuccess = createAction('[Cart] removeWishlistSuccess', props<{message:string,wishlist:any}>());
+export const removeWishlistSuccess = createAction('[Cart] removeWishlistSuccess', props<{message:string,id:string | null}>());
 
 // clear wishlist
 export const clearWishlist = createAction('[Cart] clearWishlist', props<{id:string}>());
@@ -58,6 +58,10 @@ export const orderBooksSuccess = createAction('[Order] orderBooksSuccess',props<
 // verify payment
 export const verifyPayment = createAction('[Order] verifyPayment',props<{reference:string | null}>())
 export const verifyPaymentSuccess = createAction('[Order] verifyPaymentSuccess');
+
+// get orders
+export const getOrders = createAction('[Order] getOrders')
+export const getOrdersSuccess = createAction('[Order] getOrdersSuccess',props<{orders:any}>())
 
 
 export const cartError = createAction('[Cart] cartError',props<{error:string}>());

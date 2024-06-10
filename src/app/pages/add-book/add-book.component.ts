@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Store, select } from '@ngrx/store';
+import { addBook } from '../../store/book/book.actions';
+import { selectBookLoading } from '../../store/book/book.selector';
 
 @Component({
   selector: 'app-add-book',
@@ -17,14 +20,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AddBookComponent implements OnInit {
   fb = inject(FormBuilder)
   addBookForm!: FormGroup;
-  progress$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  // progress$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   categories :string[] = ["Science","Technology","Health","Religion","Art","Finance"];
   frontCoverUrl : string | ArrayBuffer | null | undefined;
   backCoverUrl : string | ArrayBuffer | null | undefined;
   @ViewChild("front") frontCover!: ElementRef;
   @ViewChild("back") backCover!: ElementRef;
   @ViewChild("pdf") pdf!: ElementRef;
-  http = inject(HttpClient)
+  // http = inject(HttpClient)
+  store = inject(Store);
+  loadingBook$ = this.store.select(selectBookLoading);
 
   ngOnInit(){
     this.addBookForm = this.fb.group({
@@ -56,27 +61,28 @@ export class AddBookComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e) => {
         if(type == 'front') {
-          // this.frontCoverUrl = e.target?.result
-          // this.addBookForm.patchValue({
-          //   frontCover : file.name
-          // })
+          this.frontCoverUrl = e.target?.result
+          this.addBookForm.patchValue({
+            frontCover : file.name
+          })
           
         }else if(type == 'back'){
-          // // this.backCoverUrl = e.target?.result
-          // this.addBookForm.patchValue({
-          //   backCover: file.name
-          // })
+          this.backCoverUrl = e.target?.result
+          this.addBookForm.patchValue({
+            backCover: file.name
+          })
         }else {
-          // this.addBookForm.patchValue({
-          //   pdf: file.name
-          // })
+          this.addBookForm.patchValue({
+            pdf: file.name
+          })
         }
       };
       reader.readAsDataURL(file);
       }
     }
 
-  addBookSubmit(){
+  addBookSubmit(event: Event){
+    event.preventDefault();
     const formData = new FormData();
 
     // Append form values to FormData
@@ -86,13 +92,9 @@ export class AddBookComponent implements OnInit {
     formData.append('frontCover', this.frontCover.nativeElement.files[0]);
     formData.append('backCover', this.backCover.nativeElement.files[0]);
     formData.append('pdf', this.pdf.nativeElement.files[0]);
-    console.log(formData);
+    // console.log(formData);
     
-    // this.http.post("/api/v1/books", formData).subscribe(data=>{
-    //   console.log(data);
-      
-    // })
-    
+    this.store.dispatch(addBook({book:formData}))
   }
 
 }

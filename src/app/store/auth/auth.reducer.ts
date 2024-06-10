@@ -70,8 +70,7 @@ export const authReducer = createReducer(
     // user
     on(getUser, (state)=> ({...state,loading:true,error:null})),
     on(getUserSuccess, (state,{user})=> {
-        console.log("huui");
-        console.log(user);
+        console.log({user},'red');
         
         return {...state,loading:false,user}
     }),

@@ -3,9 +3,10 @@
     <section class="top-section">
         <aside>
             <div>
-                <img class="main-img" src="../../../assets/bookdet.png" alt="">
+                <img class="main-img" [src]="(book$ | async)?.frontCover.image" alt="">
                 <div class="img-container">
-                    <img class="img" *ngFor="let img of [1,2]" [src]="'../../../assets/bookdet.png'" alt="">
+                    <img class="img"  [src]="(book$ | async)?.frontCover.image" alt="">
+                    <img class="img" [src]="(book$ | async)?.backCover.image" alt="">
                 </div>
             </div>
         </aside>
@@ -16,7 +17,7 @@
                 <div class="flex">
                     <p>rating</p>
                     <p>{{(book$ | async)?.reviews.length }} review</p>
-                    <p>100 sold</p>
+                    <p>{{(book$ | async)?.sold}} sold</p>
                 </div>
                 <div>
                     <div>
@@ -54,16 +55,27 @@
         </aside>
         <aside>
             <div class="buy">
+                <!-- {{loadingCart$ | async}} -->
                 <p>N {{(book$ | async)?.price}}</p>
-                <!-- routerLink="/dashboard/payment?buy-now=true" -->
-                <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="['/dashboard/payment']" 
-                [queryParams]="{ 'buy-now': true,id : (book$ | async)?._id }" >Buy Now</button>
-                <button class="btn" *ngIf="((book$ | async)?.bought)" routerLink="/books" >Go to books</button>
-                <!-- <button class="contact-btn" (click)="addToAnnonymousCart()">{{ (incart$ | async) ? 'Go To Cart' : 'Add To Cart' }}</button> -->
-                <!-- <button class="contact-btn">Add To Cart</button> -->
-                <button class="contact-btn" routerLink="/cart"  *ngIf="((book$ | async)?.inCart)">Go To Cart</button>
-                <button class="contact-btn"  *ngIf="!((book$ | async)?.inCart) && !((book$ | async)?.bought)" (click)="addToCart()">Add To Cart</button>
-                <button class="contact-btn"  *ngIf="((book$ | async)?.bought)">Start Reading</button>
+                <!-- routerLink="/dashboard/payment?buy-now=true"{{user$ | async | json}} -->
+                @if((user$ | async)?._id !== (book$ | async)?.author._id){
+                    <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="['/dashboard/payment']" 
+                    [queryParams]="{ 'buy-now': true,id : (book$ | async)?._id }" >Buy Now</button>
+                    <button class="btn" *ngIf="((book$ | async)?.bought)" routerLink="/books" >Go to books</button>
+                    <button class="contact-btn" routerLink="/cart"  *ngIf="((book$ | async)?.inCart)">Go To Cart</button>
+                    <div *ngIf="!((book$ | async)?.inCart) && !((book$ | async)?.bought)">
+                        @if(!(loadingCart$ | async)){
+                            <button class="contact-btn" (click)="addToCart()"   >
+                                Add To Cart
+                            </button> 
+                        }@else{
+                            <div class="loader"></div>
+                        }
+                    </div>
+                    <button class="contact-btn"  *ngIf="((book$ | async)?.bought)">Start Reading</button>
+                }@else{
+                    <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="'/dashboard/edit-book/' + (book$ | async)?._id" >Edit Book</button>
+                }
             </div>
         </aside>
     </section>
@@ -79,9 +91,13 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn" routerLink="/dashboard/author/send-message">Contact Author</button>
-                    <button class="contact-btn" routerLink="/author">Author's Profile</button>
-                </div>
+                    @if((user$ | async)?._id !== (book$ | async)?.author._id){
+                        <button class="btn" routerLink="/dashboard/author/send-message">Contact Author</button>
+                        <button class="contact-btn" [routerLink]="'/author/' +  (book$ | async)?.author.fullname.split(' ').join('-') + '/' + (book$ | async)?.author._id">Author's Profile</button>
+                    }@else{
+                        <button class="btn" [routerLink]="'/author/' +  (book$ | async)?.author.fullname.split(' ').join('-') + '/' + (book$ | async)?.author._id">Your Profile</button>
+                    }
+                    </div>
             </div>
         </aside>
     </section>
@@ -93,8 +109,9 @@
             </div>
             <hr/>
             <div class="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                <p>{{(book$ | async)?.description}}</p>
+                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p> -->
                 <div class="tab">
                     <ul class="cat">
                         <li>category</li>
@@ -123,28 +140,32 @@
             <div class="content rate">
                 <h4>Rating Summary</h4>
                 <p>4.0 out of 5 star</p>
-                <button class="btn">Write a review</button>
+                @if((user$ | async)?._id !== (book$ | async)?.author._id){
+                    <button class="btn">Write a review</button>
+                }
             </div>
         </aside>
     </section>
+    @if((user$ | async)?._id !== (book$ | async)?.author._id){
     <section>
-        <div class="top-card">
-            <h4>More Science Books</h4>
-            <p>More</p>
-        </div>
-        <div class="book-row">     
-            <div *ngFor="let book of [1,2,3,4,5]" class="book-card">
-                <img src="../../../assets/Rectangle 10.png" alt="">
-                <div class="detail">
-                    <p class="title">The Revival</p>
-                    <p class="author">Morris Johnson</p>
-                    <div class="price">
-                        <p class="title">N 23,400</p>
-                        <img src="../../../assets/Vector.svg" alt="">
+            <div class="top-card">
+                <h4>More Science Books</h4>
+                <p>More</p>
+            </div>
+            <div class="book-row">     
+                <div *ngFor="let book of [1,2,3,4,5]" class="book-card">
+                    <img src="../../../assets/Rectangle 10.png" alt="">
+                    <div class="detail">
+                        <p class="title">The Revival</p>
+                        <p class="author">Morris Johnson</p>
+                        <div class="price">
+                            <p class="title">N 23,400</p>
+                            <img src="../../../assets/Vector.svg" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    }
 </main>
 <app-footer></app-footer>

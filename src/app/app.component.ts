@@ -22,10 +22,10 @@ export class AppComponent {
   ngOnInit () {
     this.store.dispatch(getUser());
     if(!this.token){
-      // console.log("app anno cart");
+      console.log("app anno cart");
       return this.store.dispatch(getAnnonymousCart())
     }
-    // console.log("app cart");
+    console.log("app cart");
     
     return this.store.dispatch(getCart())
   }

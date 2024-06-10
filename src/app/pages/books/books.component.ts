@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { IBest } from '../../../types/types';
@@ -33,7 +33,18 @@ export class BooksComponent implements OnInit {
   active = 0;
   pageSize$ = this.store.select(selectPages)
   pageSizeArray!: number[];
+  show: boolean = true;
+  @ViewChild('main',{ static: true }) main!: ElementRef;
+  renderer: Renderer2 = inject(Renderer2)
 
+  toggleSideBar(){
+    this.show = !this.show;
+    if (this.show) {
+      this.renderer.removeClass(this.main.nativeElement, 'main2');
+    } else {
+      this.renderer.addClass(this.main.nativeElement, 'main2');
+    }
+  }
 
   ngOnInit(): void {
     this.pageSize$.subscribe(value => {
