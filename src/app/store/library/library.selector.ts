@@ -13,10 +13,10 @@ export const selectLoading = createSelector(
     (state) => state.loading
 )
 
-// export const selectCartLength = createSelector(
-//     selectCartState,
-//     (state) => state.cartLength
-// )
+export const selectPdf = createSelector(
+    selectLibraryState,
+    (state) => state.pdf
+)
 
 // export const selectWishlist = createSelector(
 //     selectCartState,

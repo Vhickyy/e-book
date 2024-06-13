@@ -1,6 +1,6 @@
-<div class="body">
+<!-- <div class="body">
     <app-navbar></app-navbar>
-    <div class="main">
+    <div class="main"> -->
         <app-dashboard-layout>
             <section>
                 <aside>
@@ -14,14 +14,27 @@
                     <!-- <button>Explore Books</button> -->
                 </aside>
                 <p>Recently Opened</p>
-                <p>Your Books</p>
-                <!-- {{library$ | async | json}} -->
                 <div class="book-row">
                     @for(book of library$ | async; track book){
-                        <!-- {{book | json}} -->
-                        <div class="card">
-                            <img [src]='book.book.frontCover?.image' alt="library">
-                            <p>{{book.title}}</p>
+                        <div  class="book-card">
+                            <img [src]="book.book.frontCover?.image" alt="" class="img">
+                            <div class="detail">
+                                <p class="title">{{book.book.title}}</p>
+                                <p class="author">{{book.book.author.fullname}}</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <p>Your Books</p>
+                <div class="book-row">
+                    @for(book of library$ | async; track book){
+                        <div  class="book-card" [routerLink]="'/dashboard/library/' + book._id">
+                            <img [src]="book.book.frontCover?.image" alt="" class="img">
+                            <div class="detail">
+                                <p class="title">{{book.book.title}}</p>
+                                <p class="author">{{book.book.author.fullname}}</p>
+                            </div>
                         </div>
                     }
                 </div>
@@ -32,9 +45,8 @@
                     }
                     <button ><img src="/assets/arrowright.svg" alt="arrowright"></button>
                 </div>
-                <pdf-viewer [src]="(library$ | async)[0]?.book.pdf?.image" style="display: block; width: 100%; height: 600px;"></pdf-viewer>
             </section>
         </app-dashboard-layout>
-    </div>
+    <!-- </div>
     <app-footer></app-footer>
-</div>
+</div> -->

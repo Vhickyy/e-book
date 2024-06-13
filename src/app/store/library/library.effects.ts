@@ -20,3 +20,18 @@ export const getLibrary = createEffect((action$=inject(Actions), libraryService 
         })
     )
 },{functional:true})
+
+
+export const getPdf = createEffect((action$=inject(Actions), libraryService = inject(LibraryService)) => {
+    return action$.pipe(
+        ofType(libraryAction.getPdf),
+        switchMap(({id}) => {
+            return libraryService.getPdf(id).pipe(
+                map(({data}) => {  
+                    return libraryAction.getPdfSuccess({book:data.book})
+                }),
+                catchError((error:HttpErrorResponse) => of(libraryAction.libraryError(error)))
+            )
+        })
+    )
+},{functional:true})

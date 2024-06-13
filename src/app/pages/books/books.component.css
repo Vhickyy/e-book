@@ -130,8 +130,7 @@ h4{
     padding: .2rem;
     border-radius: .5rem;
     overflow: hidden;
-    /* border: 1px solid transparent; */
-    border: 2px solid rgba(187, 41, 235, 0.15)
+    border: 2px solid rgba(187, 41, 235, 0.15);
 }
 
 .book-card img{

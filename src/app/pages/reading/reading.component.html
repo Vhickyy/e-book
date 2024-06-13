@@ -1,0 +1,16 @@
+<!-- <div class="body">
+    <app-navbar></app-navbar>
+    <div class="main"> -->
+        <!-- <div> -->
+
+            <app-dashboard-layout>
+                <section>
+                    <h3>{{(pdf$ | async)?.title}}</h3>
+                    <pdf-viewer [src]="(pdf$ | async)?.pdf.image" ></pdf-viewer>
+                </section>
+            </app-dashboard-layout>
+        <!-- </div> -->
+        <!-- <h4>ji</h4> -->
+    <!-- </div>
+    <app-footer></app-footer>
+</div> -->

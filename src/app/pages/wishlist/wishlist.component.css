@@ -1,12 +1,13 @@
-.body{
+/* .body{
    display: flex;
    flex-direction: column;
+   background-color: red;
 }
 .main{
    height: auto;
    flex-grow: 1;
    background: linear-gradient(0deg,rgba(129, 14, 167, 0.6), rgba(129, 14, 167, 0.6)), url("../../../assets/bgImg.png") center/cover fixed no-repeat;
-}
+} */
 
 section{
    background-color: white;
@@ -14,12 +15,12 @@ section{
    padding: 2rem;
    display: grid;
    gap: 2rem;
+
 }
+
 .grid{
    display: grid;
    grid-template-columns: 1fr 2fr;
-   /* justify-content: space-between; */
-   /* justify-content: center; */
    align-items: center;
    gap: 1rem;
 }

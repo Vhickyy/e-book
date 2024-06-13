@@ -1,38 +1,28 @@
-<div class="body">
-    <app-navbar></app-navbar>
-    <div class="main">
-        <app-dashboard-layout>
-            <section >
-                <div *ngFor="let list of wishList$ | async" class="grid">
-                    <div class="img-container">
-                        <img [src]="list.frontCover?.secureUrl" alt="list.title" class="img">
-                    </div>
-                    <div>
-                        <p>{{list.title}}</p>
-                        <p>{{list.author.fullname}}</p>
-                        <p>N {{list.price}}</p>
-                        <div class="with-btn desk">
-                            <button>Add To Cart</button>
-                            <img src="../../../assets/edit.svg" alt="delete-icon">
-                        </div>
-                    </div>
-                    <p>N {{list.price}}</p>
-                    <div class="mobile btn-container">
-                        @if(list.inLib){
-                            <button>Buy</button>
-                        }@else{
-                            <button>Read</button>
-                        }
-                        <button class="button" (click)="removeWishlist(list._id)">Remove</button>
-                    </div>
-                    <!-- <p>N {{list.price}}</p>
-                    <div class=" btn-container">
-                        <button>Buy Now</button>
-                        <button class="button" (click)="removeWishlist(list._id)">Remove</button>
-                    </div> -->
+
+<app-dashboard-layout>
+    <section >
+        <div *ngFor="let list of wishList$ | async" class="grid">
+            <div class="img-container">
+                <img [src]="list.frontCover?.image" alt="list.title" [routerLink]="'/books/science/' + list._id" class="img">
+            </div>
+            <div>
+                <p>{{list.title}}</p>
+                <p>{{list.author.fullname}}</p>
+                <p>N {{list.price}}</p>
+                <div class="with-btn desk">
+                    <button>Add To Cart</button>
+                    <img src="../../../assets/edit.svg" alt="delete-icon">
                 </div>
-            </section>
-        </app-dashboard-layout>
-    </div>
-    <app-footer></app-footer>
-</div>
+            </div>
+            <p>N {{list.price}}</p>
+            <div class="mobile btn-container">
+                @if(list.inLib){
+                    <button>Read</button>
+                }@else{
+                    <button>Buy</button>
+                }
+                <button class="button" (click)="removeWishlist(list._id)">Remove</button>
+            </div>
+        </div>
+    </section>
+</app-dashboard-layout>

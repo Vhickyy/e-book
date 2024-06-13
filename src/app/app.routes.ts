@@ -26,6 +26,7 @@ import { authGaurd } from './gaurds/auth-gaurd.guard';
 import { authorGuard } from './gaurds/author.guard';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { EditBookComponent } from './pages/edit-book/edit-book.component';
+import { ReadingComponent } from './pages/reading/reading.component';
 
 export const routes: Routes = [
     {path: "", component:HomeComponent},
@@ -52,6 +53,7 @@ export const routes: Routes = [
         {path:"wishlist",component:WishlistComponent},
         {path:"orders",component:OrdersComponent},
         {path:"library",component:LibraryComponent},
+        {path:"library/:id",component:ReadingComponent},
         {path:"payment",component:PaymentComponent},
         {path:"verify-payment",component:VerifyPaymentComponent}
     ]}

@@ -6,12 +6,12 @@ import { Store } from '@ngrx/store';
 import { selectLibrary, selectLoading } from '../../store/library/library.selector';
 import { getLibrary } from '../../store/library/library.actions';
 import { CommonModule } from '@angular/common';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [DashboardLayoutComponent,FooterComponent,NavbarComponent,CommonModule,PdfViewerModule],
+  imports: [DashboardLayoutComponent,FooterComponent,NavbarComponent,CommonModule,RouterLink],
   templateUrl: './library.component.html',
   styleUrl: './library.component.css'
 })

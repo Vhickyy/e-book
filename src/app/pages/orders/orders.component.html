@@ -1,31 +1,27 @@
-<div class="body">
-    <app-navbar></app-navbar>
-    <div class="main">
-        <app-dashboard-layout>
-            <section >
-                <div class="flex">
-                    <p>All</p>
-                    <p>Success</p>
-                    <p>failed</p>
-                </div>
-                <div class="order-container">
-                    @if((orders$ | async)?.length){
-                        @for(order of (orders$ | async); track order){
-                            <!-- {{order | json}} -->
-                            <div class="order">
-                                <p>#{{order.paymentReference}}</p>
-                                <p>No of Items: {{order.items.length}}</p>
-                                <p>Ordered On: {{order.orderDate}}</p>
-                                <p>Status: {{order.status}}</p>
-                            </div>
-                        }
-                    }
-                </div>
-            </section>
-            <!-- @for(button of [1,2,3,4]; track button){
-                <button>{{button}}</button>
-            } -->
-        </app-dashboard-layout>
-    </div>
-    <app-footer></app-footer>
-</div>
+<app-dashboard-layout>
+    <section >
+        <div class="flex">
+            <p>All</p>
+            <p>Success</p>
+            <p>failed</p>
+        </div>
+        <div class="order-container">
+            @if((orders$ | async)?.length){
+                @for(order of (orders$ | async); track order){
+                    <div class="order">
+                        <img [src]="order.book.frontCover.image" class="img" alt="">
+                        <div>
+                            <p>#{{order.paymentReference}}</p>
+                            <p>{{order.book.title}}</p>
+                            <p>Ordered On: {{order.orderDate}}</p>
+                            <p>Status: {{order.status}}</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+    <!-- @for(button of [1,2,3,4]; track button){
+        <button>{{button}}</button>
+    } -->
+</app-dashboard-layout>

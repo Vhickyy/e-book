@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { getWishlist, removeWishlist } from '../../store/cart/cart.actions';
 import { selectWishlist } from '../../store/cart/cart.selector';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [NavbarComponent,FooterComponent,DashboardLayoutComponent, CommonModule],
+  imports: [NavbarComponent,FooterComponent,DashboardLayoutComponent, CommonModule,RouterLink],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })

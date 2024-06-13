@@ -18,4 +18,8 @@ export class LibraryService {
     return this.http.get("/api/v1/library")
   }
 
+  getPdf(id:string | null): Observable<any> {
+    return this.http.get(`/api/v1/library/${id}`)
+  }
+
 }

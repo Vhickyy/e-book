@@ -1,40 +1,27 @@
-.body{
-    display: flex;
-    flex-direction: column;
- }
- .main{
-    height: auto;
-    flex-grow: 1;
-    background: linear-gradient(0deg,rgba(129, 14, 167, 0.6), rgba(129, 14, 167, 0.6)), url("../../../assets/bgImg.png") center/cover fixed no-repeat;
- }
- 
+
  section{
-    background-color: white;
-    border-radius: .5rem;
-    padding: 2rem;
-    display: grid;
-    gap: 2rem;
- }
+   background-color: white;
+   border-radius: .5rem;
+   padding: 2rem;
+   display: grid;
+   gap: 2rem;
+   height: 100%;
+}
  .grid{
     display: grid;
     grid-template-columns: 1fr 2fr;
-    /* justify-content: space-between; */
-    /* justify-content: center; */
     align-items: center;
     gap: 1rem;
  }
- .img-container{
-    height: 100%;
-    width: 100%;
- }
+
  .img{
-    height: 100%;
-    width: 100%;
-    border-radius: .5rem;
+   height: 6rem;
+   width: 6rem;
+   border-radius: .5rem;
  }
  .flex{
    display: flex;
-   justify-content: space-evenly
+   justify-content: space-evenly;
  }
  .order-container{
    display: grid;
@@ -43,53 +30,10 @@
  }
 
  .order{
+   display: flex;
+   gap: 2rem;
    border-radius: .5rem;
    padding: 1rem;
    border: 2px solid rgba(187, 41, 235, 0.15);
  }
- /* .with-btn{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: .5rem;
- }
- button{
-    background-color: var(--primaryColor);
-    color: white;
-    padding: .5rem 1rem;
-    border: none;
-    border-radius: .5rem;
- } */
- /* .mobile{
-    display: none;
- }
- .button{
-    padding: .8rem 2rem;
-    background-color: white;
-    border: 1px solid rgba(250, 52, 52, 1);
-    color: rgba(250, 52, 52, 1);
-    border-radius: .5rem;
- } */
- /* @media screen and (min-width:700px) {
-   
-    .mobile{
-       display: block;
-    }
-    .img-container{
-       width: 25%;
-    }
-    .desk{
-       display: none;
-    }
-    .grid{
-       display: flex;
-       justify-content: space-between;
-    }
-    button{
-       padding: 1rem 2rem;
-    }
-    .btn-container{
-       display: flex;
-       gap: 1rem;
-    }
- } */
+ 

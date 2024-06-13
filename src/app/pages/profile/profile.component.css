@@ -1,11 +1,11 @@
-.body{
+/* .body{
     display: flex;
     flex-direction: column;
- }
+ } */
  .main{
     /* height: auto; */
-    flex-grow: 1;
-    background: linear-gradient(0deg,rgba(129, 14, 167, 0.6), rgba(129, 14, 167, 0.6)), url("../../../assets/bgImg.png") center/cover fixed no-repeat;
+    /* flex-grow: 1; */
+    /* background: linear-gradient(0deg,rgba(129, 14, 167, 0.6), rgba(129, 14, 167, 0.6)), url("../../../assets/bgImg.png") center/cover fixed no-repeat; */
     /* min-height: 80vh; */
     /* background-color: red; */
  }

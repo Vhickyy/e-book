@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store"
-import { getLibrary, getLibrarySuccess, libraryError } from "./library.actions"
+import { getLibrary, getLibrarySuccess, getPdf, getPdfSuccess, libraryError } from "./library.actions"
 
 interface ILibrary  {
     loading: boolean
@@ -8,6 +8,7 @@ interface ILibrary  {
     error : string | null,
     message?: string | null
     cartLength: number
+    pdf: any
 }
 
 const initialState: ILibrary = {
@@ -16,17 +17,25 @@ const initialState: ILibrary = {
     library: [],
     recentlyOpened: [],
     error: null,
-    message: null
+    message: null,
+    pdf: null
 }
 
 
 export const libraryReducer = createReducer(
     initialState,
 
-    // Get Library
+    // ------------------------ Get Library -------------------- //
     on(getLibrary,(state) => ({...state,loading:true,error:null})),
     on(getLibrarySuccess,(state,{library,recentlyOpened}) => {
-        return ({...state,library,recentlyOpened})
+        return ({...state,loading:false,library,recentlyOpened})
+    }),
+
+
+    // --------------------------- Get Pdf ------------------------ //
+    on(getPdf,(state) => ({...state,loading:true,error:null})),
+    on(getPdfSuccess,(state,{book}) => {
+        return ({...state,loading:false,pdf:book})
     }),
 
     on(libraryError,(state,action)=> ({...state,loading:false,error:action.error})),
