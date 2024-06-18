@@ -93,13 +93,13 @@
                         </div>
                     </aside>
                 </section>
-                @if(!(loadingBook$ | async)){
-                    <button type="submit" >Add Book</button>
-                }@else{
+                <!-- @if(!(loadingBook$ | async)){ -->
+                    <button type="submit" [disabled]="(loadingBook$ | async)">{{!(loadingBook$ | async) ? 'Add Book' : "Uploading"}}</button>
+                <!-- }@else{
                     <button>
                         <div class="loader"></div>
                     </button>
-                }
+                } -->
             </form>
             <!-- <section class="upload-section">
                 <div class="file">

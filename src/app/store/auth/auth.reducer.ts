@@ -4,7 +4,7 @@ import { IUser } from "../../Model/User";
 
 export interface IAuthState {
     loading: boolean,
-    error: string | null,
+    error: {message:string} | null,
     user: IUser | null
     data: string | null
 }
@@ -24,7 +24,8 @@ export const authReducer = createReducer(
     on(registerSuccess, (state,action) => ({...state,loading:false,user:action.user})),
     on(error, (state,action) => {
         console.log(action.error);
-        return {...state,loading:false,error:action.error}
+        return {...state,loading:false,error: {message:action.error.message}}
+        // return {...state,loading:false,error:action.error?.message}
     }),
 
 

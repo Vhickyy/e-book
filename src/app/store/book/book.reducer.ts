@@ -2,6 +2,7 @@ import { Store, createReducer, on } from "@ngrx/store";
 import { addBook, addBookSuccess, addId, addWishlist, bookFailure, deleteBook, deleteBookSuccess, editBook, editBookSuccess, getAuthorBooks, getAuthorBooksSuccess, getBook, getBookSuccess, getBooks, getBooksSuccess, placeInCart, removeId, removeWishlist } from "./book.actions";
 import { inject } from "@angular/core";
 import { selectCart } from "../cart/cart.selector";
+import { error } from "../auth/auth.actions";
 
 export interface IBook {
     title: string,
@@ -20,7 +21,8 @@ export interface IBookState{
     // book: IBook[] | null,
     books: any
     loading: boolean,
-    error: string | null,
+    // error: {message:string} | null,
+    error: {message:string} | null,
     message: string | null,
     reviews: null,
     book: any,
@@ -48,7 +50,12 @@ export const bookReducer = createReducer(
 
     // add book
     on(addBook, (state) => ({...state,loading:true,error:null})),
-    on(addBookSuccess, (state,action) => ({...state,loading:false,books:[...state.books,action.books]})),
+    on(addBookSuccess, (state,action) => {
+        const authorBooks = state.authorBooks ? [...state?.authorBooks,action.books] : [action.books];
+        console.log({authorBooks});
+        
+        return ({...state,loading:false,authorBooks})
+    }),
 
     // get books
     on(getBooks, (state) => ({...state,loading:true,error:null})),
@@ -60,7 +67,7 @@ export const bookReducer = createReducer(
     // get books
     on(getAuthorBooks, (state) => ({...state,loading:true,error:null})),
     on(getAuthorBooksSuccess, (state,action) => {
-        console.log(action.authorBooks);
+        console.log(action.authorBooks,"reducer");
         return {...state,loading:false,authorBooks:action.authorBooks}
     }),
 
@@ -96,17 +103,12 @@ export const bookReducer = createReducer(
 
     // id array
     on(addId,(state,{id}) => {
-        // console.log(id);
-        // const newId = [...state.ids,id]
-        // console.log({newId});
-        
         return {...state,ids:[...state.ids,id]};
     }),
    
     on(removeId,(state,{id}) => {
         const ids = state.ids.filter(id => id !== id)
-        return {...state,ids:[...state.ids,id]}
-        // return {...state,book:{...state.book,inCart:true,ids}}
+        return {...state,ids}
     }),
 
 
@@ -115,17 +117,22 @@ export const bookReducer = createReducer(
         const books = state.books.map((book: any,i: any) => {
             return book._id == id ? {...book,inWishlist:true} : book
         });
+        console.log({books});
+        
         return {...state,books}
     }),
 
     // remove from wishlist
     on(removeWishlist,(state,{id}) => {
         const books = state.books?.map((book: any,i: any) => book._id == id ? {...book,inWishlist:false} : book);
+        console.log({books});
         return {...state,books}
     }),
 
 
     // error
-    on(bookFailure, (state,action) => ({...state,loading:false,error: action.error}))
+    on(bookFailure, (state,action) => {
+       return {...state,loading:false,error: {message:action.error.message}}
+    })
 
 )

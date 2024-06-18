@@ -3,9 +3,9 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { DashboardLayoutComponent } from '../../shared/dashboard-layout/dashboard-layout.component';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { getWishlist, removeWishlist } from '../../store/cart/cart.actions';
-import { selectWishlist } from '../../store/cart/cart.selector';
+import { Store, select } from '@ngrx/store';
+import { addId, getWishlist, removeWishlist } from '../../store/cart/cart.actions';
+import { selectBookIds, selectWishlist, seletCartLoading } from '../../store/cart/cart.selector';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -44,12 +44,15 @@ export class WishlistComponent implements OnInit {
   ]
   store = inject(Store)
   wishList$ = this.store.select(selectWishlist);
+  ids$ = this.store.select(selectBookIds);
+  loading$ = this.store.select(seletCartLoading);
 
   ngOnInit(): void {
     this.store.dispatch(getWishlist());
   }
 
   removeWishlist(id:string){
-    this.store.dispatch(removeWishlist({id}))
+    this.store.dispatch(addId({id}));
+    this.store.dispatch(removeWishlist({id}));
   }
 }

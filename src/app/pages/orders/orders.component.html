@@ -1,25 +1,29 @@
 <app-dashboard-layout>
     <section >
-        <div class="flex">
-            <p>All</p>
-            <p>Success</p>
-            <p>failed</p>
-        </div>
-        <div class="order-container">
-            @if((orders$ | async)?.length){
-                @for(order of (orders$ | async); track order){
-                    <div class="order">
-                        <img [src]="order.book.frontCover.image" class="img" alt="">
-                        <div>
-                            <p>#{{order.paymentReference}}</p>
-                            <p>{{order.book.title}}</p>
-                            <p>Ordered On: {{order.orderDate}}</p>
-                            <p>Status: {{order.status}}</p>
+        @if(!(orders$ | async)?.length){
+            <p>orders is empty</p>
+        }@else{
+            <div class="flex">
+                <p>All</p>
+                <p>Success</p>
+                <p>failed</p>
+            </div>
+            <div class="order-container">
+                @if((orders$ | async)?.length){
+                    @for(order of (orders$ | async); track order){
+                        <div class="order">
+                            <img [src]="order.book.frontCover.image" class="img" alt="">
+                            <div>
+                                <p>#{{order.paymentReference}}</p>
+                                <p>{{order.book.title}}</p>
+                                <p>Ordered On: {{order.orderDate}}</p>
+                                <p>Status: {{order.status}}</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }
-        </div>
+            </div>
+        }
     </section>
     <!-- @for(button of [1,2,3,4]; track button){
         <button>{{button}}</button>

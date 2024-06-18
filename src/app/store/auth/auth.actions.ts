@@ -32,9 +32,9 @@ export const verifyForgotPasswordOtpSuccess =  createAction('[Auth] verifyForgot
 
 
 // verify forgot password otp
-export const resetPassword = createAction('[Auth] resetPassword',props<{newPassword: string,email:string | null}>());
+export const resetPassword = createAction('[Auth] resetPassword',props<{newPassword: string,email:string | null,confirmPassword:string}>());
 export const resetPasswordSuccess =  createAction('[Auth] resetPasswordSuccess',props<{data:string}>());
-export const error = createAction('[Auth] registerFailure',props<{error : string}>());
+export const error = createAction('[Auth] registerFailure',props<{error : {message:string}}>());
 
 
 // user

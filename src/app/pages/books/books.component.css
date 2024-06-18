@@ -53,7 +53,7 @@ main{
     padding-block: 4rem 7rem;
 }
 .main{
-    width: min(90%,var(--maxWidth));
+    width: min(90%,1600px);
     margin-inline: auto;
     /* background-color: red; */
     display: grid;
@@ -73,12 +73,10 @@ main{
     position: sticky;
     top: 2rem;
     border: 1px solid #810EA71F;
-    /* background-color: green; */
 }
 .filterCon{
     position: sticky;
     top: 2rem;
-    /* background-color: red; */
 }
 h4{
     text-align: center;
@@ -97,12 +95,13 @@ h4{
     padding-top: 1rem;
 }
 
-.books{
+/* .books{ */
     /* width: min(90%,var(--maxWidth)); */
     /* margin-inline: auto; */
     /* padding-left: 2rem; */
     /* background-color: red; */
-}
+/* } */
+
 .top-card{
     display: flex;
     justify-content: space-between;
@@ -120,7 +119,7 @@ h4{
 }
 .book-row{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(330px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     gap: 1rem;
     row-gap: 2.5rem;
 }
@@ -135,6 +134,15 @@ h4{
 
 .book-card img{
     cursor: pointer;
+    object-fit: cover;
+    width: 1.7rem;
+    /* height: 2rem; */
+}
+
+.book0mg{
+    width: 100%;
+    /* height: ; */
+    aspect-ratio: 1;
 }
 
 .book-card:hover{
@@ -195,8 +203,17 @@ h4{
     color: white;
 }
 
+.sk{
+    background-color: gray;
+    height: 2rem;
+}
+.sk-img{
+    height: 7rem;
+    border-radius: .3rem;
+}
+
 @media screen and (min-width: 1600px) {
     .book-row{
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }

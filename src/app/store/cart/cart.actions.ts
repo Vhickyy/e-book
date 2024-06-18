@@ -64,4 +64,9 @@ export const getOrders = createAction('[Order] getOrders')
 export const getOrdersSuccess = createAction('[Order] getOrdersSuccess',props<{orders:any}>())
 
 
-export const cartError = createAction('[Cart] cartError',props<{error:string}>());
+// id array
+export const addId = createAction('[Cart] addId',props<{id:string}>());
+export const removeId = createAction('[Cart] removeId',props<{id:string}>());
+
+
+export const cartError = createAction('[Cart] cartError',props<{error:{message:string}}>());

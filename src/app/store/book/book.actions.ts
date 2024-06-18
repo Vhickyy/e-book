@@ -40,4 +40,4 @@ export const removeWishlist = createAction('[Book] removeWishlist',props<{id:str
 // Add Review
 
 // error
-export const bookFailure = createAction('[Book] bookFailure', props<{error: string}>());
+export const bookFailure = createAction('[Book] bookFailure', props<{error: {message:string}}>());

@@ -5,7 +5,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { addId, deleteBook, getAuthorBooks } from '../../store/book/book.actions';
-import { selectAuthorBook, selectBookIds } from '../../store/book/book.selector';
+import { selectAuthorBook, selectBookIds, selectBookLoading } from '../../store/book/book.selector';
 import { selectUser } from '../../store/auth/auth.selector';
 
 @Component({
@@ -23,6 +23,7 @@ export class AuthorComponent implements OnInit{
   user$ = this.store.select(selectUser);
   authorId!: string | null
   id$ = this.store.select(selectBookIds);
+  loading$ = this.store.select(selectBookLoading);
 
   ngOnInit(){
     this.route.paramMap.subscribe(data => {

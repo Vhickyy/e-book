@@ -27,3 +27,8 @@ export const selectOrders = createSelector(
     selectCartState,
     (state) => state.orders
 )
+
+export const selectBookIds = createSelector(
+    selectCartState,
+    (state) => state.ids
+)

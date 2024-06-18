@@ -21,7 +21,7 @@ export const addBookEffect = createEffect((actions$ = inject(Actions),bookServic
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(bookAction.bookFailure(error));
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )
         })
@@ -39,8 +39,14 @@ export const getAllBookEffect = createEffect((actions$ = inject(Actions), bookSe
                     return bookAction.getBooksSuccess({books:data.books,pageSize:data.pageSize})
                 }),
                 catchError((error:HttpErrorResponse) => {
-                    console.log(error);
-                    return of(bookAction.bookFailure(error))
+                    // if(!error.error && error.status == 500){
+                    //     console.log(error.statusText);
+                    //     return of(bookAction.bookFailure({error:{message:"Check Your Internet Connectivity."}}))
+                    // }
+                    // // console.log("ji");
+                    
+                    // return of(bookAction.bookFailure(error))
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )
         })
@@ -60,7 +66,7 @@ export const getAuthorBookEffect = createEffect((actions$ = inject(Actions), boo
                 }),
                 catchError((error:HttpErrorResponse) => {
                     console.log(error);
-                    return of(bookAction.bookFailure(error))
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )
         })
@@ -77,7 +83,7 @@ export const getBookEffect = createEffect((actions$ = inject(Actions), bookServi
                     return bookAction.getBookSuccess({book:data.data})
                 }),
                 catchError((error:HttpErrorResponse) => {
-                    return of(bookAction.bookFailure(error))
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )
         })
@@ -97,7 +103,7 @@ export const editBookEffect = createEffect((actions$ = inject(Actions),bookServi
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(bookAction.bookFailure(error));
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )
         })
@@ -119,7 +125,7 @@ export const deleteBookEffect = createEffect((actions$ = inject(Actions),bookSer
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
                     store.dispatch(bookAction.removeId({id}))
-                    return of(bookAction.bookFailure(error));
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )
         })

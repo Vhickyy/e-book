@@ -13,67 +13,90 @@
     <!-- <div (click)="show = !show">
         show
     </div> -->
-    <div class="main" #main>
+    @if(!(error$ | async)?.message){
+        <div class="main" #main>
+            
+            <div class="filterCon">
+                @if(show){
+                    <section class="filter">
+                        <h4>Filter</h4>
+                        <p>Category</p>
+                        <div class="cat-list">
+                            <p *ngFor="let cat of category" (click)="changeCategory(cat)" [ngStyle]="{color: selectedCategory == cat.toLowerCase() ? '#810EA7' : 'black'}">{{cat}}</p>
+                        </div>
+                    </section>
+                }
+            </div>
+            @if(!(loading$ | async)){
+                <section>
+                        <div class="books">
+                            <div class="top-card">
+                                <div (click)="toggleSideBar()">
+                                    show
+                                </div>
+                                <h4>{{selectedCategory[0].toUpperCase()}}{{selectedCategory.slice(1)}}</h4>
+                                <h4>Search Result for: {{search}}</h4>
+                            </div>
+                            <div class="book-row">
+                               
+                                @if(!(books$ | async)?.length){
         
-        <div class="filterCon">
-            @if(show){
-                <section class="filter">
-                    <h4>Filter</h4>
-                    <p>Category</p>
-                    <div class="cat-list">
-                        <p *ngFor="let cat of category" (click)="changeCategory(cat)" [ngStyle]="{color: selectedCategory == cat.toLowerCase() ? '#810EA7' : 'black'}">{{cat}}</p>
-                    </div>
+                                   <p>No Book</p>
+        
+                                } @else{
+                                    @for(book of books$ | async; track book){
+                                        <div  class="book-card">
+                                            <img [src]="book.frontCover?.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
+                                            <div class="detail">
+                                                <p class="title">{{book.title}}</p>
+                                                <p class="author">{{book.author.fullname}}</p>
+                                                <div class="price">
+                                                    <p class="title">N {{book.price}}</p>
+                                                    @if((id$ | async)?.includes(book._id)){
+                                                        <div class="loader"></div>
+                                                    }@else{
+                                                        <img *ngIf="book.inWishlist" (click)="removeFromWishlist(book._id)" src="../../../assets/heartfull.svg" alt="">
+                                                        <img *ngIf="!book.inWishlist" (click)="addWishlist(book._id)" src="../../../assets/Vector.svg" alt="">
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+        
+                                }
+                            </div>
+                        </div>
                 </section>
+            }@else{
+                <div class="book-row">
+                    @for(i of [1,2,3,4,5]; track i){
+                        <div  class="book-card">
+                            <div class="sk sk-img"></div>
+                            <div class="detail">
+                                <p class="sk sk-title"></p>
+                                <div class="price">
+                                    <div class="sk sk-title"></div>
+                                    <div class="sk sk-icon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             }
         </div>
-        <section>
-                <div class="books">
-                    <div class="top-card">
-                        <div (click)="toggleSideBar()">
-                            show
-                        </div>
-                        <h4>{{selectedCategory[0].toUpperCase()}}{{selectedCategory.slice(1)}}</h4>
-                        <h4>Search Result for: {{search}}</h4>
-                    </div>
-                    <div class="book-row">
-                        <!-- {{ (books$ | async).length}} -->
-                        @if(!(books$ | async)?.length){
+    
+        @if((books$ | async)?.length){
+            <div class="pagination">
+                <button (click)="prevPage()"><img src="../../../assets/arrowleft.svg" alt="arrowleft"></button>
+                <button (click)="changeActive(i)" *ngFor="let button of pageSizeArray; let i = index;" [ngClass]="{active: i == active}">{{button + 1}}</button>
+                <button (click)="nextPage()"><img src="../../../assets/arrowright.svg" alt="arrowright"></button>
+            </div>
+        }
 
-                            <p>No book</p>
-
-                        } @else{
-
-                            @for(book of books$ | async; track book){
-                                <!-- {{book.frontCover | json}} -->
-                                <div  class="book-card">
-                                    <img [src]="book.frontCover?.image" [routerLink]="'/books/science/' + book._id" alt="">
-                                    <div class="detail">
-                                        <p class="title">{{book.title}}</p>
-                                        <p class="author">{{book.author.fullname}}</p>
-                                        <div class="price">
-                                            <p class="title">N {{book.price}}</p>
-                                            <!-- <button class="icon"><img src="../../../assets/Vector.svg" alt=""></button> -->
-        
-                                            <img *ngIf="book.inWishlist" (click)="removeFromWishlist(book._id)" src="../../../assets/Star 1.svg" alt="">
-                                            <img *ngIf="!book.inWishlist" (click)="addWishlist(book._id)" src="../../../assets/Vector.svg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-                        }
-                    </div>
-                </div>
-        </section>
-    </div>
-
-    @if((books$ | async)?.length){
-        <div class="pagination">
-            <button (click)="prevPage()"><img src="../../../assets/arrowleft.svg" alt="arrowleft"></button>
-            <button (click)="changeActive(i)" *ngFor="let button of pageSizeArray; let i = index;" [ngClass]="{active: i == active}">{{button + 1}}</button>
-            <button (click)="nextPage()"><img src="../../../assets/arrowright.svg" alt="arrowright"></button>
-        </div>
+    }@else{
+        <p>{{(error$ | async)?.message}}</p>
     }
+
 
 </main>
 <app-footer></app-footer>

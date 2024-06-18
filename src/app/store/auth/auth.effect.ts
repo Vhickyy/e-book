@@ -22,7 +22,7 @@ export const registerEffect = createEffect((actions$ = inject(Actions), authServ
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
                     console.log(error.message);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })
@@ -41,7 +41,7 @@ export const verifyOtpEffect = createEffect((actions$ = inject(Actions), authSer
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })
@@ -59,7 +59,7 @@ export const resendOtpEffect = createEffect((actions$ = inject(Actions), authSer
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })
@@ -83,7 +83,7 @@ export const loginEffect = createEffect((actions$ = inject(Actions), authService
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })
@@ -101,8 +101,7 @@ export const forgotPasswordEffect = createEffect((actions$ = inject(Actions), au
                     return authAction.forgotPasswordOtpSuccess(data.message);
                 }),
                 catchError((error:HttpErrorResponse)=> {
-                    console.log(error);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })
@@ -121,7 +120,7 @@ export const verifyForgotPasswordOtpEffect = createEffect((actions$ = inject(Act
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })
@@ -131,8 +130,8 @@ export const verifyForgotPasswordOtpEffect = createEffect((actions$ = inject(Act
 export const resetPasswordEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
     return actions$.pipe(
         ofType(authAction.resetPassword),
-        switchMap(({newPassword,email})=>{
-            return authService.resetPassword({newPassword,email}).pipe(
+        switchMap(({newPassword,email,confirmPassword})=>{
+            return authService.resetPassword({newPassword,email,confirmPassword}).pipe(
                 map((data)=> {
                     console.log(data);
                     router.navigate(['/reset-password'], {queryParams:{email}})
@@ -140,7 +139,7 @@ export const resetPasswordEffect = createEffect((actions$ = inject(Actions), aut
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })
@@ -157,7 +156,7 @@ export const getUserEffect = createEffect((actions$ = inject(Actions), authServi
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error(error));
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
         })

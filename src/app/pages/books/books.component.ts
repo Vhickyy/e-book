@@ -7,10 +7,12 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { getBooks } from '../../store/book/book.actions';
-import {  selectBooks, selectPages } from '../../store/book/book.selector';
-import { addAnnonymousCart, addCart, addWishlist, removeWishlist } from '../../store/cart/cart.actions';
+import {  selectBookLoading, selectBooks, selectError, selectPages } from '../../store/book/book.selector';
+import { addAnnonymousCart, addCart, addId, addWishlist, removeWishlist } from '../../store/cart/cart.actions';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { selectBookIds, seletCartLoading } from '../../store/cart/cart.selector';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-books',
@@ -27,13 +29,18 @@ export class BooksComponent implements OnInit {
   http = inject(HttpClient);
   store = inject(Store);
   books$ = this.store.select(selectBooks);
-  token = localStorage.getItem("token");
+  error$ = this.store.select(selectError)
   selectedCategory = "all";
   search = '';
   active = 0;
   pageSize$ = this.store.select(selectPages)
   pageSizeArray!: number[];
   show: boolean = true;
+  loading$ = this.store.select(selectBookLoading)
+  wishListLoading = this.store.select(seletCartLoading);
+  id$ = this.store.select(selectBookIds);
+  obs!: Subscription;
+
   @ViewChild('main',{ static: true }) main!: ElementRef;
   renderer: Renderer2 = inject(Renderer2)
 
@@ -50,7 +57,14 @@ export class BooksComponent implements OnInit {
     this.pageSize$.subscribe(value => {
       this.pageSizeArray = Array.from({length: value}, (_, index) => index);
     });
-    this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
+    this.obs = this.books$.subscribe(book => {
+      console.log({book});
+      if(!book) {
+        console.log("jdhd");
+        
+        return this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))}
+    })
+    // this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
   }
   
   changeCategory(cat: string){
@@ -65,10 +79,17 @@ export class BooksComponent implements OnInit {
   }
 
   addWishlist(id: string){
+    console.log("add");
+    
+    this.store.dispatch(addId({id}))
     this.store.dispatch(addWishlist({id}))
+    
   }
 
   removeFromWishlist(id:string){
+    console.log("rem");
+    
+    this.store.dispatch(addId({id}))
     this.store.dispatch(removeWishlist({id}))
   }
 
@@ -98,4 +119,9 @@ export class BooksComponent implements OnInit {
       this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search,page:this.active + 1}));
     }
   }
+
+  ngOnDestroy() {
+    this.obs.unsubscribe();
+  }
+
 }

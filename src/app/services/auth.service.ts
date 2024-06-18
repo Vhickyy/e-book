@@ -41,9 +41,9 @@ export class AuthService {
     return this.http.post("/api/v1/auth/verify-forgot-otp", {code,email});
   }
 
-  resetPassword({newPassword,email}:{email:string | null,newPassword:string}): Observable<any> {
+  resetPassword({newPassword,email,confirmPassword}:{email:string | null,newPassword:string,confirmPassword:string}): Observable<any> {
     console.log({newPassword,email});
-    return this.http.post("/api/v1/auth/reset-password", {newPassword,email});
+    return this.http.post("/api/v1/auth/reset-password", {newPassword,email,confirmPassword});
   }
  
   getUser() {
