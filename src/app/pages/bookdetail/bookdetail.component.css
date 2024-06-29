@@ -12,7 +12,7 @@ section{
 .top-section{
     display: grid;
     gap: 2rem;
-    grid-template-columns: repeat(3,1fr);
+    /* grid-template-columns: repeat(3,1fr); */
     background-color: white;
     border: 1px solid #DEE2E7;
     border-radius: .3rem;
@@ -38,18 +38,20 @@ aside{
 }
 .main-img{
     display: block;
-    height: 20rem;
+    height: 15rem;
     width: 100%;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 .img{
-    height: 6rem;
+    height: 8rem;
     width: 100%;
     display: block;
     padding: .3rem;
     border: 1px solid #DEE2E7;
     border-radius: 5px;
+    object-fit: cover;
 }
 .top-detail{
     display: grid;
@@ -110,7 +112,7 @@ aside{
 .tab{
     margin-block: 2rem;
     display: grid;
-    width: 50%;
+    width: 100%;
     grid-template-columns: auto 1fr;
 }
 .cat{
@@ -151,6 +153,7 @@ h4{
 }
 
 .fit{
+    width: min(100%,30rem);
     height: fit-content;
 }
 .author-info-container{
@@ -158,6 +161,7 @@ h4{
     display: flex;
     flex-direction: column;
 }
+
 .author-det{
     margin-top: 1rem;
     display: grid;
@@ -166,6 +170,7 @@ h4{
     align-items: center;
     justify-content: space-between;
 }
+
 .author-info{
     display: flex;
     align-items: center;
@@ -252,12 +257,24 @@ h4{
 }
 
 @media screen and (min-width: 600px) {
-    /* .author-info-container{
-        width: min(75%,40rem);
-        
-    } */
     .author-det{
         grid-template-columns:  1fr 1fr;
-        
+    }
+    
+}
+
+/* @media screen and (min-width: 850px) {
+    
+} */
+
+@media screen and (min-width: 900px) {
+    .middle-section{
+        grid-template-columns: 2fr 1fr;
+    }
+    .tab{
+        width: min(80%,35rem);
+    }
+    .top-section{
+        grid-template-columns: repeat(3,1fr);
     }
 }
