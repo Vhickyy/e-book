@@ -35,12 +35,10 @@ export class PaymentComponent {
       const id = data.get('id');
       if(this.single){
         this.store.dispatch(getBook({id}));
-        // this.items$ = this.store.select(selectBook);
         this.store.select(selectBook).subscribe(data => this.item = data);
         return
       }
       this.store.select(selectCart).subscribe(data => this.item = data);
-      // this.items$ = this.store.select(selectCart);
     })
   }
 

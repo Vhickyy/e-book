@@ -27,17 +27,21 @@ import { authorGuard } from './gaurds/author.guard';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { EditBookComponent } from './pages/edit-book/edit-book.component';
 import { ReadingComponent } from './pages/reading/reading.component';
+import { openauthGuard } from './gaurds/openauth.guard';
+
 
 export const routes: Routes = [
     {path: "", component:HomeComponent},
     {path: "about", component:AboutComponent},
-    {path: "login", component:LoginComponent},
-    {path: "register", component:RegisterComponent},
-    {path:"verify-email",component:VerifyEmailComponent},
-    {path:"verify-otp",component:VerifyOtpComponent},
-    {path:"forgot-password",component:ForgotPasswordComponent},
-    {path:"reset-password",component:ResetPasswordComponent},
-    {path:"verify-success",component:VerifySuccessComponent},
+    {path: "",canActivate:[openauthGuard], children:[
+        {path: "login", component:LoginComponent},
+        {path: "register", component:RegisterComponent},
+        {path:"verify-email",component:VerifyEmailComponent},
+        {path:"verify-otp",component:VerifyOtpComponent},
+        {path:"forgot-password",component:ForgotPasswordComponent},
+        {path:"reset-password",component:ResetPasswordComponent},
+        {path:"verify-success",component:VerifySuccessComponent},
+    ]},
     {path:"books", component:BooksComponent},
     {path:"books/:category/:id",component:BookdetailComponent},
     {path:"contact",component:ContactComponent},
@@ -45,7 +49,7 @@ export const routes: Routes = [
     {path:"author/:name/:id",component:AuthorComponent},
     {path:"cart",component:CartComponent},
     {path:'dashboard',canActivate:[authGaurd],children:[
-        {path:"add-book", component:AddBookComponent},
+        {path:"add-book", canActivate:[authorGuard],component:AddBookComponent},
         {path:"edit-book/:id", component:EditBookComponent},
         {path:"author/edit-profile/:id",canActivate:[authorGuard],component:AuthorEditComponent},
         {path:"author/send-message",component:SendMessageComponent},

@@ -1,5 +1,5 @@
 <div class="body">
-    <app-navbar></app-navbar>
+    <!-- <app-navbar></app-navbar> -->
     <main>
         <section>
             <div class="box empty" *ngIf="!(cartItems$ | async)?.items?.length">
@@ -19,20 +19,33 @@
                         <p class="price">$ {{item.price}}</p>
                     </div>
                     <div class="second">
+
+                        <!-- ====================== Check Loading State ========================= -->
                         @if((loading$ | async) && id == item._id){
                             <div class="loader"></div>
                          }@else{
                             <img src="../../../assets/edit.svg" class="icon" alt="" (click)="removeFromCart(item._id)">
                         }
-                        <img src="../../../assets/Vector.svg" class="icon" alt="">
+                        @if(item.inWishlist){
+                            <img src="../../../assets/heartfull.svg" (click)="removeFromWishlist(item._id)" class="icon" alt="">
+                        }@else{
+                            <img src="../../../assets/Vector.svg" (click)="addWishlist(item._id)" class="icon" alt="">
+                        }
+
                     </div>
+
                     <div class="desk">
                         <p class="title">{{item.title}}</p>
                         <p>{{item.author.fullname}}</p>
                     </div>
+
                     <div class="flex desk">
-                        <img src="../../../assets/Vector.svg" class="icon" alt="">
-                        <p class="wish">Add to wishlist</p>
+                        @if(item.inWishlist){
+                            <img src="../../../assets/heartfull.svg" (click)="removeFromWishlist(item._id)" class="icon" alt="">
+                        }@else{
+                            <img src="../../../assets/Vector.svg" (click)="addWishlist(item._id)" class="icon" alt="">
+                        }
+                        <!-- <p class="wish">Add to wishlist</p> -->
                     </div>
                     <p class="desk price">$ {{item.price}}</p>
                     <!-- <div class="loader"></div> -->

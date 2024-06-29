@@ -3,10 +3,12 @@ import { VerifyComponent } from '../../shared/verify/verify.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { resendOtp, verifyForgotPasswordOtp, verifyOtp } from '../../store/auth/auth.actions';
-import { selectError, selectLoading } from '../../store/auth/auth.selector';
+import { getCode, resendOtp, verifyOtp } from '../../store/auth/auth.actions';
+import { selectData, selectError, selectLoading, selectToken } from '../../store/auth/auth.selector';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-verify-otp',
@@ -24,19 +26,24 @@ export class VerifyOtpComponent implements OnInit{
   error$ = this.store.select(selectError)
   paramObs!: Subscription;
   email!: string | null;
-  forgotPassword! : string | null;
   route = inject(ActivatedRoute)
+  router = inject(Router)
   count = 0
   intervalId:any;
+  otp$ = this.store.select(selectData)
+  token$ = this.store.select(selectToken);
 
   @ViewChildren('inputField') inputField!: QueryList<ElementRef>;
 
   ngOnInit(){
     this.paramObs = this.route.queryParamMap.subscribe(params => {
-    this.email = params.get('email');
-    this.forgotPassword = params.get('forgot-password');
-  })};
-
+      this.email = params.get('email');
+    })
+    if(this.email){
+      this.store.dispatch(getCode({email:this.email}))
+    }
+  };
+  
   ngAfterViewInit() {
     this.inputField.first.nativeElement.focus()
   }
@@ -46,7 +53,7 @@ export class VerifyOtpComponent implements OnInit{
   }
 
   // transfer logic to auth service
-  onValueChange(e:any,index:any){
+  onValueChange(e:any,index:number){
     if(e && !this.filled){
       if(isNaN(Number(e))){
         this.inputField.toArray()[index].nativeElement.value = this.code[index];
@@ -61,11 +68,13 @@ export class VerifyOtpComponent implements OnInit{
     }
     
     if(this.filled && e){
-      if(this.forgotPassword){
-        this.store.dispatch(verifyForgotPasswordOtp({code:Number(this.code.join('')),email:this.email}))
-      }else{
-        this.store.dispatch(verifyOtp({code:Number(this.code.join('')),email:this.email}));
-      }
+        let token
+        this.token$.subscribe(data => {
+          token = data;
+        }) 
+        if(token){
+          this.store.dispatch(verifyOtp({code:Number(this.code.join('')),token}));
+        }
       
       this.error$.subscribe(val=>{
         if(val){
@@ -76,7 +85,7 @@ export class VerifyOtpComponent implements OnInit{
     }
   }
 
-  onBack(e:KeyboardEvent,index:any){
+  onBack(e:KeyboardEvent,index:number){
     if(e.key == 'Backspace'){
       this.code[index] = '';
       this.inputField.toArray()[index].nativeElement.value = '';
@@ -86,11 +95,12 @@ export class VerifyOtpComponent implements OnInit{
  
   resendOtp(){
     if(this.intervalId) clearInterval(this.intervalId)
-    if(this.forgotPassword){
-      this.store.dispatch(resendOtp({email:this.email,forgotPassword:this.forgotPassword}))
-    }else{
       this.store.dispatch(resendOtp({email:this.email}));
-    }
+    let token
+    this.token$.subscribe(data => {
+      token = data
+    }) 
+    this.router.navigate(['/verify-otp'],{queryParams: {email:this.email,token}})
     this.count = 30
     this.intervalId = setInterval(()=>{
     if(this.count < 1) return

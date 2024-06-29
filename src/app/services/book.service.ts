@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { EventEmitter, Injectable, Output, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +7,12 @@ import { Injectable, inject } from '@angular/core';
 export class BookService {
 
   http = inject(HttpClient)
+  search = '';
+  // @Output() searchBook = new EventEmitter<string>()
 
   constructor() { }
+
+
 
   // book
   getAllBook (category = "all",search: string,page?:number) {

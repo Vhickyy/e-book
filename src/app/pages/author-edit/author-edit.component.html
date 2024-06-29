@@ -1,5 +1,5 @@
 <header>
-    <app-navbar></app-navbar>
+    <!-- <app-navbar></app-navbar> -->
     <section class="head-section">
         <h3>Edit Profile</h3>
     </section>
@@ -35,7 +35,7 @@
         </aside>
         <aside class="book-row">
                 <div *ngFor="let book of (authorBook$ | async)" class="book-card">
-                    <img [src]="book.frontCover.secureUrl" alt="">
+                    <img [src]="book.frontCover.image" alt="">
                     <div class="detail">
                         <p class="title">{{book.title}}</p>
                         <p class="title">N {{book.price}}</p>

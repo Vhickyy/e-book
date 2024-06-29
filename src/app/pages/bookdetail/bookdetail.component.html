@@ -1,12 +1,12 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar> -->
 <main>
     <section class="top-section">
         <aside>
             <div>
-                <img class="main-img" [src]="(book$ | async)?.frontCover.image" alt="">
+                <img class="main-img" [src]="(book$ | async)?.frontCover?.image" alt="">
                 <div class="img-container">
-                    <img class="img"  [src]="(book$ | async)?.frontCover.image" alt="">
-                    <img class="img" [src]="(book$ | async)?.backCover.image" alt="">
+                    <img class="img"  [src]="(book$ | async)?.frontCover?.image" alt="">
+                    <img class="img" [src]="(book$ | async)?.backCover?.image" alt="">
                 </div>
             </div>
         </aside>
@@ -16,7 +16,7 @@
                 <!-- <h3>Intergalactic War of The Tidal Maro of Zugal Race, A Book</h3> -->
                 <div class="flex">
                     <p>rating</p>
-                    <p>{{(book$ | async)?.reviews.length }} review</p>
+                    <p>{{(book$ | async)?.reviews?.length }} review</p>
                     <p>{{(book$ | async)?.sold}} sold</p>
                 </div>
                 <div>
@@ -55,10 +55,8 @@
         </aside>
         <aside>
             <div class="buy">
-                <!-- {{loadingCart$ | async}} -->
                 <p>N {{(book$ | async)?.price}}</p>
-                <!-- routerLink="/dashboard/payment?buy-now=true"{{user$ | async | json}} -->
-                @if((user$ | async)?._id !== (book$ | async)?.author._id){
+                @if((user$ | async)?._id !== (book$ | async)?.author?._id){
                     <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="['/dashboard/payment']" 
                     [queryParams]="{ 'buy-now': true,id : (book$ | async)?._id }" >Buy Now</button>
                     <button class="btn" *ngIf="((book$ | async)?.bought)" routerLink="/books" >Go to books</button>
@@ -86,16 +84,16 @@
                 <div class="author-info">
                     <img src="../../../assets/Rectangle 10.png" class="pic" alt="">
                     <div>
-                        <p>{{(book$ | async)?.author.fullname}}</p>
+                        <p>{{(book$ | async)?.author?.fullname}}</p>
                         <p>Uyo, Nigeria.</p>
                     </div>
                 </div>
                 <div>
-                    @if((user$ | async)?._id !== (book$ | async)?.author._id){
+                    @if((user$ | async)?._id !== (book$ | async)?.author?._id){
                         <button class="btn" routerLink="/dashboard/author/send-message">Contact Author</button>
-                        <button class="contact-btn" [routerLink]="'/author/' +  (book$ | async)?.author.fullname.split(' ').join('-') + '/' + (book$ | async)?.author._id">Author's Profile</button>
+                        <button class="contact-btn" [routerLink]="'/author/' +  (book$ | async)?.author?.fullname?.split(' ')?.join('-') + '/' + (book$ | async)?.author?._id">Author's Profile</button>
                     }@else{
-                        <button class="btn" [routerLink]="'/author/' +  (book$ | async)?.author.fullname.split(' ').join('-') + '/' + (book$ | async)?.author._id">Your Profile</button>
+                        <button class="btn" [routerLink]="'/author/' +  (book$ | async)?.author?.fullname?.split(' ')?.join('-') + '/' + (book$ | async)?.author?._id">Your Profile</button>
                     }
                     </div>
             </div>
@@ -140,13 +138,13 @@
             <div class="content rate">
                 <h4>Rating Summary</h4>
                 <p>4.0 out of 5 star</p>
-                @if((user$ | async)?._id !== (book$ | async)?.author._id){
+                @if((user$ | async)?._id !== (book$ | async)?.author?._id){
                     <button class="btn">Write a review</button>
                 }
             </div>
         </aside>
     </section>
-    @if((user$ | async)?._id !== (book$ | async)?.author._id){
+    @if((user$ | async)?._id !== (book$ | async)?.author?._id){
     <section>
             <div class="top-card">
                 <h4>More Science Books</h4>

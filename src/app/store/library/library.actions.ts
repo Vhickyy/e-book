@@ -7,3 +7,5 @@ export const getPdf = createAction('[Library] getPdf',props<{id:string | null}>(
 export const getPdfSuccess = createAction('[Library] getPdfSuccess',props<{book:any}>());
 
 export const libraryError = createAction('[Library] libraryError',props<{error:string}>());
+
+export const reset = createAction('[Library] reset')

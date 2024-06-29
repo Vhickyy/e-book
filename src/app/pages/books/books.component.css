@@ -18,6 +18,7 @@ h3{
     width: min(75%,25rem);
     border-radius: .2rem;
     padding: .2rem;
+    padding-left: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,7 +50,7 @@ input::placeholder{
     color: #912CB2;
 }
 main{
-    background-color: #F8F9FA;
+    /* background-color: #F8F9FA; */
     padding-block: 4rem 7rem;
 }
 .main{
@@ -59,9 +60,11 @@ main{
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 2rem;
+    /* background-color: brown; */
 }
 .main2{
     grid-template-columns: 1fr;
+    /* background-color: cornflowerblue; */
 }
 
 .filter{
@@ -71,12 +74,13 @@ main{
     width: 17rem;
     height: fit-content;
     position: sticky;
-    top: 2rem;
+    top: 7rem;
     border: 1px solid #810EA71F;
 }
 .filterCon{
     position: sticky;
     top: 2rem;
+    /* background-color: red; */
 }
 h4{
     text-align: center;
@@ -119,9 +123,11 @@ h4{
 }
 .book-row{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    gap: 1rem;
+    /* grid-template-columns: repeat(auto-fit,minmax(270px,1fr)); */
+    grid-template-columns: repeat(auto-fill,minmax(270px,1fr));
+    gap: 1.5rem;
     row-gap: 2.5rem;
+    /* background-color: aquamarine; */
 }
 
 .book-card{
@@ -211,7 +217,31 @@ h4{
     height: 7rem;
     border-radius: .3rem;
 }
+.error{
+    background-color: white;
+    padding-block: 1rem .1rem;
+    padding-inline: .2rem;
+    position: fixed;
+    top: 5rem;
+    right: 5rem;
+   
+    border-radius: .5rem;
+    box-shadow: 1px 1px 5px gray;
+}
 
+.error > p{
+    text-align: center;
+    font-size: 1.1rem;
+    padding-inline: 2rem;
+    margin-bottom: .5rem;
+}
+
+.error-load{
+    background-color: var(--primaryColor);
+    width: 100%;
+    border-radius: 1rem;
+    height: .3rem;
+}
 @media screen and (min-width: 1600px) {
     .book-row{
         grid-template-columns: 1fr 1fr 1fr 1fr;

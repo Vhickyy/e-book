@@ -2,4 +2,21 @@
     <img src="../../../assets/reg-logo.svg" alt="">
     <h4>Code sent to email</h4>
     <p>{{!forgotPassword ? "A verification" : "An"}} email has been sent to {{email}}. check your email to complete {{!forgotPassword ? "verification" : "process"}} or click <a [routerLink]="'/verify-otp'"  [queryParams]="!forgotPassword ? {email} : {email, 'forgot-password':'true'}">here</a></p>
+    
+    <!-- // ========== Remove Here ============== // -->
+    <div>
+        <p>Hi, If a real mail was used, you can check your mail.</p>
+        <p>Here is an assistance for dummy mail.</p>
+        @if(loading$ | async){
+            <p>Loading...</p>
+        }
+        @if(token$ | async){
+            <p class="link" *ngIf="forgotPassword" [routerLink]="'/reset-password'" [queryParams]="{token: token$ | async}">Verify Your Mail2</p>
+            <p *ngIf="!forgotPassword" [routerLink]="'/verify-otp'" [queryParams]="{email, token: token$ | async}" class="link">Verify Your Mail</p>
+            <p>Thank you for engaging in WarmBook</p>
+        }@else{
+            <p>An Error Occurred.</p>
+        }
+    </div>
+    <!-- // ========== End Here ============== // -->
 </app-verify>

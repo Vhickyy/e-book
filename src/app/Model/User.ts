@@ -5,4 +5,5 @@ export interface IUser {
     token: string
     role: string
     fullname: string
+    profilePic?: string
 }

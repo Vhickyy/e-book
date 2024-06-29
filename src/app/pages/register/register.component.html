@@ -1,5 +1,5 @@
 <div class="body">
-    <app-navbar></app-navbar>
+    <!-- <app-navbar></app-navbar> -->
     <main>
         <div class="head">
             <img src="../../../assets/reg-logo.svg" alt="">
@@ -19,13 +19,43 @@
                 <p *ngIf="page == 3"><span>3</span> Preveiew details</p>
             </div>
             <div class="form-content">
-                <!-- [fullname]="registerForm.get('fullname')?.value" [email]="registerForm.get('email')?.value" [password]="registerForm.get('password')?.value" -->
-                <app-pageone *ngIf="page == 1" (changePage)="changePage()" (image)="image($event)" [registerForm]="registerForm" [imageUrl]="imageUrl"></app-pageone>
-                <app-pagetwo *ngIf="page == 2" (changePage)="changePage()"></app-pagetwo>
+            @if(showCrop){
+                <div class="crop">
+                    <image-cropper
+                    [imageFile]= "inputFile.nativeElement.files[0]"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]= "1/1"
+                    (imageCropped)="imageCropped($event)"
+                    >
+                    <!-- [imageFile]= "inputFile.nativeElement.files[0]" -->
+                    </image-cropper>
+                    <div>
+                        <button type="button" (click)="cancelCrop()">Cancel</button>
+                        <button type="button" (click)="saveCrop()">Done</button>
+                    </div>
+                </div>
+            }  
+                <input type="file" class="file" #file  (change)="uploadFile($event)" (click)="inputFile.nativeElement.value=''" />
+                <app-pageone *ngIf="page == 1" (changePage)="changePage()" [registerForm]="registerForm" [imageUrl]="imageUrl" [inputFile]="inputFile" ></app-pageone>
+                <app-pagetwo *ngIf="page == 2" (changePage)="changePage()" [registerForm]="registerForm"></app-pagetwo>
                 <app-pagethree *ngIf="page == 3" (changePage)="changePage()" [registerForm]="registerForm" [imageUrl]="imageUrl" (register)="register()"></app-pagethree>
+
             </div>
         </form>
         <div class="overlay"></div>
     </main>
     <app-footer></app-footer>
 </div>
+
+
+<!-- <ngx-image-cropper
+        > -->
+        <!-- [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1/1"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()" -->
+        <!-- </ngx-image-cropper> -->

@@ -84,7 +84,8 @@ aside{
 }
 .middle-section{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    /* grid-template-columns: 2fr 1fr; */
     column-gap: 1.5rem;
     margin-top: 3rem;
 }
@@ -153,12 +154,15 @@ h4{
     height: fit-content;
 }
 .author-info-container{
-    width: 50%;
+    width: min(100%,40rem);
+    display: flex;
+    flex-direction: column;
 }
 .author-det{
     margin-top: 1rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: space-between;
 }
@@ -245,4 +249,15 @@ h4{
     font-weight: 400;
     font-size: .9rem;
     color: rgba(30, 0, 40, 0.58);
+}
+
+@media screen and (min-width: 600px) {
+    /* .author-info-container{
+        width: min(75%,40rem);
+        
+    } */
+    .author-det{
+        grid-template-columns:  1fr 1fr;
+        
+    }
 }

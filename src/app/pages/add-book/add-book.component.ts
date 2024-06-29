@@ -89,10 +89,13 @@ export class AddBookComponent implements OnInit {
     Object.keys(this.addBookForm.value).forEach(key => {
       formData.append(key, this.addBookForm.value[key]);
     });
+    
     formData.append('frontCover', this.frontCover.nativeElement.files[0]);
     formData.append('backCover', this.backCover.nativeElement.files[0]);
     formData.append('pdf', this.pdf.nativeElement.files[0]);
-    // console.log(formData);
+    // console.log({formData});
+    // console.log(this.frontCover.nativeElement.files);
+    // console.log(this.frontCover.nativeElement.files[0]);
     
     this.store.dispatch(addBook({book:formData}))
   }

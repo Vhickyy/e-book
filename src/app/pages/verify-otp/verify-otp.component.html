@@ -1,7 +1,22 @@
 <app-verify>
     <form>
         <h4>Input OTP</h4>
-        <!-- <p>{{code.toString()}}</p> -->
+
+        <!-- // ========== Remove Here ============== // -->
+        @if(loading$ | async){
+            <p>Fetching Code...</p>
+        }
+        @if((otp$ | async)){
+            <div>
+                <p>Code - {{(otp$ | async)}}</p>
+                <p>Thank you for engaging in WarmBook</p>
+            </div>
+        }
+        @if(error$ | async){
+            <p>An Error Occurred. {{error$ | async | json}}</p>
+        }
+        <!-- // ========== End Here ============== // -->
+
         <div >
             <input type="text" 
             *ngFor="let inp of code; let i = index trackBy: trackByFn" 

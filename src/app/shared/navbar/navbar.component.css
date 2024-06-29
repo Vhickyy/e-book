@@ -1,7 +1,9 @@
 nav{
     background-color: white;
-    /* position: sticky; */
-    /* top: 0; */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 1px 1px 7px gray;
 }
 section{
     display: flex;
@@ -46,4 +48,50 @@ button{
 .grid{
     display: grid;
     place-items: center;
+}
+.img{
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid var(--primaryColor);
+}
+
+.flex{
+    display: none;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+    height: fit-content;
+    bottom: 0;
+    top: 3rem;
+    right: 0;
+    background-color: whitesmoke;
+    padding: 1rem;
+    width: 100%;
+    display: grid;
+    gap: .5rem;
+    border-radius: .5rem;
+    border: 2px solid var(--primaryColor);
+}
+.absolute p{
+    cursor: pointer;
+}
+
+.pix{
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+}
+
+@media screen and (min-width: 800px) {
+    .flex{
+        display: flex;
+    }
+    .mobile{
+        display: none;
+    }
 }

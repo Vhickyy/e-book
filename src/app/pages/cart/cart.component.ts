@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { getCart, removeAnnonymousCart, removeCart } from '../../store/cart/cart.actions';
+import { addId, addWishlist, getAnnonymousCart, getCart, removeAnnonymousCart, removeCart, removeWishlist } from '../../store/cart/cart.actions';
 import { selectCart, seletCartLoading } from '../../store/cart/cart.selector';
 import { RouterLink } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   // cartItems = [
   //   {
   //     img: '../../../assets/bookdet.png',
@@ -29,6 +29,17 @@ export class CartComponent {
   loading$ = this.store.select(seletCartLoading);
   id: string = ''
 
+  ngOnInit(){
+    if(this.token){
+      this.store.dispatch(getCart());
+      console.log("heyto");
+    }else{
+      this.store.dispatch(getAnnonymousCart());
+      console.log("dwqwdtwe");
+      
+    }
+  }
+
 
   removeFromCart(id:string) {
     this.id = id
@@ -37,4 +48,16 @@ export class CartComponent {
     }
     return this.store.dispatch(removeAnnonymousCart({id}));
   }
+
+  removeFromWishlist(id:string){
+    this.store.dispatch(addId({id}));
+    this.store.dispatch(removeWishlist({id}));
+  }
+
+  addWishlist(id: string){
+    console.log("add");
+    this.store.dispatch(addId({id}))
+    this.store.dispatch(addWishlist({id}))
+  }
+
 }

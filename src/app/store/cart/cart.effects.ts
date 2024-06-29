@@ -7,6 +7,7 @@ import { catchError, map, of, switchMap } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Store } from "@ngrx/store";
 import {  addWishlist, placeInCart, removeWishlist } from "../book/book.actions";
+import { ICart } from "../../Model/Book";
 
 
 export const addCartEffect = createEffect((action$ = inject(Actions),router = inject(Router), cartService = inject(CartService),store = inject(Store)) => {
@@ -18,13 +19,13 @@ export const addCartEffect = createEffect((action$ = inject(Actions),router = in
             return cartService.addCart(id).pipe(
                 map((data:any) => {
                     console.log(data);
-                    console.log(data.data);
                     
                     store.dispatch(placeInCart())
-
+                    // console.log(data.data);
+                    
                     return cartAction.addCartSuccess({message:data.message,cart:data.data})
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
             )
         })
     )
@@ -37,10 +38,10 @@ export const removeItemEffect = createEffect((action$ = inject(Actions), router 
         switchMap(({id}) => {
             return cartService.removeCart(id).pipe(
                 map((data:any) => {
-                    console.log(data);
-                    return cartAction.removeCartSuccess({cart:data.data,message:data.message})
+                    console.log(data); 
+                    return cartAction.removeCartSuccess({id,message:data.message,price:data.data})
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
             )
         })
     )
@@ -58,7 +59,7 @@ export const getCartEffect = createEffect( (action$ = inject(Actions), router = 
                     
                     return cartAction.getCartSuccess({cart:data.data})
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error?.error?.message || error.statusText}})))
             )
         })
     )
@@ -74,7 +75,7 @@ export const clearCartEffect = createEffect ((action$ = inject(Actions), router 
                     console.log(data);
                     return cartAction.clearCartSuccess(data.data);
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
             )
         })
     )
@@ -97,7 +98,7 @@ export const addAnnonymousCartEffect = createEffect((action$ = inject(Actions),r
                     store.dispatch(placeInCart())
                     return cartAction.addAnnonymousCartSuccess({message:data.message,cart:data.data})
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
             )
         })
     )
@@ -112,7 +113,7 @@ export const removeAnnonymousItemEffect = createEffect((action$ = inject(Actions
                     console.log(data);
                     return cartAction.removeAnnonymousCartSuccess({cart:data.data,message:data.message})
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
             )
         })
     )
@@ -122,13 +123,19 @@ export const removeAnnonymousItemEffect = createEffect((action$ = inject(Actions
 export const getAnnonymousCartEffect = createEffect( (action$ = inject(Actions), router = inject(Router), cartService = inject(CartService)) => {
     return action$.pipe(
         ofType(cartAction.getAnnonymousCart),
+        
         switchMap(() => {
+            const uuid = localStorage.getItem("uuid")
+                    console.log({uuid},'eff');
             return cartService.getAnnonymousCart().pipe(
                 map(({data}:any) => {
-                    console.log(data.cart);
+                    // const uuid = localStorage.getItem("uuid")
+                    // console.log({uuid},'eff');
+                    
+                    console.log({car:data.cart},'hrtr');
                     return cartAction.getAnnonymousCartSuccess({cart:data.cart})
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
             )
         })
     )
@@ -144,7 +151,7 @@ export const clearAnnonymousCartEffect = createEffect ((action$ = inject(Actions
                     console.log(data);
                     return cartAction.clearAnnonymousCartSuccess(data.data);
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
             )
         })
     )
@@ -161,11 +168,11 @@ export const addWishlistEffect = createEffect ((action$ = inject(Actions), route
                     // update inWishlist for book
                     store.dispatch(addWishlist({id}));
                     store.dispatch(cartAction.removeId({id}))
-                    return cartAction.addWishlistSuccess({message:data.message,wishlist:data})
+                    return cartAction.addWishlistSuccess({message:data.message,wishlist:data,id})
                 }),
                 catchError((error:HttpErrorResponse) => {
                     store.dispatch(cartAction.removeId({id}))
-                    return of(cartAction.cartError({error:{message:error.error || error.statusText}}))
+                    return of(cartAction.cartError({error:{message:error.error.message || error.statusText}}))
                 })
             )
         })
@@ -179,10 +186,12 @@ export const getWishlistEffect = createEffect((action$ = inject(Actions), router
         switchMap(() => {
             return cartService.getWishlist().pipe(
                 map(({data}:any) => {
-                    console.log(data.items);
-                    return cartAction.getWishlistSuccess({message:data.message,wishlist:data.items})
+                    // console.log(data.items);
+                    return cartAction.getWishlistSuccess({message:data?.message,wishlist:data?.items})
                 }),
-                catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+                catchError((error:HttpErrorResponse) => {
+                   return of(cartAction.cartError({error:{message:error.error.message || error.statusText}}))
+                })
             )
         })
     )
@@ -203,7 +212,7 @@ export const removeWishlistEffect = createEffect((action$ = inject(Actions), rou
                 }),
                 catchError((error:HttpErrorResponse) => {
                     store.dispatch(cartAction.removeId({id}))
-                    return of(cartAction.cartError({error:{message:error.error || error.statusText}}))
+                    return of(cartAction.cartError({error:{message:error.error.message || error.statusText}}))
                 })
             )
         })
@@ -224,7 +233,7 @@ export const orderBooks = createEffect((action$ = inject(Actions), router = inje
                 })
             )
         }),
-        catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+        catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
     )
 },{functional:true});
 
@@ -240,7 +249,7 @@ export const verifyPayment = createEffect((action$ = inject(Actions), router = i
                 })
             )
         }),
-        catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+        catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
     )
 },{functional:true})
 
@@ -254,6 +263,6 @@ export const getOrders = createEffect((action$ = inject(Actions), router = injec
                 })
             )
         }),
-        catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error || error.statusText}})))
+        catchError((error:HttpErrorResponse) => of(cartAction.cartError({error:{message:error.error.message || error.statusText}})))
     )
 },{functional:true})

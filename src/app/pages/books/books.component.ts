@@ -8,11 +8,12 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { getBooks } from '../../store/book/book.actions';
 import {  selectBookLoading, selectBooks, selectError, selectPages } from '../../store/book/book.selector';
-import { addAnnonymousCart, addCart, addId, addWishlist, removeWishlist } from '../../store/cart/cart.actions';
+import { addAnnonymousCart, addCart, addId, addWishlist, hideError, removeWishlist } from '../../store/cart/cart.actions';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { selectBookIds, seletCartLoading } from '../../store/cart/cart.selector';
+import { selectBookIds, selectCartError, seletCartLoading } from '../../store/cart/cart.selector';
 import { Subscription } from 'rxjs';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-books',
@@ -24,14 +25,14 @@ import { Subscription } from 'rxjs';
 
 export class BooksComponent implements OnInit {
   category:string[] = ["All","Science","Technology","Health","Religion","Art","Finance"];
-  // science:IBest[] = bestSellingBooks
-  science: any = []
   http = inject(HttpClient);
   store = inject(Store);
+  searchService = inject(BookService)
   books$ = this.store.select(selectBooks);
-  error$ = this.store.select(selectError)
+  error$ = this.store.select(selectError);
+  cartError$ = this.store.select(selectCartError);
   selectedCategory = "all";
-  search = '';
+  search = this.searchService.search;
   active = 0;
   pageSize$ = this.store.select(selectPages)
   pageSizeArray!: number[];
@@ -40,31 +41,49 @@ export class BooksComponent implements OnInit {
   wishListLoading = this.store.select(seletCartLoading);
   id$ = this.store.select(selectBookIds);
   obs!: Subscription;
+  errObs$! : Subscription;
+  timerId!: any
 
-  @ViewChild('main',{ static: true }) main!: ElementRef;
+  @ViewChild('main') main!: ElementRef;
   renderer: Renderer2 = inject(Renderer2)
+
+
+  ngOnInit(): void {
+    
+    this.pageSize$.subscribe(value => {
+      this.pageSizeArray = Array.from({length: value}, (_, index) => index);
+    });
+    this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
+
+    this.errObs$ = this.cartError$.subscribe(data => {
+      if(data){
+        if(data.message.includes("found")) {
+          this.timerId = setTimeout(() => {
+            this.store.dispatch(hideError())
+          },0)
+          return
+        }
+        this.timerId = setTimeout(() => {
+          this.store.dispatch(hideError())
+        },5000)
+      }
+    })
+  }
 
   toggleSideBar(){
     this.show = !this.show;
     if (this.show) {
       this.renderer.removeClass(this.main.nativeElement, 'main2');
+      
     } else {
       this.renderer.addClass(this.main.nativeElement, 'main2');
+      
     }
   }
 
-  ngOnInit(): void {
-    this.pageSize$.subscribe(value => {
-      this.pageSizeArray = Array.from({length: value}, (_, index) => index);
-    });
-    this.obs = this.books$.subscribe(book => {
-      console.log({book});
-      if(!book) {
-        console.log("jdhd");
-        
-        return this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))}
-    })
-    // this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}))
+  closeError(){
+    this.store.dispatch(hideError())
+    clearTimeout(this.timerId)
   }
   
   changeCategory(cat: string){
@@ -74,6 +93,9 @@ export class BooksComponent implements OnInit {
   }
 
   searchBook(){
+    console.log({s:this.search});
+    console.log({s2:this.searchService.search});
+    
     this.store.dispatch(getBooks({category:this.selectedCategory,search:this.search}));
     this.active = 0;
   }
@@ -83,7 +105,6 @@ export class BooksComponent implements OnInit {
     
     this.store.dispatch(addId({id}))
     this.store.dispatch(addWishlist({id}))
-    
   }
 
   removeFromWishlist(id:string){
@@ -120,8 +141,8 @@ export class BooksComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
-    this.obs.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.obs.unsubscribe();
+  // }
 
 }

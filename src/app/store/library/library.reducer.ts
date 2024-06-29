@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store"
-import { getLibrary, getLibrarySuccess, getPdf, getPdfSuccess, libraryError } from "./library.actions"
+import { getLibrary, getLibrarySuccess, getPdf, getPdfSuccess, libraryError, reset } from "./library.actions"
 
 interface ILibrary  {
     loading: boolean
@@ -39,4 +39,6 @@ export const libraryReducer = createReducer(
     }),
 
     on(libraryError,(state,action)=> ({...state,loading:false,error:action.error})),
+
+    on(reset, (state) => (initialState)),
 )

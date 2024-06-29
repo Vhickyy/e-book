@@ -1,11 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
-import {  addAnnonymousCart, addAnnonymousCartSuccess, addCart, addCartSuccess, addId, addWishlist, addWishlistSuccess, cartError, clearAnnonymousCart, clearAnnonymousCartSuccess, clearCart, clearCartSuccess, getAnnonymousCart, getAnnonymousCartSuccess, getCart, getCartSuccess, getOrders, getOrdersSuccess, getWishlist, getWishlistSuccess, orderBooks, orderBooksSuccess, removeAnnonymousCart, removeAnnonymousCartSuccess, removeCart, removeCartSuccess, removeId, removeWishlist, removeWishlistSuccess, verifyPayment, verifyPaymentSuccess, } from "./cart.actions";
+import {  addAnnonymousCart, addAnnonymousCartSuccess, addCart, addCartSuccess, addId, addWishlist, addWishlistSuccess, cartError, clearAnnonymousCart, clearAnnonymousCartSuccess, clearCart, clearCartSuccess, getAnnonymousCart, getAnnonymousCartSuccess, getCart, getCartSuccess, getOrders, getOrdersSuccess, getWishlist, getWishlistSuccess, hideError, orderBooks, orderBooksSuccess, removeAnnonymousCart, removeAnnonymousCartSuccess, removeCart, removeCartSuccess, removeId, removeWishlist, removeWishlistSuccess, reset, verifyPayment, verifyPaymentSuccess, } from "./cart.actions";
+import { IBook, ICart } from "../../Model/Book";
 
 
-interface ICart  {
+interface ICartState  {
     loading: boolean
-    cart: any,
-    wishlist: any,
+    cart: ICart,
+    wishlist: IBook[] | null,
     error: {message:string} | null,
     message?: string | null
     cartLength: number
@@ -13,11 +14,14 @@ interface ICart  {
     ids:string[]
 }
 
-const initialState: ICart = {
+const initialState: ICartState = {
     loading: false,
     cartLength: 0,
-    cart: [],
-    wishlist: [],
+    cart: {
+        items: [],
+        orderValue: 0
+    },
+    wishlist: null,
     error: null,
     message: null,
     orders: null,
@@ -30,40 +34,39 @@ export const cartReducer = createReducer(
     // add cart
     on(addCart,(state) => ({...state,loading:true,error:null})),
     on(addCartSuccess,(state,{message,cart}) => {
-        const count = cart?.items?.length || 0;
+        const count = state.cart.items.length ? state.cart.items.length + 1 : (cart?.items?.length || 0);
         return {...state,loading:false,message,cartLength:count,cart}
     }),
 
     // get cart
     on(getCart,(state) => ({...state,loading:true,error:null})),
     on(getCartSuccess,(state,{cart}) => {
-        // console.log(cart);
         return {...state,loading:false,cart,cartLength:cart?.items?.length || 0}
     }),
 
     // remove cart
     on(removeCart,(state) => ({...state,loading:true,error:null})),
-    on(removeCartSuccess,(state,{cart,message}) => {
-        return {...state,loading:false,message,cart,cartLength:cart.items.length}
+    on(removeCartSuccess,(state,{id,message,price}) => {
+        const newItems =  state.cart.items.filter((item) => item._id !== id);
+        return {...state,loading:false,message,cart:{...state.cart,items:newItems,orderValue:price.orderValue},cartLength:state.cart.items.length - 1}
     }),
 
     // clear cart
-    on(clearCart,(state) => ({...state,loading:true,error:null})),
-    on(clearCartSuccess,(state,{message,cart}) => ({...state,loading:false,message,cart})),
+    // on(clearCart,(state) => ({...state,loading:true,error:null})),
+    // on(clearCartSuccess,(state,{message,cart}) => ({...state,loading:false,message,cart})),
 
 
     // add annonymous cart
     on(addAnnonymousCart,(state) => ({...state,loading:true,error:null})),
     on(addAnnonymousCartSuccess,(state,{message,cart}) => {
         const count = cart.items.length;
-        console.log(state.cartLength);
         return {...state,loading:false,message,cartLength:count,cart}
     }),
 
     // get annonymous cart
     on(getAnnonymousCart,(state) => ({...state,loading:true,error:null})),
     on(getAnnonymousCartSuccess,(state,{cart}) => {
-        console.log(cart);
+        console.log({cart});
         return {...state,loading:false,cart,cartLength:cart?.items?.length || 0}
     }),
 
@@ -72,15 +75,17 @@ export const cartReducer = createReducer(
     on(removeAnnonymousCartSuccess,(state,{cart,message}) => ({...state,loading:false,message,cartLength:cart.items.length,cart})),
 
     // clear annonymous cart
-    on(clearAnnonymousCart,(state) => ({...state,loading:true,error:null})),
-    on(clearAnnonymousCartSuccess,(state,{message,cart}) => ({...state,loading:false,message,cart,cartLength:state.cart.length})),
+    // on(clearAnnonymousCart,(state) => ({...state,loading:true,error:null})),
+    // on(clearAnnonymousCartSuccess,(state,{message,cart}) => ({...state,loading:false,message,cart,cartLength: 0})),
 
     
     // add wishlist
     on(addWishlist, (state) => ({...state,loading:true,error:null})),
-    on(addWishlistSuccess, (state,{message,wishlist}) => {
-        const wishlistItems = [wishlist,...state.wishlist];
-        return {...state,loading:false,message,wishlist:wishlistItems}
+    on(addWishlistSuccess, (state,{message,wishlist,id}) => {
+        const wishlistItems = [wishlist,...(state?.wishlist || [])];
+        
+        const items = state?.cart?.items?.map((item) => item._id === id ? {...item,inWishlist:true} : item) || [];
+        return {...state,loading:false,message,wishlist:wishlistItems,cart:{...state.cart,items}}
     }),
 
     // get wishlist
@@ -89,9 +94,22 @@ export const cartReducer = createReducer(
     
     // remove wishlist
     on(removeWishlist, (state) => ({...state,loading:true,error:null})),
-    on(removeWishlistSuccess, (state,{message,id}) => {
-        const wishlist = state.wishlist?.filter((book:any) => book._id !== id)
-        return {...state,loading:false,message,wishlist}
+    on(removeWishlistSuccess, (state, { message, id }) => {
+        const wishlist = state?.wishlist?.filter((book: IBook) => book._id !== id) || [];
+        const items = state.cart.items.map((item) =>
+            item._id === id ? { ...item, inWishlist: false } : item
+        );
+
+        return {
+            ...state,
+            loading: false,
+            message,
+            wishlist,
+            cart: {
+                ...state.cart,
+                items
+            }
+        };
     }),
 
     // order book
@@ -108,12 +126,6 @@ export const cartReducer = createReducer(
 
      // id array
      on(addId,(state,{id}) => {
-        console.log(state.ids);
-        
-        console.log(id);
-        const nrewd = [...state.ids,id]
-        console.log({nrewd});
-        
         return {...state,ids:[...state.ids,id]};
     }),
    
@@ -123,6 +135,15 @@ export const cartReducer = createReducer(
     }),
 
 
-    on(cartError,(state,action)=> ({...state,loading:false,error:{message:action.error.message}})),
+    on(cartError,(state,action)=> {
+        
+        return {...state,loading:false,error:{message:action.error.message}}
+    }),
+
+    on(hideError, (state) => {
+       return {...state,error: null}
+    }),
+
+    on(reset, (state) => (initialState)),
     
 )

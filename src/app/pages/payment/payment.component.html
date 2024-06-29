@@ -1,37 +1,36 @@
-<div class="body">
-    <app-navbar></app-navbar>
+<!-- <div class="body"> -->
+    <!-- <app-navbar></app-navbar> -->
     <main>
-        <section>
+        <section class="payment-section">
             <h3>Confirm Your Order.</h3>
-            <!-- <p>Total: {{(cartItems$ | async)?.total}}</p> -->
-            <!-- <div> -->
-                <!-- {{items$ | async | json}} -->
-                <!-- {{item | json}} -->
+            <p>Total: {{item.total}}</p>
+            <div class="payment-items">
                 @if(!single){
-                    <p>Total:{{item.total}}</p>
-                    @for(item of item?.items; track item){
-                        <div>
-                            <img [src]="item.frontCover.image" class="img" />
-                            <p>{{item.title}}</p>
-                            <p>{{item.author.fullname}}</p>
-                            <p>N {{item.price}}</p>
-                        </div>
-                    }
+                    <!-- <div class="books"> -->
+                        @for(item of item?.items; track item){
+                            <div class="flex">
+                                <img [src]="item.frontCover.image" class="img" />
+                                <p>{{item.title}}</p>
+                                <p>{{item.author.fullname}}</p>
+                                <p>N {{item.price}}</p>
+                            </div>
+                        }
+                    <!-- </div> -->
                 }
                 @else{
                     <p>Total: {{item?.price}}</p>
                     <div>
-                        <img [src]="item?.frontCover.secureUrl" class="img" />
+                        <img [src]="item?.frontCover.image" class="img" />
                         <p>N {{item?.author.fullname}}</p>
                         <p>N {{item?.price}}</p>
                     </div>
                 }
                 <p routerLink="/cart">Go To Cart</p>
                 <p routerLink="/books">Go To Books</p>
-            <!-- </div> -->
+            </div>
             <button (click)="makePayment(item._id)">Proceed To Payment</button>
         </section>
         <div class="overlay"></div>
     </main>
     <app-footer></app-footer>
-</div>
+<!-- </div> -->

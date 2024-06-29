@@ -59,8 +59,8 @@ export class EditBookComponent implements OnInit, OnDestroy {
           ISBN: data.ISBN || '',
           pages: data.pages || ''
         });
-        this.frontCoverUrl = data.frontCover.secureUrl;
-        this.backCoverUrl = data.backCover.secureUrl;
+        this.frontCoverUrl = data.frontCover.image;
+        this.backCoverUrl = data.backCover.image;
       }else{
         console.log('het');
         

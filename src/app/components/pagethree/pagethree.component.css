@@ -9,6 +9,7 @@ h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1rem;
 }
 button{
     background-color: var(--primaryColor);
@@ -24,9 +25,18 @@ button{
 .detail{
     border-bottom: 1px solid var(--primaryColor);
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    margin-top: 1rem;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+}
+
+.detail p{
+    font-size: 1.1rem;
+    margin-bottom: .5rem;
 }
 .interest{
     display: flex;
@@ -38,4 +48,14 @@ img{
     width: 9rem;
     height: 8rem;
     object-fit: cover;
+    border: 3px solid var(--primaryColor);
+    border-radius: .5rem;
 }
+
+
+@media screen and (min-width: 700px) {
+    .detail{
+        flex-direction: row;
+    }
+}
+/* .inps */

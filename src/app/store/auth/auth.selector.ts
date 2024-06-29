@@ -17,3 +17,11 @@ export const selectError = createSelector(
     selectAuthState,
     (state) => state.error
 )
+export const selectData = createSelector(
+    selectAuthState,
+    (state) => state?.data?.code
+)
+export const selectToken = createSelector(
+    selectAuthState,
+    (state) => state?.data?.token
+)

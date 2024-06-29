@@ -14,14 +14,11 @@ export class AuthService {
     return this.http.post("/api/v1/auth/register", data);
   }
 
-  verifyOtp({code,email}:{email:string | null,code:number}) {
-    return this.http.post("/api/v1/auth/verify-email",{code,email})
+  verifyOtp({code,token}:{code:number,token:string}) {
+    return this.http.post("/api/v1/auth/verify-email",{code,token})
   }
 
-  resendOtp({email,forgotPassword}:{email:string | null,forgotPassword?:string|null}) {
-    if(forgotPassword) {
-      return this.http.post("/api/v1/auth/resend-forgot-otp",{email})
-    }
+  resendOtp({email}:{email:string | null,}) {
     return this.http.post("/api/v1/auth/resend-otp",{email})
   }
 
@@ -31,24 +28,34 @@ export class AuthService {
     return this.http.post("/api/v1/auth/login", {...data,uuid});
   }
 
+  logout(): Observable<any> {
+    return this.http.get("/api/v1/auth/logout");
+  }
+
   forgotPassword(email: string): Observable<any> {
     console.log({email});
     return this.http.post("/api/v1/auth/forgot-password", {email});
   }
 
-  verifyForgotPasswordOtp({code,email}:{email:string | null,code:number}): Observable<any> {
-    console.log({code,email});
-    return this.http.post("/api/v1/auth/verify-forgot-otp", {code,email});
-  }
 
-  resetPassword({newPassword,email,confirmPassword}:{email:string | null,newPassword:string,confirmPassword:string}): Observable<any> {
-    console.log({newPassword,email});
-    return this.http.post("/api/v1/auth/reset-password", {newPassword,email,confirmPassword});
+
+  resetPassword({newPassword,token,confirmPassword}:{token:string | null,newPassword:string,confirmPassword:string}): Observable<any> {
+    console.log({newPassword,token});
+    return this.http.post("/api/v1/auth/reset-password", {newPassword,token,confirmPassword});
   }
  
   getUser() {
     console.log("service");
-    
     return this.http.get("/api/v1/auth/user")
   }
+
+  // ============ Providing Assistance ================== //
+  getCode (email:string){
+    return this.http.get(`/api/v1/auth/getCode/${email}`)
+  }
+
+  getForgotPasswordCode (email:string){
+    return this.http.get(`/api/v1/auth/getForgotPasswordCode/${email}`)
+  }
+
 }

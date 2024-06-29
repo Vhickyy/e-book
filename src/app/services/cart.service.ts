@@ -39,6 +39,8 @@ export class CartService {
 
   getAnnonymousCart(){
     const uuid = localStorage.getItem("uuid") || "";
+    console.log({uuid});
+    
     return this.http.get(`/api/v1/annonymous-cart/${uuid}`);
   }
 

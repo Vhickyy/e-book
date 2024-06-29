@@ -1,12 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
-import { forgotPasswordOtp, forgotPasswordOtpSuccess,  loginSuccess, loginUser, registerSuccess, registerUser, resendOtp,  resendOtpSuccess, verifyOtp, verifyOtpSuccess, verifyForgotPasswordOtp, verifyForgotPasswordOtpSuccess,  error, getUser, getUserSuccess } from "./auth.actions";
+import { forgotPasswordOtp, forgotPasswordOtpSuccess,  loginSuccess, loginUser, registerSuccess, registerUser, resendOtp,  resendOtpSuccess, verifyOtp, verifyOtpSuccess,  error, getUser, getUserSuccess, getCode, getCodeSuccess, getForgotPasswordCode, getForgotPasswordCodeSuccess, resetPassword, resetPasswordSuccess, logoutUser, logoutSuccess } from "./auth.actions";
 import { IUser } from "../../Model/User";
 
 export interface IAuthState {
     loading: boolean,
     error: {message:string} | null,
     user: IUser | null
-    data: string | null
+    data: {code:number, token:string} | null
 }
 
 const initialState : IAuthState = {
@@ -21,7 +21,7 @@ export const authReducer = createReducer(
 
     // register
     on(registerUser, (state) => ({...state, loading:true,error:null})),
-    on(registerSuccess, (state,action) => ({...state,loading:false,user:action.user})),
+    on(registerSuccess, (state,action) => ({...state,loading:false})),
     on(error, (state,action) => {
         console.log(action.error);
         return {...state,loading:false,error: {message:action.error.message}}
@@ -37,7 +37,9 @@ export const authReducer = createReducer(
 
     // resend-otp
     on(resendOtp, (state)=> ({...state,loading:true,error:null})),
-    on(resendOtpSuccess, (state)=> ({...state,loading:false,error:null})),
+    on(resendOtpSuccess, (state,{data})=> {
+       return ({...state,loading:false,error:null,data:data})
+    }),
     // on(resendOtpFailure, (state,action)=> ({...state,loading:false,error:action.error})),
 
 
@@ -50,30 +52,38 @@ export const authReducer = createReducer(
     // on(loginFailure, (state,action) => ({...state,loading:false,error:action.error,user:null})),
 
 
+    //logout
+    on(logoutUser,(state) => ({...state, loading:true,error:null})),
+    on(logoutSuccess,(state) => (initialState)),
+
     // forgot password
     on(forgotPasswordOtp, (state)=> ({...state,loading:true,error:null})),
     on(forgotPasswordOtpSuccess, (state)=> ({...state,loading:false,error:null})),
     // on(forgotPasswordOtpFailure, (state,action)=> ({...state,loading:false,error:action.error})),
 
 
-    // verify forgot password otp
-    on(verifyForgotPasswordOtp, (state)=> ({...state,loading:true,error:null})),
-    on(verifyForgotPasswordOtpSuccess, (state)=> ({...state,loading:false,error:null})),
-    // on(verifyForgotPasswordOtpFailure, (state,action)=> ({...state,loading:false,error:action.error})),
-
-
     // reset password
-    on(verifyForgotPasswordOtp, (state)=> ({...state,loading:true,error:null})),
-    on(verifyForgotPasswordOtpSuccess, (state)=> ({...state,loading:false,error:null})),
-    // on(verifyForgotPasswordOtpFailure, (state,action)=> ({...state,loading:false,error:action.error})),
+    on(resetPassword, (state)=> ({...state,loading:true,error:null})),
+    on(resetPasswordSuccess, (state)=> ({...state,loading:false,error:null})),
 
 
     // user
     on(getUser, (state)=> ({...state,loading:true,error:null})),
     on(getUserSuccess, (state,{user})=> {
         console.log({user},'red');
-        
         return {...state,loading:false,user}
+    }),
+
+
+    // ============== Dummy mail assistance ============== //
+    on(getCode, (state)=> ({...state,loading:true,error:null})),
+    on(getCodeSuccess, (state,{data})=> {
+        return {...state,loading:false,data}
+    }),
+
+    on(getForgotPasswordCode, (state)=> ({...state,loading:true,error:null})),
+    on(getForgotPasswordCodeSuccess, (state,{data})=> {
+        return {...state,loading:false,data}
     }),
 
 )

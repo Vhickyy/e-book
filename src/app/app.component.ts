@@ -5,11 +5,12 @@ import { Store } from '@ngrx/store';
 import { getUser } from './store/auth/auth.actions';
 import { getBooks } from './store/book/book.actions';
 import { getAnnonymousCart, getCart } from './store/cart/cart.actions';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,HttpClientModule],
+  imports: [RouterOutlet,HttpClientModule,NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -25,8 +26,6 @@ export class AppComponent {
       console.log("app anno cart");
       return this.store.dispatch(getAnnonymousCart())
     }
-    console.log("app cart");
-    
     return this.store.dispatch(getCart())
   }
 }

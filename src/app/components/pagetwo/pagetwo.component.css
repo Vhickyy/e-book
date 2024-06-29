@@ -17,7 +17,39 @@ button{
     border: none;
     border-radius: .3rem;
 }
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.flex p{
+    background-color: #AD62C6;    ;
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.seclected{
+    opacity: 30%;
+}
+
+.interest{
+    margin-block: 2rem;
+    display: grid;
+    gap: 2rem;
+}
+
 .footer p{
     color: var(--primaryColor);
     cursor: pointer;
+}
+
+@media screen and (min-width: 500px){
+    .flex p{
+        padding-inline: 2rem;
+    }
 }

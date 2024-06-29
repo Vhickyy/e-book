@@ -6,7 +6,9 @@ import { catchError, map, of, switchMap } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { addCartSuccess } from "../cart/cart.actions";
+import { addCartSuccess, reset as cartReset } from "../cart/cart.actions";
+import { getBooks, reset as bookReset } from "../book/book.actions";
+import { reset } from "../library/library.actions";
 
 export const registerEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
     return actions$.pipe(
@@ -16,7 +18,7 @@ export const registerEffect = createEffect((actions$ = inject(Actions), authServ
             return authService.register(user).pipe(
                 map(({data})=> {
                     console.log(data);
-                    router.navigate(['/verify-email'], { queryParams: { email: data.user.email }})
+                    router.navigate(['/verify-email'], { queryParams: { email: user.get('email') }})
                     return authAction.registerSuccess(data)
                 }),
                 catchError((error:HttpErrorResponse)=> {
@@ -32,8 +34,8 @@ export const registerEffect = createEffect((actions$ = inject(Actions), authServ
 export const verifyOtpEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
     return actions$.pipe(
         ofType(authAction.verifyOtp),
-        switchMap(({code,email})=>{
-            return authService.verifyOtp({email,code}).pipe(
+        switchMap(({code,token})=>{
+            return authService.verifyOtp({code,token}).pipe(
                 map((data:any)=> {
                     console.log(data);
                     router.navigate(['/verify-success'])
@@ -51,11 +53,10 @@ export const verifyOtpEffect = createEffect((actions$ = inject(Actions), authSer
 export const resendOtpEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService)) => {
     return actions$.pipe(
         ofType(authAction.resendOtp),
-        switchMap(({email,forgotPassword})=>{
-            return authService.resendOtp({email,forgotPassword}).pipe(
-                map((data:any)=> {
-                    console.log(data);
-                    return authAction.resendOtpSuccess(data.message);
+        switchMap(({email})=>{
+            return authService.resendOtp({email}).pipe(
+                map(({data}:any)=> {
+                    return authAction.resendOtpSuccess({data});
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
@@ -74,15 +75,42 @@ export const loginEffect = createEffect((actions$ = inject(Actions), authService
                 map(({data})=> {
                     localStorage.setItem("token", data.token)
                     localStorage.removeItem("uuid");
-                    console.log(data);
                     if(data.carts){
                         store.dispatch(addCartSuccess({cart:data.carts}))
                     }
+                    store.dispatch(getBooks({category:"all",search:""}))
                     router.navigate(['/dashboard/wishlist'])
                     return authAction.loginSuccess({user:data.user});
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                })
+            )
+        })
+    )
+},{functional:true})
+
+export const logoutEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router),store = inject(Store)) => {
+    return actions$.pipe(
+        ofType(authAction.logoutUser),
+        switchMap(()=>{
+            return authService.logout().pipe(
+                map(()=> {
+                    localStorage.removeItem("token");
+                    store.dispatch(bookReset())
+                    store.dispatch(cartReset())
+                    store.dispatch(reset())
+                    router.navigate(['/'])
+                    return authAction.logoutSuccess();
+                }),
+                catchError((error:HttpErrorResponse)=> {
+                    console.log(error);
+                    localStorage.removeItem("token");
+                    store.dispatch(bookReset())
+                    store.dispatch(cartReset())
+                    store.dispatch(reset())
+                    router.navigate(['/'])
                     return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })
             )
@@ -98,7 +126,7 @@ export const forgotPasswordEffect = createEffect((actions$ = inject(Actions), au
                 map((data)=> {
                     console.log(data);
                     router.navigate(['/verify-email'], { queryParams: { email, 'forgot-password':true }})
-                    return authAction.forgotPasswordOtpSuccess(data.message);
+                    return authAction.forgotPasswordOtpSuccess();
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     return of(authAction.error({error:{message:error.error || error.statusText}}));
@@ -108,33 +136,15 @@ export const forgotPasswordEffect = createEffect((actions$ = inject(Actions), au
     )
 },{functional:true})
 
-export const verifyForgotPasswordOtpEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
-    return actions$.pipe(
-        ofType(authAction.verifyForgotPasswordOtp),
-        switchMap(({code,email})=>{
-            return authService.verifyForgotPasswordOtp({code,email}).pipe(
-                map((data)=> {
-                    console.log(data);
-                    router.navigate(['/reset-password'], {queryParams:{email}})
-                    return authAction.verifyForgotPasswordOtpSuccess(data.message);
-                }),
-                catchError((error:HttpErrorResponse)=> {
-                    console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
-                })
-            )
-        })
-    )
-},{functional:true})
 
 export const resetPasswordEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
     return actions$.pipe(
         ofType(authAction.resetPassword),
-        switchMap(({newPassword,email,confirmPassword})=>{
-            return authService.resetPassword({newPassword,email,confirmPassword}).pipe(
+        switchMap(({newPassword,token,confirmPassword})=>{
+            return authService.resetPassword({newPassword,token,confirmPassword}).pipe(
                 map((data)=> {
                     console.log(data);
-                    router.navigate(['/reset-password'], {queryParams:{email}})
+                    // router.navigate(['/reset-password'], {queryParams:{email}})
                     return authAction.resetPasswordSuccess(data.message);
                 }),
                 catchError((error:HttpErrorResponse)=> {
@@ -155,6 +165,50 @@ export const getUserEffect = createEffect((actions$ = inject(Actions), authServi
                     return authAction.getUserSuccess({user:data.data});
                 }),
                 catchError((error:HttpErrorResponse)=> {
+                    console.log(error);
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                })
+            )
+        })
+    )
+},{functional:true});
+
+export const getCodeEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
+    return actions$.pipe(
+        ofType(authAction.getCode),
+        switchMap(({email})=>{
+            return authService.getCode(email).pipe(
+                map((data:any)=> {
+                    console.log({data});
+                    
+                    return authAction.getCodeSuccess({data:data.data});
+                }),
+                catchError((error:HttpErrorResponse)=> {
+                    console.log(error);
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                })
+            )
+        })
+    )
+},{functional:true})
+
+export const getForgotPasswordCodeEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
+    return actions$.pipe(
+        ofType(authAction.getForgotPasswordCode),
+        switchMap(({email})=>{
+            console.log({email},'gsgsf');
+            
+            return authService.getForgotPasswordCode(email).pipe(
+                map((data:any)=> {
+                    console.log("here");
+                    
+                    console.log({data});
+                    
+                    return authAction.getForgotPasswordCodeSuccess({data:data.data});
+                }),
+                catchError((error:HttpErrorResponse)=> {
+                    console.log("here2");
+                    
                     console.log(error);
                     return of(authAction.error({error:{message:error.error || error.statusText}}));
                 })

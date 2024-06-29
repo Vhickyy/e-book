@@ -4,6 +4,7 @@
         @if(!(wishList$ | async)?.length){
             <p>Wishlist is empty</p>
         }@else{
+            <p>Items: {{(wishList$ | async)?.length}}</p>
             <div *ngFor="let list of wishList$ | async" class="grid">
                 <div class="img-container">
                     <img [src]="list.frontCover?.image" alt="list.title" [routerLink]="'/books/science/' + list._id" class="img">
@@ -22,7 +23,8 @@
                     @if(list.inLib){
                         <button>Read</button>
                     }@else{
-                        <button routerLink="/dashboard/payment">Buy</button>
+                        <button [routerLink]="['/dashboard/payment']" 
+                        [queryParams]="{ 'buy-now': true,id :list._id }">Buy</button>
                     }
                     
                     @if((ids$ | async)?.includes(list._id)){

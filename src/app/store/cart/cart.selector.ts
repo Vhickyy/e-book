@@ -32,3 +32,8 @@ export const selectBookIds = createSelector(
     selectCartState,
     (state) => state.ids
 )
+
+export const selectCartError = createSelector(
+    selectCartState,
+    (state) => state.error
+)

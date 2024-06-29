@@ -1,15 +1,17 @@
 <div class="main">
     <h4>Interest</h4>
     <p>Let's know what topics interests you when it comes to reading and writing.</p>
-    <p>(you can do this later)</p>
-    <div>
-        <input type="search">
-        <div>
-            books
+    <!-- <p>(you can do this later)</p> -->
+    <div class="interest">
+        <p>{{registerForm.get('interest')?.value.toString()}}</p>
+        <div class="flex">
+            @for(item of list; track item){
+                <p [ngClass]="{seclected: this.registerForm.get('interest')?.value.includes(item)}" (click)="select(item)">{{item}}</p>
+            }
         </div>
     </div>
     <div class="footer">
-        <p (click)="onChangePage()">skip</p>
+        <p (click)="onChangePage(true)">skip</p>
         <button type="button" (click)="onChangePage()">Next</button>
     </div>
 </div>

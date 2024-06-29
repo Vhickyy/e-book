@@ -1,5 +1,5 @@
 <header>
-    <app-navbar></app-navbar>
+    <!-- <app-navbar></app-navbar> -->
     <section>
         <div class="body-head">
             <div class="flex-row">
@@ -12,9 +12,12 @@
             <p class="center">A Large Collection Of Books, Journals, Articles And Resources To Suit Your Reading Needs</p>
             <div class="search">
                 <img src="../../../assets/search.svg" alt="search-icon">
-                <input type="text" placeholder="Search For A Book">
-                <button>Search</button>
+                <input type="text" placeholder="Search For A Book" [(ngModel)]="searchService.search">
+                <button routerLink="/books">Search</button>
             </div>
+            <!-- <div class="comp">
+                <app-search></app-search>
+            </div> -->
         </div>
         <div class="overlay"></div>
     </section>

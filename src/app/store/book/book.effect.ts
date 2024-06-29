@@ -46,6 +46,8 @@ export const getAllBookEffect = createEffect((actions$ = inject(Actions), bookSe
                     // // console.log("ji");
                     
                     // return of(bookAction.bookFailure(error))
+                    console.log(error);
+                    
                     return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )
@@ -99,7 +101,7 @@ export const editBookEffect = createEffect((actions$ = inject(Actions),bookServi
                 map((data: any)=>{
                     console.log(data);
                     router.navigate(["/"])
-                    return bookAction.editBookSuccess({message:data.message,id,book})
+                    return bookAction.editBookSuccess({message:data.message,id,book:data.book})
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);

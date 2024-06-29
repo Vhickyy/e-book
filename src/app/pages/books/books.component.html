@@ -1,5 +1,5 @@
 <header>
-    <app-navbar></app-navbar>
+    <!-- <app-navbar></app-navbar> -->
     <section class="head-section">
         <h3>BOOKS</h3>
         <div class="search">
@@ -7,15 +7,22 @@
             <input type="text" placeholder="Search For A Book" [(ngModel)]="search">
             <button (click)="searchBook()">Search</button>
         </div>
+        <!-- <div class="search">
+            <app-search></app-search>
+        </div> -->
+        <!-- <app-search (searchBook)="searchBook($event)"></app-search> -->
     </section>
 </header>
 <main>
-    <!-- <div (click)="show = !show">
-        show
-    </div> -->
+    @if((cartError$ | async)?.message){
+        <div class="error">
+            <p>{{(cartError$ | async)?.message}}</p>
+            <p (click)="closeError()">x</p>
+            <div class="error-load"></div>
+        </div>
+    }
     @if(!(error$ | async)?.message){
         <div class="main" #main>
-            
             <div class="filterCon">
                 @if(show){
                     <section class="filter">
@@ -46,7 +53,7 @@
                                 } @else{
                                     @for(book of books$ | async; track book){
                                         <div  class="book-card">
-                                            <img [src]="book.frontCover?.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
+                                            <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
                                             <div class="detail">
                                                 <p class="title">{{book.title}}</p>
                                                 <p class="author">{{book.author.fullname}}</p>

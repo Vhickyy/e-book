@@ -1,38 +1,50 @@
 <div class="main">
     <h4>Personal Information</h4>
     <p>Set up your account details in less than five minutes</p>
-    <div class="content contentlg" [formGroup]="registerForm">
+    <div class="content contentlg" [formGroup]="registerForm"> 
         <div class="">
             <div>
-                <img [src]="imageUrl || '../../../assets/profile.png'" alt="profile" (click)="upload()">
-                <!-- <img src="../../../assets/profile.png" alt="profile" (click)="upload()"> -->
-                <input type="file" class="file" #file  (change)="handleFileInput($event)">
+                <img [src]="imageUrl || '../../../assets/noPic.jpeg'" alt="profile" (click)="upload()">
             </div>
-            <p>Select Avatar</p>
+            <p (click)="upload()">Select Avatar</p>
         </div>
         <div class="content">
-            <div>
-                <label for="name">Name</label>
-                <input type="text" name="name" placeholder="Full Name" formControlName="fullname">
+            <div class="field">
+
+                <div >
+                    <label for="name">Name</label>
+                    <input type="text" name="name" placeholder="Full Name" formControlName="fullname">
+                    <p class="small" *ngIf="(registerForm.get('fullname')?.invalid && registerForm.get('fullname')?.touched)">Name is required must be less than 30 character</p>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" placeholder="Email" formControlName="email">
+                    <p class="small" *ngIf="(registerForm.get('email')?.invalid && registerForm.get('email')?.touched)">Provide a valid mail</p>
+                </div>
             </div>
-            <div>
-                <label for="phone">Phone</label>
-                <input type="text" placeholder="Phone no." formControlName="phonenumber">
-            </div>
-        </div>
-        <div class="content">
-            <div>
-                <label for="email">Email</label>
-                <input type="text" placeholder="Email" formControlName="email">
-            </div>
-            <div>
-                <label for="">Password</label>
-                <input type="text" placeholder="Password" formControlName="password">
+            <div class="field">
+                <div >
+                    <label for="phone">Password</label>
+                    <div class="pass">
+                        <input [type]="pass ? 'password' : 'text'" placeholder="Password" formControlName="password">
+                        <p (click)='show("pass")'>H</p>
+                    </div>
+                    <p class="small" *ngIf="(registerForm.get('password')?.invalid && registerForm.get('password')?.touched)">Must contain uppercase at least 8 characters</p>
+                </div>
+                <div >
+                    <label for="password">Confirm Password</label>
+                    <div class="pass">
+                        <input [type]="confirm ? 'password' : 'text'" placeholder="Confirm Password" formControlName="confirm-password">
+                        <p (click)='show("confirm")'>H</p>
+                    </div>
+                    <p class="small" *ngIf="(registerForm.get('password')?.value !== registerForm.get('confirm-password')?.value) && registerForm.get('confirm-password')?.touched">Password do not match</p>
+                </div>
             </div>
         </div>
     </div>
     <div class="footer">
         <a routerLink="/login">Back to Login</a>
-        <button type="button" (click)="onChangePage()">Next</button>
+        <!-- <button type="button" (click)="onChangePage()" >Next</button> -->
+        <button type="button" (click)="onChangePage()" [disabled]="!registerForm.valid || (registerForm.get('password')?.value !== registerForm.get('confirm-password')?.value)">Next</button>
     </div>
 </div>

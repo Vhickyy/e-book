@@ -9,7 +9,7 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
   console.log('request');
   
   const frontendUrl = window.location.href
-  console.log(frontendUrl);
+  // console.log(frontendUrl);
   
   const token = localStorage.getItem("token") || '';
     const router = inject(Router)
@@ -18,7 +18,7 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
     // console.log(request);
     
     // console.log(frontendUrl.includes("dashboard") && token);
-    console.log({token});
+    // console.log({token});
     
     if(token){
       const modifiedReq = request.clone({headers : request.headers.append("Authorization", "Bearer " + token)});
@@ -38,6 +38,9 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
           }
         ))
     }
+
+    console.log("hetfr");
+    
     
     // return next(request);
 
