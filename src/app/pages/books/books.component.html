@@ -54,6 +54,7 @@
                                     @for(book of books$ | async; track book){
                                         <div  class="book-card">
                                             <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
+                                            <!-- <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt=""> -->
                                             <div class="detail">
                                                 <p class="title">{{book.title}}</p>
                                                 <p class="author">{{book.author.fullname}}</p>
@@ -100,9 +101,10 @@
             </div>
         }
 
-    }@else{
-        <p>{{(error$ | async)?.message}}</p>
     }
+    <!-- @else{
+        <p>{{(error$ | async)?.message}}</p>
+    } -->
 
 
 </main>

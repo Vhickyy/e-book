@@ -21,6 +21,11 @@ section{
     align-items: center;
     padding-block: 7rem;
 }
+.flex-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .gain{
     display: grid;
