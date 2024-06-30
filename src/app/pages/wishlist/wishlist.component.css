@@ -10,7 +10,7 @@
 } */
 
 section{
-   background-color: white;
+   /* background-color: white; */
    border-radius: .5rem;
    padding: 2rem;
    display:  flex;
