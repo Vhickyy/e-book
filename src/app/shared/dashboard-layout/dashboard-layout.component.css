@@ -21,12 +21,12 @@
     margin-inline: auto;
     display: grid;
     grid-template-columns: auto 1fr;
-    background-color: green;
+    /* background-color: green; */
 }
 
 
 @media screen and (min-width:1000px) {
-    section{
+    .section{
         grid-template-columns: auto 1fr;
     }
 }
