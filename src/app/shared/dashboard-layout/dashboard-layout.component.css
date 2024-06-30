@@ -19,19 +19,17 @@
     height: 100%;
     width: min(90%,var(--maxWidth));
     margin-inline: auto;
-    /* display: grid;
-    grid-template-columns: 1fr; */
-    background-color: green;
     display: flex;
-    /* flex-direction: ; */
-}
-.side{
-    display: none;
 }
 
 
-@media screen and (min-width:1000px) {
+@media screen and (min-width:800px) {
     .section{
         grid-template-columns: auto 1fr;
     }
 }
+/* @media screen and (min-width:1000px) {
+    .section{
+        grid-template-columns: auto 1fr;
+    }
+} */
