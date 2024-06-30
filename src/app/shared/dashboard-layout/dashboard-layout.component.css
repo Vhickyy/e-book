@@ -19,10 +19,11 @@
     height: 100%;
     width: min(90%,var(--maxWidth));
     margin-inline: auto;
-    display: grid;
-    grid-template-columns: 1fr;
+    /* display: grid;
+    grid-template-columns: 1fr; */
     background-color: green;
-    /* display: flex; */
+    display: flex;
+    /* flex-direction: ; */
 }
 .side{
     display: none;
