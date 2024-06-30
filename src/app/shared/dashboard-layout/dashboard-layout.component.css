@@ -15,11 +15,13 @@
 
 
 section{
-    flex: 1;
+    /* flex: 1; */
+    height: 100%;
     width: min(90%,var(--maxWidth));
     margin-inline: auto;
     display: grid;
     grid-template-columns: auto 1fr;
+    background-color: green;
 }
 
 
