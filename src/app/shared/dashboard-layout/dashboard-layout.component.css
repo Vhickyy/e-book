@@ -16,12 +16,16 @@
 
 .section{
     flex: 1;
-    /* height: 100%; */
+    height: 100%;
     width: min(90%,var(--maxWidth));
     margin-inline: auto;
-    /* display: grid;
-    grid-template-columns: auto 1fr; */
-    /* background-color: green; */
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: green;
+    /* display: flex; */
+}
+.side{
+    display: none;
 }
 
 
