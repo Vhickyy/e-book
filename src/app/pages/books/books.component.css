@@ -7,7 +7,7 @@
 }
 
 h3{
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
     color: white;
@@ -71,7 +71,7 @@ main{
     background-color: white;
     border-radius: .5rem;
     padding: 2rem 1.5rem;
-    width: 17rem;
+    width: 12rem;
     height: fit-content;
     position: sticky;
     top: 7rem;
@@ -241,6 +241,11 @@ h4{
     width: 100%;
     border-radius: 1rem;
     height: .3rem;
+}
+@media screen and (min-width: 700px) {
+    .filter{
+        width: 17rem;
+    }
 }
 @media screen and (min-width: 1600px) {
     .book-row{

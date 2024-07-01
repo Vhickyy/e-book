@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { forgotPasswordOtp, forgotPasswordOtpSuccess,  loginSuccess, loginUser, registerSuccess, registerUser, resendOtp,  resendOtpSuccess, verifyOtp, verifyOtpSuccess,  error, getUser, getUserSuccess, getCode, getCodeSuccess, getForgotPasswordCode, getForgotPasswordCodeSuccess, resetPassword, resetPasswordSuccess, logoutUser, logoutSuccess } from "./auth.actions";
+import { forgotPasswordOtp, forgotPasswordOtpSuccess,  loginSuccess, loginUser, registerSuccess, registerUser, resendOtp,  resendOtpSuccess, verifyOtp, verifyOtpSuccess,  error, getUser, getUserSuccess, getCode, getCodeSuccess, getForgotPasswordCode, getForgotPasswordCodeSuccess, resetPassword, resetPasswordSuccess, logoutUser, logoutSuccess, getAuthor, getAuthorSuccess } from "./auth.actions";
 import { IUser } from "../../Model/User";
 
 export interface IAuthState {
@@ -7,13 +7,15 @@ export interface IAuthState {
     error: {message:string} | null,
     user: IUser | null
     data: {code:number, token:string} | null
+    author:  IUser | null
 }
 
 const initialState : IAuthState = {
     loading: false,
     error: null,
     user: null,
-    data: null
+    data: null,
+    author: null
 }
 
 export const authReducer = createReducer(
@@ -72,6 +74,13 @@ export const authReducer = createReducer(
     on(getUserSuccess, (state,{user})=> {
         console.log({user},'red');
         return {...state,loading:false,user}
+    }),
+
+    // Author
+    on(getAuthor, (state)=> ({...state,loading:true,error:null})),
+    on(getAuthorSuccess, (state,{user})=> {
+        console.log({user},'red');
+        return {...state,loading:false,author:user}
     }),
 
 

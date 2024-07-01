@@ -28,6 +28,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { EditBookComponent } from './pages/edit-book/edit-book.component';
 import { ReadingComponent } from './pages/reading/reading.component';
 import { openauthGuard } from './gaurds/openauth.guard';
+import { BecomeAuthorComponent } from './pages/become-author/become-author.component';
 
 
 export const routes: Routes = [
@@ -47,6 +48,7 @@ export const routes: Routes = [
     {path:"contact",component:ContactComponent},
     {path:"faq",component:FaqComponent},
     {path:"author/:name/:id",component:AuthorComponent},
+    {path:"become-author",component:BecomeAuthorComponent},
     {path:"cart",component:CartComponent},
     {path:'dashboard',canActivate:[authGaurd],children:[
         {path:"add-book", canActivate:[authorGuard],component:AddBookComponent},

@@ -41,6 +41,10 @@ export const error = createAction('[Auth] registerFailure',props<{error : {messa
 export const getUser = createAction('[Auth] getUser');
 export const getUserSuccess = createAction('[Auth] getUserSuccess', props<{user:any}>());
 
+// Author
+export const getAuthor = createAction('[Auth] getAuthor',props<{id:string}>());
+export const getAuthorSuccess = createAction('[Auth] getAuthorSuccess', props<{user:any}>());
+
 
 export const getCode = createAction('[Auth] getCode',props<{email:string}>());
 export const getCodeSuccess = createAction('[Auth] getCodeSuccess', props<{data:any}>());

@@ -46,8 +46,11 @@ export class AuthService {
   }
  
   getUser() {
-    console.log("service");
     return this.http.get(`${environment.apiUrl}/api/v1/auth/user`)
+  }
+
+  getAuthor(id:string) {
+    return this.http.get(`${environment.apiUrl}/api/v1/auth/get-author/${id}`)
   }
 
   // ============ Providing Assistance ================== //

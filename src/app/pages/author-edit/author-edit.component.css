@@ -8,7 +8,7 @@
 }
 
 h3{
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
     color: white;
@@ -48,7 +48,8 @@ main{
     padding: 2.5rem 1rem;
     margin-top: -6rem;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr;
+    gap: 2rem;
     column-gap: 2rem;
     border-radius: .5rem;
     border: 1px solid #DEE2E7;
@@ -72,8 +73,8 @@ label{
 }
 .edit-input{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    /* grid-template-columns: 1fr 1fr; */
+    gap: 1rem;
 }
 .flex-info{
     display: flex;
@@ -96,13 +97,9 @@ label{
 }
 textarea{
     resize: none;
+    height: 10rem;
 }
 
-/* .about p{
-    color: #8B96A5;
-    line-height: 1.5rem;
-    word-spacing: 3px;
-} */
 .book-section{
     width: min(90%,var(--maxWidth));
     margin-inline: auto;
@@ -121,7 +118,6 @@ textarea{
     padding: .2rem;
     border-radius: .5rem;
     overflow: hidden;
-    /* border: 1px solid transparent; */
     border: 2px solid rgba(187, 41, 235, 0.15)
 }
 
@@ -156,4 +152,19 @@ textarea{
     font-weight: 400;
     font-size: .9rem;
     color: rgba(30, 0, 40, 0.58);
+}
+button{
+    width: fit-content;
+}
+@media screen and (min-width:600px) {
+    .edit-input{
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (min-width:850px) {
+    .top-section{
+        grid-template-columns: 1fr 2fr;
+    }
 }

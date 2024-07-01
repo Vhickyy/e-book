@@ -6,7 +6,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { addId, deleteBook, getAuthorBooks } from '../../store/book/book.actions';
 import { selectAuthorBook, selectBookIds, selectBookLoading } from '../../store/book/book.selector';
-import { selectUser } from '../../store/auth/auth.selector';
+import { selectAuthor, selectUser } from '../../store/auth/auth.selector';
+import { getAuthor } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-author',
@@ -21,6 +22,7 @@ export class AuthorComponent implements OnInit{
   route = inject(ActivatedRoute)
   authorBook$ = this.store.select(selectAuthorBook);
   user$ = this.store.select(selectUser);
+  author$ = this.store.select(selectAuthor);
   authorId!: string | null
   id$ = this.store.select(selectBookIds);
   loading$ = this.store.select(selectBookLoading);
@@ -28,6 +30,7 @@ export class AuthorComponent implements OnInit{
   ngOnInit(){
     this.route.paramMap.subscribe(data => {
       this.authorId = data.get('id');
+      if(this.authorId) this.store.dispatch(getAuthor({id:this.authorId}))
       this.store.dispatch(getAuthorBooks({authorId:this.authorId}))
     })
   }

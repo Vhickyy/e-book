@@ -173,6 +173,23 @@ export const getUserEffect = createEffect((actions$ = inject(Actions), authServi
     )
 },{functional:true});
 
+export const getAuthorEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
+    return actions$.pipe(
+        ofType(authAction.getAuthor),
+        switchMap(({id})=>{
+            return authService.getAuthor(id).pipe(
+                map((data:any)=> {
+                    return authAction.getAuthorSuccess({user:data.data});
+                }),
+                catchError((error:HttpErrorResponse)=> {
+                    console.log(error);
+                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                })
+            )
+        })
+    )
+},{functional:true});
+
 export const getCodeEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
     return actions$.pipe(
         ofType(authAction.getCode),

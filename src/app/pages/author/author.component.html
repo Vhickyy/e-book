@@ -1,18 +1,18 @@
 <header>
     <!-- <app-navbar></app-navbar> -->
     <section class="head-section">
-        <h3>Author Profile</h3>
+        <h3>{{((user$ | async)?._id !== authorId) ? 'Author Profile' : 'My Profile'}}</h3>
     </section>
 </header>
 <main>
     <section class="top-section">
-        <aside>
-            <img class="img" src="../../../assets/profilepic.png" alt="">
+        <aside class="img-container">
+            <img class="img" [src]="(author$ | async)?.profilePic || '../../../assets/noPic.jpeg'" alt="">
         </aside>
         <aside class="about">
             <div class="flex-info">
                 <div>
-                    <h4>Matthew Aniekan</h4>
+                    <h4>{{(author$ | async)?.fullname}}</h4>
                     <p>Uyo, Nigeria</p>
                 </div>
                 <button *ngIf="((user$ | async)?._id !== authorId)" routerLink="/dashboard/author/send-message">Message</button>
