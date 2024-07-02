@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ILinks } from '../../../types/types';
 import { linksData, linksDataMobile } from '../../../data/data';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUser } from '../../store/auth/auth.selector';
 import { getUser, logoutUser } from '../../store/auth/auth.actions';
@@ -12,7 +12,7 @@ import { selectCartLength } from '../../store/cart/cart.selector';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule,RouterLink,RouterModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

@@ -42,14 +42,11 @@
 }
 
 h4{
-    /* font-weight: 600; */
     font-size: 1.5rem;
     padding-bottom: 2rem;
 }
 .book-row{
-    /* background-color: green; */
     display: grid;
-    /* grid-template-columns: repeat(4,1fr); */
     grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
     gap: 1rem;
 }
@@ -59,7 +56,6 @@ h4{
     padding: .2rem;
     border-radius: .5rem;
     overflow: hidden;
-    /* border: 1px solid transparent; */
     border: 2px solid rgba(187, 41, 235, 0.15)
 }
 
@@ -131,57 +127,39 @@ a{
     text-decoration: none;
     color: var(--primaryColor);
 }
+.circle{
+    position: absolute;
+    filter: blur(5rem);
+    width: 20%;
+    height: 10rem;
+    border-radius: 100%;
+
+}
 
 .circle1{
-    position: absolute;
     top: 0;
     right: 0;
-    border-radius: 100%;
     background-color: rgba(0, 172, 255, 1);
-    height: 10rem;
-    width: 20%;
-    filter: blur(5rem);
 }
 .circle2{
-    position: absolute;
     bottom: -2rem;
     right: 10rem;
-    border-radius: 100%;
     background-color: rgba(254, 79, 119, 1);
-    height: 10rem;
-    width: 20%;
-    filter: blur(5rem);
 }
 .circle3{
-    position: absolute;
     top: -2rem;
-    /* right: 50%; */
     left: 40%;
-    border-radius: 100%;
     background-color: rgba(246, 112, 124, 1);
-    height: 10rem;
-    width: 20%;
-    filter: blur(5rem);
 }
 .circle4{
-    position: absolute;
     bottom: -2rem;
     left: 20%;
-    border-radius: 100%;
     background-color: rgba(254, 197, 158, 1);
-    height: 10rem;
-    width: 20%;
-    filter: blur(5rem);
 }
 .circle5{
-    position: absolute;
     top: -2rem;
     left: 0;
-    border-radius: 100%;
     background-color: rgba(18, 8, 92, 1); 
-    height: 10rem;
-    width: 20%;
-    filter: blur(5rem);
 }
 .overlay-home{
     position: absolute;
