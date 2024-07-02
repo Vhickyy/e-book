@@ -1,9 +1,11 @@
 <nav>
     <section>
         <img src="../../../assets/logo.svg" alt="book-logo">
+
         <div class="flex desk" >
             <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of links">{{link.name}}</a>
         </div>
+
         <div class="flex desk">
             <button routerLink="/cart">Cart {{cartLength$ | async}}</button>
             <button routerLink="/register" *ngIf="!(user$ | async)">Sign in</button>
@@ -14,27 +16,30 @@
             <div class="absolute" *ngIf="show">
                 <p routerLink="/dashboard/library" (click)="toggleShow()">Dashboard</p>
                 <p (click)="toggleShow()" *ngIf="(user$ | async)?.role == 'author'" [routerLink]="'/author/' +  (user$ | async)?.fullname?.split(' ')?.join('-') + '/' + (user$ | async)?._id">Profile</p>
-                <!-- <p (click)="toggleShow()" *ngIf="(user$ | async)?.role == 'author'">Profile</p> -->
                 <p (click)="toggleShow()"  *ngIf="(user$ | async)?.role == 'user'" routerLink="/become-author">Become an Author</p>
                 <button (click)="signOut()" (click)="toggleShow()">Sign Out</button>
             </div>
          </div>
+
          <div class="mobile">
             <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">
             <p (click)="toggleShow()" >Ham</p>
          </div>
+
     </section>
 </nav>
+
+<!-- ========== Side Bar =========== -->
 <section class="sidebar-modal" *ngIf="show" >
-    <!-- <div class="sidebar"> -->
         <div class="top-modal" *ngIf="(user$ | async)">
             <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">
             <p>{{(user$ | async)?.fullname}}</p>
         </div>
-        <img src="../../../assets/logo.svg" alt="">
+        <img src="../../../assets/logo.svg" alt="logo" *ngIf="!(user$ | async)">
         <div class="dashboard" *ngIf="(user$ | async)">
             <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of linksMobile" (click)="toggleShow()">{{link.name}}</a>
         </div>
+
         <div class="dashboard">
             <a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">WarmBook</a>
             <a routerLink="/about" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">About</a>
@@ -42,16 +47,9 @@
             <a routerLink="/contact" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Contact</a>
             <a routerLink="/faq" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">FAQ</a>
         </div>
+
         <div class="dashboard">
             <a (click)="signOut()">Sign Out</a>
         </div>
-        <!-- <a>Profile</a>
-        <a>Books</a>
-
-        <a>Library</a>
-            <a>Orders</a>
-            <a>Wishlist</a>
-            <a>Carts</a>
-            <a>Log Out</a> -->
-    <!-- </div> -->
+        
 </section>
