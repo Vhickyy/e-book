@@ -14,18 +14,15 @@ import { ReadingComponent } from './pages/reading/reading.component';
 
 
 export const routes: Routes = [
-    
-    // {path:'dashboard',canActivate:[authGaurd],loadChildren:()=> [
-        {path:"add-book", canActivate:[authorGuard],component:AddBookComponent},
-        {path:"edit-book/:id", component:EditBookComponent},
-        {path:"author/edit-profile/:id",canActivate:[authorGuard],component:AuthorEditComponent},
-        {path:"author/send-message",component:SendMessageComponent},
-        {path:"profile",component:ProfileComponent},
-        {path:"wishlist",component:WishlistComponent},
-        {path:"orders",component:OrdersComponent},
-        {path:"library",component:LibraryComponent},
-        {path:"library/:id",component:ReadingComponent},
-        {path:"payment",component:PaymentComponent},
-        {path:"verify-payment",component:VerifyPaymentComponent}
-    // ]},
+    {path:"add-book", canActivate:[authorGuard],component:AddBookComponent},
+    {path:"edit-book/:id", component:EditBookComponent},
+    {path:"author/edit-profile/:id",canActivate:[authorGuard],component:AuthorEditComponent},
+    {path:"author/send-message",component:SendMessageComponent},
+    {path:"profile",component:ProfileComponent},
+    {path:"wishlist",component:WishlistComponent},
+    {path:"orders",component:OrdersComponent},
+    {path:"library",component:LibraryComponent},
+    {path:"library/:id",component:ReadingComponent},
+    {path:"payment",component:PaymentComponent},
+    {path:"verify-payment",component:VerifyPaymentComponent}
 ];

@@ -27,21 +27,23 @@
 </nav>
 <section class="sidebar-modal" *ngIf="show" >
     <!-- <div class="sidebar"> -->
-        <div class="top-modal">
+        <div class="top-modal" *ngIf="(user$ | async)">
             <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">
             <p>{{(user$ | async)?.fullname}}</p>
         </div>
-        <div class="dashboard">
-            <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of linksMobile">{{link.name}}</a>
+        <img src="../../../assets/logo.svg" alt="">
+        <div class="dashboard" *ngIf="(user$ | async)">
+            <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of linksMobile" (click)="toggleShow()">{{link.name}}</a>
         </div>
         <div class="dashboard">
-            <a>WarmBook</a>
-            <a>About</a>
-            <a>Contact</a>
-            <a>FAQ</a>
+            <a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">WarmBook</a>
+            <a routerLink="/about" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">About</a>
+            <a *ngIf="!(user$ | async)" routerLink="/books" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Books</a>
+            <a routerLink="/contact" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Contact</a>
+            <a routerLink="/faq" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">FAQ</a>
         </div>
         <div class="dashboard">
-            <a>Sign Out</a>
+            <a (click)="signOut()">Sign Out</a>
         </div>
         <!-- <a>Profile</a>
         <a>Books</a>
