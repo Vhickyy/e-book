@@ -29,6 +29,7 @@ import { EditBookComponent } from './pages/edit-book/edit-book.component';
 import { ReadingComponent } from './pages/reading/reading.component';
 import { openauthGuard } from './gaurds/openauth.guard';
 import { BecomeAuthorComponent } from './pages/become-author/become-author.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 
 export const routes: Routes = [
@@ -62,5 +63,6 @@ export const routes: Routes = [
         {path:"library/:id",component:ReadingComponent},
         {path:"payment",component:PaymentComponent},
         {path:"verify-payment",component:VerifyPaymentComponent}
-    ]}
+    ]},
+    {path:"**",component:NotFoundComponent}
 ];

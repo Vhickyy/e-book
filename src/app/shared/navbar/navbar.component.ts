@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ILinks } from '../../../types/types';
-import { linksData } from '../../../data/data';
+import { linksData, linksDataMobile } from '../../../data/data';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUser } from '../../store/auth/auth.selector';
@@ -18,6 +18,7 @@ import { selectCartLength } from '../../store/cart/cart.selector';
 })
 export class NavbarComponent implements OnInit{
   links: ILinks[] = linksData;
+  linksMobile: ILinks[] = linksDataMobile;
   store = inject(Store);
   user$ = this.store.select(selectUser);
   token = localStorage.getItem("token") || "";

@@ -15,6 +15,33 @@ export const linksData: ILinks[] = [
     }
 ]
 
+export const linksDataMobile: ILinks[] = [
+    {
+        name: "Profile",
+        link: "/dashboard/profile"
+    },
+    {
+        name: "Library",
+        link: "/dashboard/library"
+    },
+    {
+        name: "Books",
+        link: "/books"
+    },
+    {
+        name: "Wishlist",
+        link: "/dashboard/wishlist"
+    },
+    {
+        name: "Orders",
+        link: "/dashboard/orders"
+    },
+    {
+        name: "Cart",
+        link: "/cart"
+    },
+]
+
 
 export const bestSellingBooks: IBest[] = [
     {

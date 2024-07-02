@@ -2,7 +2,7 @@ nav{
     background-color: white;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
     box-shadow: 1px 1px 7px gray;
 }
 section{
@@ -25,6 +25,13 @@ a{
     color: var(--primaryColor);
     font-size: 1rem;
     text-decoration: none;
+    cursor: pointer;
+}
+.top-modal{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    gap: .5rem;
 }
 
 .active{
@@ -87,12 +94,59 @@ button{
     align-items: center;
     gap: .2rem;
 }
+.mobile{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.sidebar-modal{
+    position: fixed;
+    background-color: white;
+    box-shadow: 1px 1px 5px gray;
+    /* top: 4.5rem; */
+    z-index: 2000;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    width: fit-content;
+    padding-inline: 1rem;
+    padding-block: 2rem;
+    height: 100%;
+    width: min(50%,20rem);
+    margin-inline: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+}
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--primaryColor);
+    width: 100%;
+    padding-block: .5rem;
+    gap: .5rem;
+}
+
+.sidebar{
+    /* background-color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40%;
+    height: 100%; */
+    /* z-index: 10; */
+    /* opacity: 1; */
+}
 
 @media screen and (min-width: 800px) {
     .flex{
         display: flex;
     }
     .mobile{
+        display: none;
+    }
+    .sidebar-modal{
         display: none;
     }
 }

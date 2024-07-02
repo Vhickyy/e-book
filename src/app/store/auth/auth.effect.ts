@@ -182,8 +182,8 @@ export const getAuthorEffect = createEffect((actions$ = inject(Actions), authSer
                     return authAction.getAuthorSuccess({user:data.data});
                 }),
                 catchError((error:HttpErrorResponse)=> {
-                    console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    console.log({error});
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })

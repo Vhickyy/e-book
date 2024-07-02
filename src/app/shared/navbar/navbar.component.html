@@ -19,6 +19,37 @@
                 <button (click)="signOut()" (click)="toggleShow()">Sign Out</button>
             </div>
          </div>
-        <p class="mobile">Ham</p>
+         <div class="mobile">
+            <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">
+            <p (click)="toggleShow()" >Ham</p>
+         </div>
     </section>
 </nav>
+<section class="sidebar-modal" *ngIf="show" >
+    <!-- <div class="sidebar"> -->
+        <div class="top-modal">
+            <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">
+            <p>{{(user$ | async)?.fullname}}</p>
+        </div>
+        <div class="dashboard">
+            <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of linksMobile">{{link.name}}</a>
+        </div>
+        <div class="dashboard">
+            <a>WarmBook</a>
+            <a>About</a>
+            <a>Contact</a>
+            <a>FAQ</a>
+        </div>
+        <div class="dashboard">
+            <a>Sign Out</a>
+        </div>
+        <!-- <a>Profile</a>
+        <a>Books</a>
+
+        <a>Library</a>
+            <a>Orders</a>
+            <a>Wishlist</a>
+            <a>Carts</a>
+            <a>Log Out</a> -->
+    <!-- </div> -->
+</section>
