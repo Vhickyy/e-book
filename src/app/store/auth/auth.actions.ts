@@ -39,15 +39,15 @@ export const error = createAction('[Auth] registerFailure',props<{error : {messa
 
 // user
 export const getUser = createAction('[Auth] getUser');
-export const getUserSuccess = createAction('[Auth] getUserSuccess', props<{user:any}>());
+export const getUserSuccess = createAction('[Auth] getUserSuccess', props<{user:IUser}>());
 
 // Author
 export const getAuthor = createAction('[Auth] getAuthor',props<{id:string}>());
-export const getAuthorSuccess = createAction('[Auth] getAuthorSuccess', props<{user:any}>());
+export const getAuthorSuccess = createAction('[Auth] getAuthorSuccess', props<{user:IUser}>());
 
 
 export const getCode = createAction('[Auth] getCode',props<{email:string}>());
-export const getCodeSuccess = createAction('[Auth] getCodeSuccess', props<{data:any}>());
+export const getCodeSuccess = createAction('[Auth] getCodeSuccess', props<{data:{code:number, token:string}}>());
 
 export const getForgotPasswordCode = createAction('[Auth] getForgotPasswordCode',props<{email:string}>());
-export const getForgotPasswordCodeSuccess = createAction('[Auth] getForgotPasswordCodeSuccess', props<{data:any}>());
+export const getForgotPasswordCodeSuccess = createAction('[Auth] getForgotPasswordCodeSuccess', props<{data:{code:number, token:string}}>());

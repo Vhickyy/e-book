@@ -17,7 +17,7 @@ export const linksData: ILinks[] = [
 
 export const linksDataMobile: ILinks[] = [
     {
-        name: "Profile",
+        name: "Account",
         link: "/dashboard/profile"
     },
     {
