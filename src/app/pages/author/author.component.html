@@ -23,7 +23,7 @@
             </div>
             <div>
                 <h4>About</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia dolore quisquam iusto sunt nobis blanditiis ipsum, nesciunt a maiores, cumque autem, veniam adipisci ratione fugiat exercitationem perspiciatis necessitatibus quis sequi ullam pariatur! Assumenda nihil ipsam velit molestias placeat rem facilis ducimus ipsa fuga rerum quas, minima repellendus quos, quo labore, quod dolorum unde dignissimos ea corrupti nostrum error neque? Sapiente veritatis distinctio, ducimus cupiditate praesentium voluptate odit?</p>
+                <p>{{(author$ | async)?.profileId?.bio}}</p>
             </div>
         </aside>
     </section>

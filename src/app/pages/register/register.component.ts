@@ -28,9 +28,8 @@ export class RegisterComponent implements OnInit {
   store = inject(Store);
   @ViewChild('file',{static:true}) inputFile!: ElementRef;
   showCrop: boolean = false;
-  reader = new FileReader();
   objectUrl: string | ArrayBuffer | null | undefined = null;
-  profile! : File | undefined
+  // profile! : File | undefined
 
   ngOnInit(){
     this.registerForm = this.fb.group({
@@ -53,6 +52,7 @@ export class RegisterComponent implements OnInit {
 
   register(){
     const formData = new FormData();
+    console.log(this.registerForm.value);
     
     Object.keys(this.registerForm.value).forEach(key => {
       formData.append(key, this.registerForm.value[key]);
@@ -61,8 +61,8 @@ export class RegisterComponent implements OnInit {
     if(this.imgCrop){
       formData.append('profilePic', this.imgCrop);
     }
-      
-
+    console.log({formData});
+    
     this.store.dispatch(registerUser({user:formData}));
   }
 
@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    console.log(this.inputFile.nativeElement.files[0]);
+    // console.log(this.inputFile.nativeElement.files[0]);
     const {blob, objectUrl} = event; 
     if(blob && objectUrl){
       this.imgCrop = new File([blob], this.inputFile.nativeElement.files[0].name, { type: 'image/png' });
@@ -86,7 +86,7 @@ export class RegisterComponent implements OnInit {
   saveCrop(){
     this.showCrop = false
     this.imageUrl = this.objectUrl
-    this.profile = this.imgCrop;
+    // this.profile = this.imgCrop;
   }
 
   cancelCrop() {

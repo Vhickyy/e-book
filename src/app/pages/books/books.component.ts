@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { selectBookIds, selectCartError, seletCartLoading } from '../../store/cart/cart.selector';
 import { Subscription } from 'rxjs';
 import { BookService } from '../../services/book.service';
+import { selectUser } from '../../store/auth/auth.selector';
 
 @Component({
   selector: 'app-books',
@@ -43,6 +44,7 @@ export class BooksComponent implements OnInit {
   obs!: Subscription;
   errObs$! : Subscription;
   timerId!: any
+  user$ = this.store.select(selectUser);
 
   @ViewChild('main') main!: ElementRef;
   renderer: Renderer2 = inject(Renderer2)

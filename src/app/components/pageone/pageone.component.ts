@@ -25,7 +25,8 @@ export class PageoneComponent {
     // if(this.registerForm.valid && match){
     //   this.changePage.emit()
     // }
-    this.changePage.emit()
+    this.changePage.emit();
+    
   }
 
   upload(){

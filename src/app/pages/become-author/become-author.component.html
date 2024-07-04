@@ -3,58 +3,71 @@
     <div class="main">
         <h3>Author Profile Set Up</h3>
         <section>
-            <form >
+            <form [formGroup]="authorForm" (ngSubmit)="becomeAuthor()">
                 <div class="form">
-                    <p>Persinal Details</p>
+                    <p>Personal Details</p>
                     <div class="grid">
                         <div class="img-container">
-                            <img [src]="(user$ | async)?.profilePic || '../../assets/noPic.jpeg'" alt="">
+                            <div class="crop" *ngIf="showCrop">
+                                <image-cropper
+                                [imageFile]= "inputFile.nativeElement.files[0]"
+                                [maintainAspectRatio]="true"
+                                [aspectRatio]= "1/1"
+                                (imageCropped)="imageCropped($event)"
+                                >
+                                </image-cropper>
+                                <div>
+                                    <button type="button" (click)="cancelCrop()">Cancel</button>
+                                    <button type="button" (click)="saveCrop()">Done</button>
+                                </div>
+                            </div>
+                            <input type="file" class="file" #file  (change)="uploadFile($event)" (click)="inputFile.nativeElement.value=''" />
+                            <img [src]="imageUrl || (user$ | async)?.profilePic || '../../assets/noPic.jpeg'" alt="" (click)="selectAvatar()">
                             <p>{{(user$ | async)?.fullname}}</p> 
                         </div>
                         <div>
                             <label for="description">Your Bio</label>
-                            <textarea id="description" placeholder="Your Bio" ></textarea>
+                            <textarea id="description" placeholder="Your Bio" name="bio" formControlName="bio" ></textarea>
                         </div>
                     </div>
                     <div class="grid grid-3">
                         <div>
-                            <label for="pages">Location</label>
-                            <input type="text" id="pages" placeholder="Location Link">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="Location Link" formControlName="location">
                             <small>Must be between 10-1000</small>
                         </div>
-                        <div>
-                            <label for="pages">Instagram</label>
-                            <input type="text" id="pages" placeholder="Instagram Link">
-                            <small>Must be between 10-1000</small>
+                        <div formGroupName="socials">
+                            <div>
+                                <label for="instagram">Instagram</label>
+                                <input type="text" id="instagram" placeholder="Instagram Link" formControlName="instagram">
+                                <small>Must be between 10-1000</small>
+                            </div>
+                            <div>
+                                <label for="twitter">Twitter</label>
+                                <input type="text" id="twitter" placeholder="Twitter Link" formControlName="twitter">
+                            </div>
                         </div>
-                        <div>
-                            <label for="date">Twitter</label>
-                            <input type="text" id="date" placeholder="Twitter Link">
-                        </div>
+                        
                     </div>
-                    <!-- <div>
-                        <label for="description">Your Bio</label>
-                        <textarea id="description" placeholder="Your Bio" ></textarea>
-                    </div> -->
                     <p>Bank Details</p>
-                    <div class="grid grid-3">
+                    <div class="grid grid-3" formGroupName="cardInfo">
                         <div>
-                            <label for="pages">Bank Name</label>
-                            <input type="text" id="pages" placeholder="Bank Name">
+                            <label for="bankName">Bank Name</label>
+                            <input type="text" id="bankName" placeholder="Bank Name" formControlName="bankName">
                             <small>Must be between 10-1000</small>
                         </div>
                         <div>
-                            <label for="pages">Account Number</label>
-                            <input type="text" id="pages" placeholder="Account Number">
+                            <label for="accountNumber">Account Number</label>
+                            <input type="text" id="accountNumber" placeholder="Account Number" formControlName="accountNumber">
                             <small>Must be between 10-1000</small>
                         </div>
                         <div>
-                            <label for="date">Bank Holder</label>
-                            <input type="text" id="date" placeholder="Bank Holder">
+                            <label for="bankHolder">Bank Holder</label>
+                            <input type="text" id="bankHolder" placeholder="Bank Holder" formControlName="bankHolder">
                         </div>
                     </div>
                 </div>
-                <button type="submit">Save</button>
+                <button type="button" (click)="becomeAuthor()">Save</button>
                
             </form>
         </section>

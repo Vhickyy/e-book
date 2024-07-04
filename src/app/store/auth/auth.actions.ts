@@ -45,6 +45,9 @@ export const getUserSuccess = createAction('[Auth] getUserSuccess', props<{user:
 export const getAuthor = createAction('[Auth] getAuthor',props<{id:string}>());
 export const getAuthorSuccess = createAction('[Auth] getAuthorSuccess', props<{user:IUser}>());
 
+export const becomeAuthor = createAction('[Auth] becomeAuthor',props<{authorData:any}>());
+export const becomeAuthorSuccess = createAction('[Auth] becomeAuthorSuccess', props<{user:IUser}>());
+
 
 export const getCode = createAction('[Auth] getCode',props<{email:string}>());
 export const getCodeSuccess = createAction('[Auth] getCodeSuccess', props<{data:{code:number, token:string}}>());

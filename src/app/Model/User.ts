@@ -6,4 +6,16 @@ export interface IUser {
     role: string
     fullname: string
     profilePic?: string
+    profileId? : {
+        cardInfo: {
+            bankName: string
+            accountNymber: string
+            bankHolder: string
+        },
+        socials:{
+            instagram: string
+            twitter: string
+        },
+        bio: string
+    }
 }

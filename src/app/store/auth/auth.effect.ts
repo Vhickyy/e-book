@@ -190,6 +190,28 @@ export const getAuthorEffect = createEffect((actions$ = inject(Actions), authSer
     )
 },{functional:true});
 
+export const becomeAuthorEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
+    return actions$.pipe(
+        ofType(authAction.becomeAuthor),
+        switchMap(({authorData})=>{
+            return authService.becomeAuthor(authorData).pipe(
+                map(({data}:any)=> {
+                    console.log({data},data.user);
+                    
+                    localStorage.setItem("token",data.token)
+                    // router.navigate([''])
+                    router.navigate([`/author/${data.user.fullname.split(' ')?.join('-')}/${data.user._id}`])
+                    return authAction.becomeAuthorSuccess({user:data.user});
+                }),
+                catchError((error:HttpErrorResponse)=> {
+                    console.log({error});
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
+                })
+            )
+        })
+    )
+},{functional:true});
+
 export const getCodeEffect = createEffect((actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) => {
     return actions$.pipe(
         ofType(authAction.getCode),

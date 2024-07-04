@@ -38,8 +38,6 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/api/v1/auth/forgot-password`, {email});
   }
 
-
-
   resetPassword({newPassword,token,confirmPassword}:{token:string | null,newPassword:string,confirmPassword:string}): Observable<any> {
     console.log({newPassword,token});
     return this.http.post(`${environment.apiUrl}/api/v1/auth/reset-password`, {newPassword,token,confirmPassword});
@@ -51,6 +49,10 @@ export class AuthService {
 
   getAuthor(id:string) {
     return this.http.get(`${environment.apiUrl}/api/v1/auth/get-author/${id}`)
+  }
+
+  becomeAuthor(authorData:any) {
+    return this.http.post(`${environment.apiUrl}/api/v1/auth/become-author`, authorData)
   }
 
   // ============ Providing Assistance ================== //

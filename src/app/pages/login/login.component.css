@@ -97,6 +97,6 @@ button{
 }
 @media screen and (min-width: 700px) {
     form{
-        padding: 2rem 4rem;
+        padding: 3rem 4rem;
     }
 }

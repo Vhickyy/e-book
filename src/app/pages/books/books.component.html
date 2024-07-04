@@ -7,12 +7,9 @@
             <input type="text" placeholder="Search For A Book" [(ngModel)]="search">
             <button (click)="searchBook()">Search</button>
         </div>
-        <!-- <div class="search">
-            <app-search></app-search>
-        </div> -->
-        <!-- <app-search (searchBook)="searchBook($event)"></app-search> -->
     </section>
 </header>
+
 <main>
     @if((cartError$ | async)?.message){
         <div class="error">
@@ -54,7 +51,6 @@
                                     @for(book of books$ | async; track book){
                                         <div  class="book-card">
                                             <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
-                                            <!-- <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt=""> -->
                                             <div class="detail">
                                                 <p class="title">{{book.title}}</p>
                                                 <p class="author">{{book.author.fullname}}</p>
@@ -63,8 +59,10 @@
                                                     @if((id$ | async)?.includes(book._id)){
                                                         <div class="loader"></div>
                                                     }@else{
-                                                        <img *ngIf="book.inWishlist" (click)="removeFromWishlist(book._id)" src="../../../assets/heartfull.svg" alt="">
-                                                        <img *ngIf="!book.inWishlist" (click)="addWishlist(book._id)" src="../../../assets/Vector.svg" alt="">
+                                                        <div *ngIf="user$ | async">
+                                                            <img *ngIf="book.inWishlist" (click)="removeFromWishlist(book._id)" src="../../../assets/heartfull.svg" alt="">
+                                                            <img *ngIf="!book.inWishlist" (click)="addWishlist(book._id)" src="../../../assets/Vector.svg" alt="">
+                                                        </div>
                                                     }
                                                 </div>
                                             </div>
