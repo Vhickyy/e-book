@@ -114,7 +114,13 @@ img{
     place-items: center;
 }
 
-
+.loader{
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    border: 4px solid var(--primaryColor);
+}
 
 @media screen and (min-width:900px) {
     section{

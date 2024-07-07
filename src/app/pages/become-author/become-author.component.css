@@ -130,6 +130,13 @@ img{
     border-radius: .5rem;
     
 }
+.loader{
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    border: 4px solid var(--primaryColor);
+}
 @media screen and (min-width:600px) {
     .form{
         padding: 2rem;
