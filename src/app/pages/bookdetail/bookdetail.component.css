@@ -29,6 +29,12 @@ aside{
     border-radius: .3rem;
     padding: 2rem 1rem;
 }
+button{
+    cursor: pointer;
+}
+li{
+    list-style: none;
+}
 .img-container{
     width: 100%;
     display: grid;

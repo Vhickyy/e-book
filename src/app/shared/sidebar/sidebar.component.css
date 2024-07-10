@@ -17,7 +17,7 @@ aside{
 a{
     font-size: 1.1rem;
     font-weight: 600;
-    color: #353535;
+    color: #420e0e;
     text-decoration: none;
 }
 
@@ -34,6 +34,7 @@ button {
     color: white;
     border-radius: .5rem;
     margin-top: 1rem;
+    cursor: pointer;
 }
 
 @media screen and (min-width:1000px) {

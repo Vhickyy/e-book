@@ -106,7 +106,9 @@ a{
     padding: .5rem 3rem;
     border: none;
     border-radius: .5rem;
-    
+}
+button{
+    cursor: pointer;
 }
 image-cropper{
     flex: 1;

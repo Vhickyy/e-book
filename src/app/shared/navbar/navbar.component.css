@@ -52,6 +52,7 @@ button{
     border: transparent;
     padding: .7rem 2rem;
     border-radius: .5rem;
+    cursor: pointer;
 }
 .grid{
     display: grid;
