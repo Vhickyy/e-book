@@ -37,7 +37,7 @@ export class BooksComponent implements OnInit {
   active = 0;
   pageSize$ = this.store.select(selectPages)
   pageSizeArray!: number[];
-  show: boolean = true;
+  show: boolean = false;
   loading$ = this.store.select(selectBookLoading)
   wishListLoading = this.store.select(seletCartLoading);
   id$ = this.store.select(selectBookIds);

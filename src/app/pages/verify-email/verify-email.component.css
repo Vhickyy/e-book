@@ -1,3 +1,4 @@
 .link{
     color: var(--primaryColor);
+    cursor: pointer;
 }

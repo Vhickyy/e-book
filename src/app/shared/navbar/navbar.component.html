@@ -30,30 +30,50 @@
 </nav>
 
 <!-- ========== Side Bar =========== -->
-<section class="sidebar-modal" *ngIf="show" >
-        <div class="top-modal" *ngIf="(user$ | async)">
-            <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">
-            <p>{{(user$ | async)?.fullname}}</p>
-        </div>
-        <img src="../../../assets/logo.svg" alt="logo" *ngIf="!(user$ | async)">
-        <div class="dashboard" *ngIf="(user$ | async)">
-            <a [routerLink]="'/author/' +  (user$ | async)?.fullname?.split(' ')?.join('-') + '/' + (user$ | async)?._id" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()" *ngIf="(user$ | async)?.role == 'author'">Your Profile</a>
-            <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of linksMobile" (click)="toggleShow()">{{link.name}}</a>
-        </div>
+    <section class="sidebar-modal" *ngIf="show" >
+        @if(loading$ | async){
+            <div class="top-modal">
+                <div class="fake-img"></div>
+            </div>
+            <div class="dashboard">
+                <div class="ske"></div>
+                <div class="ske"></div>
+                <div class="ske"></div>
+                <div class="ske"></div>
+            </div>
+            <div class="dashboard">
+                <div class="ske"></div>
+                <div class="ske"></div>
+                <div class="ske"></div>
+                <div class="ske"></div>
+            </div>
+        }@else{
+            <p class="close" (click)="toggleShow()">x</p>
+            <div class="top-modal" *ngIf="(user$ | async)">
+                <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">
+                <p>{{(user$ | async)?.fullname}}</p>
+            </div>
+            <img src="../../../assets/logo.svg" alt="logo" *ngIf="!(user$ | async)">
+            <div class="dashboard" *ngIf="(user$ | async)">
+                <a [routerLink]="'/author/' +  (user$ | async)?.fullname?.split(' ')?.join('-') + '/' + (user$ | async)?._id" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()" *ngIf="(user$ | async)?.role == 'author'">Your Profile</a>
+                <a [routerLink]="link.link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" *ngFor="let link of linksMobile" (click)="toggleShow()">{{link.name}}</a>
+            </div>
+    
+            <div class="dashboard">
+                <a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">WarmBook</a>
+                <a routerLink="/about" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">About</a>
+                <a *ngIf="!(user$ | async)" routerLink="/books" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Books</a>
+                <a *ngIf="(user$ | async)?.role !== 'author'" routerLink="/become-author" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Become An Author</a>
+                <a routerLink="/contact" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Contact</a>
+                <a routerLink="/faq" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">FAQ</a>
+            </div>
+    
+            <div class="dashboard">
+                <a (click)="signOut()" *ngIf="(user$ | async)">Sign Out</a>
+                <a routerLink="/login" (click)="toggleShow()" *ngIf="!(user$ | async)">Log in</a>
+                <a routerLink="/register" (click)="toggleShow()" *ngIf="!(user$ | async)">Register</a>
+            </div>
+        }
+    </section>
+ <!-- } -->
 
-        <div class="dashboard">
-            <a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">WarmBook</a>
-            <a routerLink="/about" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">About</a>
-            <a *ngIf="!(user$ | async)" routerLink="/books" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Books</a>
-            <a *ngIf="(user$ | async)?.role !== 'author'" routerLink="/become-author" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Become An Author</a>
-            <a routerLink="/contact" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Contact</a>
-            <a routerLink="/faq" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">FAQ</a>
-        </div>
-
-        <div class="dashboard">
-            <a (click)="signOut()" *ngIf="(user$ | async)">Sign Out</a>
-            <a routerLink="/login" (click)="toggleShow()" *ngIf="!(user$ | async)">Log in</a>
-            <a routerLink="/register" (click)="toggleShow()" *ngIf="!(user$ | async)">Register</a>
-        </div>
-        
-</section>

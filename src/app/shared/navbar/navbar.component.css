@@ -38,13 +38,6 @@ a{
     font-weight: 600;
 }
 
-.active::after{
-    /* content: "";
-    height: .5rem;
-    width: .5rem;
-    border-radius: 100%;
-    background-color: var(--primaryColor); */
-}
 
 button{
     background-color: var(--primaryColor);
@@ -129,15 +122,25 @@ button{
     gap: .5rem;
 }
 
-.sidebar{
-    /* background-color: #fff;
+.ske{
+    background-color: gray;
+    width: 100%;
+    height: 1.5rem;
+}
+.fake-img{
+    background-color: gray;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+.close{
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 40%;
-    height: 100%; */
-    /* z-index: 10; */
-    /* opacity: 1; */
+    top: 1rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    color: var(--primaryColor);
 }
 
 @media screen and (min-width: 800px) {

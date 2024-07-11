@@ -4,7 +4,7 @@ import { ILinks } from '../../../types/types';
 import { linksData, linksDataMobile } from '../../../data/data';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUser } from '../../store/auth/auth.selector';
+import { selectLoading, selectUser } from '../../store/auth/auth.selector';
 import { getUser, logoutUser } from '../../store/auth/auth.actions';
 import { getAnnonymousCart, getCart } from '../../store/cart/cart.actions';
 import { selectCartLength } from '../../store/cart/cart.selector';
@@ -21,9 +21,11 @@ export class NavbarComponent implements OnInit{
   linksMobile: ILinks[] = linksDataMobile;
   store = inject(Store);
   user$ = this.store.select(selectUser);
+  loading$ = this.store.select(selectLoading);
   token = localStorage.getItem("token") || "";
   cartLength$ = this.store.select(selectCartLength);
   show = false;
+  // show = false;
   router = inject(Router)
   ngOnInit () {
     // this.store.dispatch(getUser());

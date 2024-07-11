@@ -270,6 +270,15 @@ h4{
     border: 4px solid var(--primaryColor);
 }
 
+.ske{
+    background-color: gray;
+    height: 15rem;
+    width: 100%;
+}
+.ske-2{
+    height: 10rem;
+    background-color: blanchedalmond;
+}
 @media screen and (min-width: 600px) {
     .author-det{
         grid-template-columns:  1fr 1fr;

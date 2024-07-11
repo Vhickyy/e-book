@@ -1,167 +1,189 @@
 <!-- <app-navbar></app-navbar> -->
 <main>
-    <section class="top-section">
-        <aside>
-            <div>
-                <img class="main-img" [src]="(book$ | async)?.frontCover?.image" alt="">
-                <div class="img-container">
-                    <img class="img"  [src]="(book$ | async)?.frontCover?.image" alt="">
-                    <img class="img" [src]="(book$ | async)?.backCover?.image" alt="">
-                </div>
+    @if((loadingBook$ | async)){
+        <section class="top-section">
+            <div >
+              <div class="ske"></div>
+              <div  class="img-container">
+                  <div class="ske ske-2"></div>
+                  <div class="ske ske-2"></div>
+              </div>
             </div>
-        </aside>
-        <aside>
-            <div>
-                <h3>{{(book$ | async)?.title}}</h3>
-                <!-- <h3>Intergalactic War of The Tidal Maro of Zugal Race, A Book</h3> -->
-                <div class="flex">
-                    <p>rating</p>
-                    <p>{{(book$ | async)?.reviews?.length }} review</p>
-                    <p>{{(book$ | async)?.sold}} sold</p>
-                </div>
+            <div class="buy">
+              <div></div>
+            </div>
+            <div >
+              <div class="ske"></div>
+              <div  class="img-container">
+                  <div class="ske ske-2"></div>
+                  <div class="ske ske-2"></div>
+              </div>
+            </div>
+      </section>
+    }@else{
+        <section class="top-section">
+            <aside>
                 <div>
+                    <img class="main-img" [src]="(book$ | async)?.frontCover?.image" alt="">
+                    <div class="img-container">
+                        <img class="img"  [src]="(book$ | async)?.frontCover?.image" alt="">
+                        <img class="img" [src]="(book$ | async)?.backCover?.image" alt="">
+                    </div>
+                </div>
+            </aside>
+            <aside>
+                <div>
+                    <h3>{{(book$ | async)?.title}}</h3>
+                    <!-- <h3>Intergalactic War of The Tidal Maro of Zugal Race, A Book</h3> -->
+                    <div class="flex">
+                        <p>rating</p>
+                        <p>{{(book$ | async)?.reviews?.length }} review</p>
+                        <p>{{(book$ | async)?.sold}} sold</p>
+                    </div>
                     <div>
-                        <div class="top-detail has-padding">
-                           <p>Category:</p>
-                           <p>Science Fiction</p> 
-                        </div>
-                        <div class="has-border  has-padding">
-                            <div class="top-detail">
-                                <p>Pages:</p>
-                                <p>{{(book$ | async)?.pages}}</p> 
-                             </div>
-                            <div class="top-detail">
-                                <p>Language:</p>
-                                <p>English</p> 
-                             </div>
-                            <div class="top-detail">
-                                <p>Publication Date:</p>
-                                <p>Date</p> 
-                             </div>
-                        </div>
                         <div>
                             <div class="top-detail has-padding">
-                                <p>ISBN No: </p> 
-                                <p>Category: </p> 
+                               <p>Category:</p>
+                               <p>Science Fiction</p> 
                             </div>
-                            <div class="top-detail">
-                                <p>ISBN No: </p> 
-                                <p>Category: </p> 
+                            <div class="has-border  has-padding">
+                                <div class="top-detail">
+                                    <p>Pages:</p>
+                                    <p>{{(book$ | async)?.pages}}</p> 
+                                 </div>
+                                <div class="top-detail">
+                                    <p>Language:</p>
+                                    <p>English</p> 
+                                 </div>
+                                <div class="top-detail">
+                                    <p>Publication Date:</p>
+                                    <p>Date</p> 
+                                 </div>
+                            </div>
+                            <div>
+                                <div class="top-detail has-padding">
+                                    <p>ISBN No: </p> 
+                                    <p>Category: </p> 
+                                </div>
+                                <div class="top-detail">
+                                    <p>ISBN No: </p> 
+                                    <p>Category: </p> 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </aside>
-        <aside>
-            <div class="buy">
-                <p>N {{(book$ | async)?.price}}</p>
-                @if((user$ | async)?._id !== (book$ | async)?.author?._id){
-                    <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="['/dashboard/payment']" 
-                    [queryParams]="{ 'buy-now': true,id : (book$ | async)?._id }" >Buy Now</button>
-                    <button class="btn" *ngIf="((book$ | async)?.bought)" routerLink="/books" >Go to books</button>
-                    <button class="contact-btn" routerLink="/cart"  *ngIf="((book$ | async)?.inCart)">Go To Cart</button>
-                    <div *ngIf="!((book$ | async)?.inCart) && !((book$ | async)?.bought)">
-                        @if(!(loadingCart$ | async)){
-                            <button class="contact-btn" (click)="addToCart()"   >
-                                Add To Cart
-                            </button> 
-                        }@else{
-                            <div class="loader"></div>
-                        }
-                    </div>
-                    <button class="contact-btn"  *ngIf="((book$ | async)?.bought)">Start Reading</button>
-                }@else{
-                    <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="'/dashboard/edit-book/' + (book$ | async)?._id" >Edit Book</button>
-                }
-            </div>
-        </aside>
-    </section>
-    <section >
-        <aside class="author-info-container">
-            <h4>Author Information</h4>
-            <div class="author-det">
-                <div class="author-info">
-                    <img src="../../../assets/Rectangle 10.png" class="pic" alt="">
-                    <div>
-                        <p>{{(book$ | async)?.author?.fullname}}</p>
-                        <p>Uyo, Nigeria.</p>
-                    </div>
-                </div>
-                <div>
+            </aside>
+            <aside>
+                <div class="buy">
+                    <p>N {{(book$ | async)?.price}}</p>
                     @if((user$ | async)?._id !== (book$ | async)?.author?._id){
-                        <button class="btn" routerLink="/dashboard/author/send-message">Contact Author</button>
-                        <button class="contact-btn" [routerLink]="'/author/' +  (book$ | async)?.author?.fullname?.split(' ')?.join('-') + '/' + (book$ | async)?.author?._id">Author's Profile</button>
+                        <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="['/dashboard/payment']" 
+                        [queryParams]="{ 'buy-now': true,id : (book$ | async)?._id }" >Buy Now</button>
+                        <button class="btn" *ngIf="((book$ | async)?.bought)" routerLink="/books" >Go to books</button>
+                        <button class="contact-btn" routerLink="/cart"  *ngIf="((book$ | async)?.inCart)">Go To Cart</button>
+                        <div *ngIf="!((book$ | async)?.inCart) && !((book$ | async)?.bought)">
+                            @if(!(loadingCart$ | async)){
+                                <button class="contact-btn" (click)="addToCart()"   >
+                                    Add To Cart
+                                </button> 
+                            }@else{
+                                <div class="loader"></div>
+                            }
+                        </div>
+                        <button class="contact-btn"  *ngIf="((book$ | async)?.bought)">Start Reading</button>
                     }@else{
-                        <button class="btn" [routerLink]="'/author/' +  (book$ | async)?.author?.fullname?.split(' ')?.join('-') + '/' + (book$ | async)?.author?._id">Your Profile</button>
+                        <button class="btn" *ngIf="!((book$ | async)?.bought)"  [routerLink]="'/dashboard/edit-book/' + (book$ | async)?._id" >Edit Book</button>
                     }
+                </div>
+            </aside>
+        </section>
+        <section >
+            <aside class="author-info-container">
+                <h4>Author Information</h4>
+                <div class="author-det">
+                    <div class="author-info">
+                        <img src="../../../assets/Rectangle 10.png" class="pic" alt="">
+                        <div>
+                            <p>{{(book$ | async)?.author?.fullname}}</p>
+                            <p>Uyo, Nigeria.</p>
+                        </div>
                     </div>
-            </div>
-        </aside>
-    </section>
-    <section class="middle-section">
-        <aside>
-            <div class="middle-header">
-                <p>Description</p>
-                <p>Reviews</p>
-            </div>
-            <hr/>
-            <div class="content">
-                <p>{{(book$ | async)?.description}}</p>
-                <div class="tab">
-                    <ul class="cat">
-                        <li>category</li>
-                        <li>categorygyuyy</li>
-                        <li>category</li>
-                        <li>category</li>
-                        <li>category</li>
-                    </ul>
-                    <ul class="spec">
-                        <li>category</li>
-                        <li>category</li>
-                        <li>category</li>
-                        <li>category</li>
-                        <li>category</li>
+                    <div>
+                        @if((user$ | async)?._id !== (book$ | async)?.author?._id){
+                            <button class="btn" routerLink="/dashboard/author/send-message">Contact Author</button>
+                            <button class="contact-btn" [routerLink]="'/author/' +  (book$ | async)?.author?.fullname?.split(' ')?.join('-') + '/' + (book$ | async)?.author?._id">Author's Profile</button>
+                        }@else{
+                            <button class="btn" [routerLink]="'/author/' +  (book$ | async)?.author?.fullname?.split(' ')?.join('-') + '/' + (book$ | async)?.author?._id">Your Profile</button>
+                        }
+                        </div>
+                </div>
+            </aside>
+        </section>
+        <section class="middle-section">
+            <aside>
+                <div class="middle-header">
+                    <p>Description</p>
+                    <p>Reviews</p>
+                </div>
+                <hr/>
+                <div class="content">
+                    <p>{{(book$ | async)?.description}}</p>
+                    <div class="tab">
+                        <ul class="cat">
+                            <li>category</li>
+                            <li>categorygyuyy</li>
+                            <li>category</li>
+                            <li>category</li>
+                            <li>category</li>
+                        </ul>
+                        <ul class="spec">
+                            <li>category</li>
+                            <li>category</li>
+                            <li>category</li>
+                            <li>category</li>
+                            <li>category</li>
+                        </ul>
+                    </div>
+                    <ul>
+                        <li>Some great feature name here</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur</li>
+                        <li>Duis aute irure dolor in reprehenderit</li>
+                        <li>Some great feature name here</li>
                     </ul>
                 </div>
-                <ul>
-                    <li>Some great feature name here</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur</li>
-                    <li>Duis aute irure dolor in reprehenderit</li>
-                    <li>Some great feature name here</li>
-                </ul>
-            </div>
-        </aside>
-        <aside class="fit">
-            <div class="content rate">
-                <h4>Rating Summary</h4>
-                <p>4.0 out of 5 star</p>
-                @if((user$ | async)?._id !== (book$ | async)?.author?._id){
-                    <button class="btn">Write a review</button>
-                }
-            </div>
-        </aside>
-    </section>
-    @if((user$ | async)?._id !== (book$ | async)?.author?._id){
-    <section>
-            <div class="top-card">
-                <h4>More Science Books</h4>
-                <p>More</p>
-            </div>
-            <div class="book-row">     
-                <div *ngFor="let book of [1,2,3,4,5]" class="book-card">
-                    <img src="../../../assets/Rectangle 10.png" alt="">
-                    <div class="detail">
-                        <p class="title">The Revival</p>
-                        <p class="author">Morris Johnson</p>
-                        <div class="price">
-                            <p class="title">N 23,400</p>
-                            <img src="../../../assets/Vector.svg" alt="">
+            </aside>
+            <aside class="fit">
+                <div class="content rate">
+                    <h4>Rating Summary</h4>
+                    <p>4.0 out of 5 star</p>
+                    @if((user$ | async)?._id !== (book$ | async)?.author?._id){
+                        <button class="btn">Write a review</button>
+                    }
+                </div>
+            </aside>
+        </section>
+        @if((user$ | async)?._id !== (book$ | async)?.author?._id){
+        <section>
+                <div class="top-card">
+                    <h4>More Science Books</h4>
+                    <p>More</p>
+                </div>
+                <div class="book-row">     
+                    <div *ngFor="let book of [1,2,3,4,5]" class="book-card">
+                        <img src="../../../assets/Rectangle 10.png" alt="">
+                        <div class="detail">
+                            <p class="title">The Revival</p>
+                            <p class="author">Morris Johnson</p>
+                            <div class="price">
+                                <p class="title">N 23,400</p>
+                                <img src="../../../assets/Vector.svg" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        }
     }
 </main>
 <app-footer></app-footer>
