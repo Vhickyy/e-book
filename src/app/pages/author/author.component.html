@@ -32,8 +32,8 @@
             <p>authorBook is empty</p>
         }@else{
             <aside class="flex-info">
-                <h4>Books</h4>
-                <h4>15 Books</h4>
+                <!-- <h4>Books</h4> -->
+                <h4 class="num">{{(authorBook$ | async)?.length}} Books</h4>
             </aside>
             <aside class="book-row">
                     <div *ngFor="let book of (authorBook$ | async)" class="book-card">
