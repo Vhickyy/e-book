@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* height: 10rem; */
+    height: 12rem;
 }
 
 h3{
@@ -44,12 +44,13 @@ button{
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
 }
 .flex-info > div{
     display: grid;
-    gap: .5rem;
+    /* gap: .5rem; */
 }
-.btn-container{
+/* .btn-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
@@ -70,7 +71,7 @@ input{
 
 input::placeholder{
     color: #912CB2;
-}
+} */
 
 main{
     background-color: #F8F9FA;
@@ -81,8 +82,8 @@ main{
     width: min(90%,var(--maxWidth));
     margin-inline: auto;
     background: white;
-    padding: 2.5rem 1.5rem;
-    margin-top: -4rem;
+    padding: 1.5rem 1.5rem;
+    margin-top: -5rem;
     display: grid;
     grid-template-columns: 1fr ;
     gap: 2rem;
@@ -97,12 +98,11 @@ main{
 
 .img{
     display: block;
-    width: min(100%,12rem);
-    height: 12rem;
+    width: min(100%,10rem);
+    height: 10rem;
     border-radius: .5rem;
     object-fit: cover;
     border: 2px solid var(--primaryColor);
-    border-radius: .5rem;
 }
 
 
@@ -172,9 +172,11 @@ main{
 @media screen and (min-width:750px) {
     .top-section{
         grid-template-columns: 1fr 2fr;
+        padding-top: 2.5rem;
     }
     .flex-info{
         flex-direction: row;
+        text-align: start;
     }
 }
 @media screen and (min-width:950px) {
