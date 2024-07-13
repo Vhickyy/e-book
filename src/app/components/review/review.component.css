@@ -1,0 +1,65 @@
+section{
+    position: absolute;
+    inset: 0;
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #80808080;
+}
+
+.main{
+    background-color: white;
+    width: min(80%, 40rem);
+    padding:  2rem ;
+    border-radius: .5rem
+}
+
+form{
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+label{
+    display: block;
+    padding-bottom: .4rem;
+}
+input{
+    padding: .5rem;
+    border: 1px solid #DEE2E7;
+    width: 50%;
+    border-radius: .5rem;
+    outline-color: var(--primaryColor);
+}
+
+textarea{
+    resize: none;
+    height: 10rem;
+    padding: 1rem;
+    border: 1px solid #DEE2E7;
+    outline-color: var(--primaryColor);
+    border-radius: .5rem;
+}
+
+button{
+    border-radius: .5rem;
+    border: 1px solid var(--primaryColor);
+    background-color: var(--primaryColor);
+    padding: .5rem;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close{
+    color: var(--primaryColor);
+    font-size: 2rem;
+    font-weight: 800;
+    cursor: pointer;
+}

@@ -52,7 +52,7 @@ button{
     display: grid;
     /* gap: .5rem; */
 }
-/* .btn-container{
+.btn-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
@@ -62,8 +62,10 @@ button{
     background-color: white;
     border: 1px solid var(--primaryColor);
 }
-
-input{
+.icon{
+    cursor: pointer;
+}
+/* input{
     height: 100%;
     width: 70%;
     font-size: 1rem;

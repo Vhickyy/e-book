@@ -24,7 +24,7 @@ export const registerEffect = createEffect((actions$ = inject(Actions), authServ
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
                     console.log(error.message);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -43,7 +43,7 @@ export const verifyOtpEffect = createEffect((actions$ = inject(Actions), authSer
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -60,7 +60,7 @@ export const resendOtpEffect = createEffect((actions$ = inject(Actions), authSer
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -84,7 +84,7 @@ export const loginEffect = createEffect((actions$ = inject(Actions), authService
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -111,7 +111,7 @@ export const logoutEffect = createEffect((actions$ = inject(Actions), authServic
                     store.dispatch(cartReset())
                     store.dispatch(reset())
                     router.navigate(['/'])
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -129,7 +129,7 @@ export const forgotPasswordEffect = createEffect((actions$ = inject(Actions), au
                     return authAction.forgotPasswordOtpSuccess();
                 }),
                 catchError((error:HttpErrorResponse)=> {
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -149,7 +149,7 @@ export const resetPasswordEffect = createEffect((actions$ = inject(Actions), aut
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -166,7 +166,7 @@ export const getUserEffect = createEffect((actions$ = inject(Actions), authServi
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -224,7 +224,7 @@ export const getCodeEffect = createEffect((actions$ = inject(Actions), authServi
                 }),
                 catchError((error:HttpErrorResponse)=> {
                     console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })
@@ -249,7 +249,7 @@ export const getForgotPasswordCodeEffect = createEffect((actions$ = inject(Actio
                     console.log("here2");
                     
                     console.log(error);
-                    return of(authAction.error({error:{message:error.error || error.statusText}}));
+                    return of(authAction.error({error:{message:error.error.message || error.statusText}}));
                 })
             )
         })

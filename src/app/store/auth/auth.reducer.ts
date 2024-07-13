@@ -26,7 +26,11 @@ export const authReducer = createReducer(
     on(registerSuccess, (state,action) => ({...state,loading:false})),
     on(error, (state,action) => {
         console.log(action.error);
-        return {...state,loading:false,error: {message:action.error.message}}
+        let err = action.error.message;
+        console.log({err});
+        
+        if(err.includes("Unauthorized")) err = ""
+        return {...state,loading:false,error: {message:err}}
         // return {...state,loading:false,error:action.error?.message}
     }),
 

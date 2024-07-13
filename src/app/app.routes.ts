@@ -16,7 +16,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { authGaurd } from './gaurds/auth-gaurd.guard';
 import { openauthGuard } from './gaurds/openauth.guard';
-import { BecomeAuthorComponent } from './pages/become-author/become-author.component';
+// import { BecomeAuthorComponent } from './pages/become-author/become-author.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 
@@ -37,7 +37,6 @@ export const routes: Routes = [
     {path:"contact",component:ContactComponent},
     {path:"faq",component:FaqComponent},
     {path:"author/:name/:id",component:AuthorComponent},
-    {path:"become-author",component:BecomeAuthorComponent},
     {path:"cart",component:CartComponent},
     {path:'dashboard',canActivate:[authGaurd],loadChildren:()=> import('./dashboard.routes').then((m) => m.routes)},
     {path:"**",component:NotFoundComponent}

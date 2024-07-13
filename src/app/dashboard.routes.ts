@@ -11,6 +11,7 @@ import { authorGuard } from './gaurds/author.guard';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { EditBookComponent } from './pages/edit-book/edit-book.component';
 import { ReadingComponent } from './pages/reading/reading.component';
+import { BecomeAuthorComponent } from './pages/become-author/become-author.component';
 
 
 export const routes: Routes = [
@@ -24,5 +25,6 @@ export const routes: Routes = [
     {path:"library",component:LibraryComponent},
     {path:"library/:id",component:ReadingComponent},
     {path:"payment",component:PaymentComponent},
-    {path:"verify-payment",component:VerifyPaymentComponent}
+    {path:"verify-payment",component:VerifyPaymentComponent},
+    {path:"become-author",component:BecomeAuthorComponent},
 ];

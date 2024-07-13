@@ -10,11 +10,12 @@ import { selectBook, selectBookLoading } from '../../store/book/book.selector';
 import { addAnnonymousCart, addCart } from '../../store/cart/cart.actions';
 import { seletCartLoading } from '../../store/cart/cart.selector';
 import { selectUser } from '../../store/auth/auth.selector';
+import { ReviewComponent } from '../../components/review/review.component';
 
 @Component({
   selector: 'app-bookdetail',
   standalone: true,
-  imports: [NavbarComponent,CommonModule,FooterComponent,RouterLink],
+  imports: [NavbarComponent,CommonModule,FooterComponent,RouterLink,ReviewComponent],
   templateUrl: './bookdetail.component.html',
   styleUrl: './bookdetail.component.css'
 })

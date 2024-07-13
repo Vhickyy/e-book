@@ -157,7 +157,7 @@
                 <div class="content rate">
                     <h4>Rating Summary</h4>
                     <p>4.0 out of 5 star</p>
-                    @if((user$ | async)?._id !== (book$ | async)?.author?._id){
+                    @if((user$ | async)?._id !== (book$ | async)?.author?._id && (book$ | async)?.bought){
                         <button class="btn">Write a review</button>
                     }
                 </div>
@@ -187,3 +187,5 @@
     }
 </main>
 <app-footer></app-footer>
+
+<app-review></app-review>

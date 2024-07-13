@@ -16,7 +16,7 @@
             <div class="absolute" *ngIf="show">
                 <p routerLink="/dashboard/library" (click)="toggleShow()">Dashboard</p>
                 <p (click)="toggleShow()" *ngIf="(user$ | async)?.role == 'author'" [routerLink]="'/author/' +  (user$ | async)?.fullname?.split(' ')?.join('-') + '/' + (user$ | async)?._id">Profile</p>
-                <p (click)="toggleShow()"  *ngIf="(user$ | async)?.role == 'user'" routerLink="/become-author">Become an Author</p>
+                <p (click)="toggleShow()"  *ngIf="(user$ | async)?.role == 'user'" routerLink="/dashboard/become-author">Become an Author</p>
                 <button (click)="signOut()" (click)="toggleShow()">Sign Out</button>
             </div>
          </div>
@@ -63,7 +63,7 @@
                 <a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">WarmBook</a>
                 <a routerLink="/about" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">About</a>
                 <a *ngIf="!(user$ | async)" routerLink="/books" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Books</a>
-                <a *ngIf="(user$ | async)?.role !== 'author'" routerLink="/become-author" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Become An Author</a>
+                <a *ngIf="(user$ | async)?.role !== 'author'" routerLink="/dashboard/become-author" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Become An Author</a>
                 <a routerLink="/contact" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">Contact</a>
                 <a routerLink="/faq" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" (click)="toggleShow()">FAQ</a>
             </div>

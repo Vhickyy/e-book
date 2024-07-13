@@ -44,11 +44,11 @@
                                 <p class="title">N {{book.price}}</p>
                             </div>
                             <div class="price" *ngIf="((user$ | async)?._id == authorId)">
-                                <img src="../../../assets/delete.svg" [routerLink]="'/dashboard/edit-book/' + book._id" alt="">
+                                <img src="../../../assets/delete.svg" [routerLink]="'/dashboard/edit-book/' + book._id" alt="" class="icon">
                                 @if((id$ | async)?.includes(book._id)){
                                     <div class="loader"></div>
                                 }@else{
-                                    <img src="../../../assets/edit.svg" (click)="deleteBook(book._id)" alt="">
+                                    <img src="../../../assets/edit.svg" (click)="deleteBook(book._id)" alt="" class="icon">
                                 }
                             </div>
                         </div>

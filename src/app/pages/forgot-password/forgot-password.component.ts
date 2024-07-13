@@ -21,6 +21,7 @@ export class ForgotPasswordComponent {
 
   requestCode(form: NgForm){
     // console.log(form.value);
+    if(!form.value) return
     this.store.dispatch(forgotPasswordOtp(form.value))
   }
 }

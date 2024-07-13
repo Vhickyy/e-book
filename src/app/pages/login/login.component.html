@@ -8,6 +8,7 @@
                 <h3>Welcome Back</h3>
                 <p>Please sign into your account</p>
             </div>
+            <p >{{(error$ | async)?.message}}</p>
             <div>
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email" placeholder="Email" autocomplete="off" ngModel>
@@ -20,7 +21,7 @@
                 <p routerLink="/forgot-password">Forgot Password?</p>
                 <p routerLink="/register">Don't have an account?</p>
             </div>
-            <button type="submit">{{!(loading$ | async) ? 'Sign In' : 'Loading'}}</button>
+            <button type="submit" [disabled]="true">{{!(loading$ | async) ? 'Sign In' : 'Loading'}}</button>
             <!-- <div class="or">
                 <div></div>
                 <p>OR</p>
