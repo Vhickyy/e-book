@@ -21,11 +21,14 @@ export class AppComponent {
   token = localStorage.getItem("token")
 
   ngOnInit () {
-    this.store.dispatch(getUser());
+    // this.store.dispatch(getUser());
     if(!this.token){
       console.log("app anno cart");
       return this.store.dispatch(getAnnonymousCart())
     }
-    return this.store.dispatch(getCart())
+    if(this.token){
+      this.store.dispatch(getUser());
+      return this.store.dispatch(getCart())
+    }
   }
 }

@@ -26,7 +26,6 @@ export class LoginComponent {
 
 
   login (data: NgForm) {
-    console.log(data.value);
     const {email,password} = data.value;
     if(!email || !password){
       this.store.dispatch(error({error:{message:"Provide all fields."}}));

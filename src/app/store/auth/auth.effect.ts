@@ -144,7 +144,7 @@ export const resetPasswordEffect = createEffect((actions$ = inject(Actions), aut
             return authService.resetPassword({newPassword,token,confirmPassword}).pipe(
                 map((data)=> {
                     console.log(data);
-                    // router.navigate(['/reset-password'], {queryParams:{email}})
+                    router.navigate(["/login"])
                     return authAction.resetPasswordSuccess(data.message);
                 }),
                 catchError((error:HttpErrorResponse)=> {

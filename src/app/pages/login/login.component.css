@@ -78,6 +78,7 @@ button{
 
 button:disabled{
     opacity: .7;
+    cursor: auto;
 }
 
 .google{

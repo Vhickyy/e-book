@@ -142,6 +142,9 @@ h4{
     cursor: pointer;
     object-fit: cover;
     width: 1.7rem;
+    border-start-start-radius: .5rem;
+    border-start-end-radius: .5rem;
+
     /* height: 2rem; */
 }
 

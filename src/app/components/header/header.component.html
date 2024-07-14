@@ -13,7 +13,7 @@
             <div class="search">
                 <img src="../../../assets/search.svg" alt="search-icon">
                 <input type="text" placeholder="Search For A Book" [(ngModel)]="searchService.search">
-                <button routerLink="/books">Search</button>
+                <button routerLink="/books" [disabled]="!searchService.search">Search</button>
             </div>
             <!-- <div class="comp">
                 <app-search></app-search>
