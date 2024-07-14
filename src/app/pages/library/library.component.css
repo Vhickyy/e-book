@@ -10,7 +10,7 @@
  section{
     background-color: #F8F9FA;
     border-radius: .5rem;
-    padding: 2rem ;
+    padding: 2rem 1rem;
     display: grid;
     gap: 2rem;
     width: 100%;
@@ -62,7 +62,7 @@
  .book-row{
    display: grid;
    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
-   gap: 1.5rem;
+   gap: 1rem;
    row-gap: 2.5rem;
    /* background-color: red; */
 }

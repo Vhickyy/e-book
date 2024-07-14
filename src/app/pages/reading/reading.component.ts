@@ -29,4 +29,20 @@ export class ReadingComponent implements OnInit {
     })
   }
 
+  search(target: any){
+    console.log("hhhhh");
+    
+    if(target.value){
+      console.log("searcg");
+      
+      this.pdf?.eventBus.dispatch("find",{
+        query: target.value,
+        type: "again",
+        caseSensitive: false,
+        findPrevious: undefined,
+        highlightAll: true,
+        phraseSearch: true
+      })
+    }
+  }
 }

@@ -8,6 +8,7 @@
                     <h3>{{(pdf$ | async)?.title}}</h3>
                     <!-- <pdf-viewer [src]="(pdf$ | async)?.pdf.image" ></pdf-viewer> -->
                      <p>{{pdf?.pdfViewer?.pagesCount}}</p>
+                     <input type="text" (change)="search($event.target)">
                     <pdf-viewer 
                     #PDF
                         [src]="(pdf$ | async)?.pdf.image"
