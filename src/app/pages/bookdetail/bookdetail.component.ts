@@ -30,6 +30,7 @@ export class BookdetailComponent implements OnInit {
   loadingCart$ = this.store.select(seletCartLoading);
   loadingBook$ = this.store.select(selectBookLoading);
   user$ =this.store.select(selectUser);
+  showReview = false;
   // incart$ = this.store.select(selectIncart);
 
   ngOnInit(): void {
@@ -47,6 +48,10 @@ export class BookdetailComponent implements OnInit {
       return this.store.dispatch(addCart({id:this.id}));
     }
     return this.store.dispatch(addAnnonymousCart({id:this.id}));
+  }
+
+  onCloseReview(){
+    this.showReview = false
   }
 
   ngOnDestroy(): void {

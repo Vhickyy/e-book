@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-review',
@@ -8,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './review.component.css'
 })
 export class ReviewComponent {
+
+  @Input() showReview!: boolean;
+  @Output() closeReview: EventEmitter<any> = new EventEmitter<any>();
+
+  onCloseReview(){
+    this.closeReview.emit()
+  }
 
 }

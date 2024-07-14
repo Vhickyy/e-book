@@ -6,7 +6,13 @@
             <app-dashboard-layout>
                 <section>
                     <h3>{{(pdf$ | async)?.title}}</h3>
-                    <pdf-viewer [src]="(pdf$ | async)?.pdf.image" ></pdf-viewer>
+                    <!-- <pdf-viewer [src]="(pdf$ | async)?.pdf.image" ></pdf-viewer> -->
+                     <p>{{pdf?.pdfViewer?.pagesCount}}</p>
+                    <pdf-viewer 
+                    #PDF
+                        [src]="(pdf$ | async)?.pdf.image"
+                        [original-size]="false"
+                        ></pdf-viewer>
                 </section>
             </app-dashboard-layout>
         <!-- </div> -->

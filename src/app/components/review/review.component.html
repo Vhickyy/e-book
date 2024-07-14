@@ -2,13 +2,14 @@
     <div class="main">
         <div class="top">
             <h3>Write a review</h3>
-            <p class="close">x</p>
+            <p class="close" (click)="onCloseReview()">x</p>
         </div>
         <form>
             <div>
                 <label for="rate">Enter Rate</label>
                 <input id="rate" type="number" defaultValue="1" min="1" max="5">
             </div>
+            <p>0/50</p>
             <textarea name="review" id="review" placeholder="write a review"></textarea>
             <button>Submit Review</button>
         </form>

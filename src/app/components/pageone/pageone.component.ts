@@ -26,7 +26,6 @@ export class PageoneComponent {
     //   this.changePage.emit()
     // }
     this.changePage.emit();
-    
   }
 
   upload(){

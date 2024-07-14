@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { DashboardLayoutComponent } from '../../shared/dashboard-layout/dashboard-layout.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PdfViewerComponent, PdfViewerModule } from 'ng2-pdf-viewer';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -20,6 +20,7 @@ export class ReadingComponent implements OnInit {
   paramsOb!: Subscription
   route = inject(ActivatedRoute);
   pdf$ = this.store.select(selectPdf);
+  @ViewChild("PDF") pdf?:  PdfViewerComponent;
 
   ngOnInit(){
     this.paramsOb = this.route.paramMap.subscribe(data => {
