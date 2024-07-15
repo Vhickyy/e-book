@@ -69,6 +69,11 @@ button{
    background-color: transparent;
    border: 4px solid var(--primaryColor);
 }
+@media screen and (min-width: 700px) {
+   section{
+     padding: 2rem;
+   }
+}
 @media screen and (min-width:900px) {
    .mobile{
       display: block;

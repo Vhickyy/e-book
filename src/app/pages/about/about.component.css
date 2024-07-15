@@ -29,20 +29,21 @@
     /* background-color: red; */
 }
 .img-container{
-    width: 100%;
+    width: 30rem;
     /* height: 100%; */
-    height: 20rem;
+    height: 25rem;
     padding-left: 3rem;
 }
 .img{
     display: block;
     width: 100%;
     height: 100%;
-    /* object-fit: cover; */
+    object-fit: contain;
 }
 
 .second-section{
-    margin-block: 9rem;
+    /* margin-block: 9rem; */
+    margin-block: 6rem;
     position: relative;
     /* background-color: blue; */
 }
@@ -69,20 +70,20 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    height: 12rem;
+    height: 14rem;
     border-left: 0;
     z-index: 2;
     /* font-size: 1.1rem; */
 }
 .mission h3{
     align-self: center;
-    padding-bottom: 1rem;
+    padding-bottom: .5rem;
 }
 .absolute{
     position: absolute;
     width: 40%;
     background-color: rgba(237, 228, 243, 1);
-    height: 12rem;
+    height: 14rem;
     border-top-right-radius: 8rem;
     border-bottom-right-radius: 8rem;
     border: 1px solid rgba(226, 173, 244, 1);
@@ -143,10 +144,7 @@
     margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    /* grid-template-columns: 1fr 1fr; */
-    gap: 2rem;
-    /* background-color: blue; */
-    /* display: flex; */
+    gap: 1.5rem;
 }
 .card{
     background-color: white;
@@ -276,6 +274,9 @@ h4{
         width: min(70%,40rem);
         /* width: 65%; */
         flex-direction: row;
+    }
+    .second-section{
+        margin-block: 9rem;
     }
     .second-section .content{
         /* display: grid;

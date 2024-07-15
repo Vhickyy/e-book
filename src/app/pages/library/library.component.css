@@ -111,4 +111,8 @@
    .book-row{
       grid-template-columns: repeat(4,1fr);
    }
+   section{
+      padding: 2rem;
+   }
+   
 }

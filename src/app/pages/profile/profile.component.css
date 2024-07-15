@@ -47,3 +47,8 @@ button{
         grid-template-columns: 1fr 1fr;
     }
 }
+@media screen and (min-width: 700px) {
+    aside{
+      padding: 2rem;
+    }
+ }
