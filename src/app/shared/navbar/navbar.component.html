@@ -47,7 +47,9 @@
                 <div class="ske"></div>
                 <div class="ske"></div>
             </div>
+            
         }@else{
+
             <p class="close" (click)="toggleShow()">x</p>
             <div class="top-modal" *ngIf="(user$ | async)">
                 <img (click)="toggleShow()" [src]="(user$ | async)?.profilePic || '../../../assets/noPic.jpeg'"  class="img" alt="pic">

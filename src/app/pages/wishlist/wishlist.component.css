@@ -26,8 +26,10 @@ section{
    gap: 1rem;
 }
 .img-container{
+   height: 5rem;
+   /* width: 5rem; */
    height: 100%;
-   width: 100%;
+   width: min(8rem,100%);
 }
 .img{
    height: 100%;
@@ -45,17 +47,18 @@ section{
 button{
    background-color: var(--primaryColor);
    color: white;
-   padding: .5rem 1rem;
+   padding: .8rem 1rem;
    border: none;
    border-radius: .5rem;
    cursor: pointer;
+   width: 6rem;
 }
 .mobile{
    display: none;
 }
 .button{
    /* display: none; */
-   padding: .8rem 2rem;
+   /* padding: .8rem 2rem; */
    background-color: white;
    border: 1px solid rgba(250, 52, 52, 1);
    color: rgba(250, 52, 52, 1);
@@ -69,12 +72,12 @@ button{
    background-color: transparent;
    border: 4px solid var(--primaryColor);
 }
-@media screen and (min-width: 700px) {
+/* @media screen and (min-width: 700px) {
+} */
+@media screen and (min-width:700px) {
    section{
      padding: 2rem;
    }
-}
-@media screen and (min-width:900px) {
    .mobile{
       display: block;
       /* width: 30%; */
@@ -91,7 +94,8 @@ button{
       justify-content: space-between;
    }
    button{
-      padding: 1rem 2rem;
+      /* padding: 1rem 2rem; */
+      padding-block: 1rem;
    }
    .btn-container{
       display: flex;

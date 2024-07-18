@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getBook } from '../../store/book/book.actions';
 import { Subscription } from 'rxjs';
@@ -23,6 +23,7 @@ export class BookdetailComponent implements OnInit {
 
   store = inject(Store);
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router)
   paramObs!: Subscription;
   book$ = this.store.select(selectBook);
   id! :string | null;
@@ -39,6 +40,7 @@ export class BookdetailComponent implements OnInit {
       this.id = params.get('id');
       this.store.dispatch(getBook({id:this.id}));
       // this.book$ = this.store.select(selectBook);
+      
     });
   }
 

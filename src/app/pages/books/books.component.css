@@ -209,13 +209,29 @@ h4{
     color: white;
 }
 
+/* ======= Skeleton Loader */
 .sk{
-    background-color: gray;
-    height: 2rem;
+    height: 1rem;
+    border-radius: .5rem;
+    animation: load-skeleton 5s linear infinite;
+    background: linear-gradient(90deg, #80808070 25%, #80808085 50%, #80808070 75%);
+    opacity: .7;
+    background-size: 200% 100%;
 }
 .sk-img{
-    height: 7rem;
+    height: 9rem;
     border-radius: .3rem;
+}
+.sk-title{
+    width: 70%;
+}
+.sk-price{
+    /* display: flex;
+    gap: 2rem; */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 8rem;
+    margin-top: 1rem;
 }
 .error{
     background-color: white;
@@ -259,3 +275,33 @@ h4{
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
+
+/* @keyframes load-skeleton {
+    0% {
+        background-color: #80808070;
+    }
+    50% {
+        background-color: #80808085;
+    }
+    100% {
+        background-color: #80808090;
+    }
+} */
+
+@keyframes load-skeleton {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* .sk {
+    height: 1rem;
+    border-radius: .5rem;
+    background: linear-gradient(90deg, #80808070 25%, #80808085 50%, #80808070 75%);
+    background-size: 200% 100%;
+    animation: load-skeleton 1.5s linear infinite;
+    opacity: .7;
+} */

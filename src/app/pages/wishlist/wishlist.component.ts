@@ -16,32 +16,32 @@ import { RouterLink } from '@angular/router';
   styleUrl: './wishlist.component.css'
 })
 export class WishlistComponent implements OnInit {
-  wishList = [
-    {
-      img: '../../../assets/bookdet.png',
-      title: "Intergalactic War of The Tidal",
-      author: "Mark Zugerbeck",
-      price: 3400
-    },
-    {
-      img: '../../../assets/bookdet.png',
-      title: "Intergalactic War of The Tidal",
-      author: "Mark Zugerbeck",
-      price: 3400
-    },
-    {
-      img: '../../../assets/bookdet.png',
-      title: "Intergalactic War of The Tidal",
-      author: "Mark Zugerbeck",
-      price: 3400
-    },
-    {
-      img: '../../../assets/bookdet.png',
-      title: "Intergalactic War of The Tidal",
-      author: "Mark Zugerbeck",
-      price: 3400
-    },
-  ]
+  // wishList = [
+  //   {
+  //     img: '../../../assets/bookdet.png',
+  //     title: "Intergalactic War of The Tidal",
+  //     author: "Mark Zugerbeck",
+  //     price: 3400
+  //   },
+  //   {
+  //     img: '../../../assets/bookdet.png',
+  //     title: "Intergalactic War of The Tidal",
+  //     author: "Mark Zugerbeck",
+  //     price: 3400
+  //   },
+  //   {
+  //     img: '../../../assets/bookdet.png',
+  //     title: "Intergalactic War of The Tidal",
+  //     author: "Mark Zugerbeck",
+  //     price: 3400
+  //   },
+  //   {
+  //     img: '../../../assets/bookdet.png',
+  //     title: "Intergalactic War of The Tidal",
+  //     author: "Mark Zugerbeck",
+  //     price: 3400
+  //   },
+  // ]
   store = inject(Store)
   wishList$ = this.store.select(selectWishlist);
   ids$ = this.store.select(selectBookIds);

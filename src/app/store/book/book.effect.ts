@@ -82,9 +82,12 @@ export const getBookEffect = createEffect((actions$ = inject(Actions), bookServi
         switchMap(({id}:{id:string | null}) => {
             return bookService.getBook(id).pipe(
                 map((data:any)=>{
+                    console.log("single");
+                    console.log({data});
                     return bookAction.getBookSuccess({book:data.data})
                 }),
                 catchError((error:HttpErrorResponse) => {
+                    router.navigate(["/not-found"])
                     return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
                 })
             )

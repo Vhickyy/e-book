@@ -11,6 +11,8 @@
 </header>
 
 <main>
+
+    <!-- =============== shows for error adding and removing items from wishlist ========= -->
     @if((cartError$ | async)?.message){
         <div class="error">
             <p>{{(cartError$ | async)?.message}}</p>
@@ -18,6 +20,7 @@
             <div class="error-load"></div>
         </div>
     }
+
     @if(!(error$ | async)?.message){
         <div class="main main2" #main>
             <div class="filterCon">
@@ -33,6 +36,7 @@
             </div>
             @if(!(loading$ | async)){
                 <section>
+                    
                         <div class="books">
                             <div class="top-card">
                                 <div (click)="toggleSideBar()">
@@ -80,7 +84,8 @@
                             <div class="sk sk-img"></div>
                             <div class="detail">
                                 <p class="sk sk-title"></p>
-                                <div class="price">
+                                <p class="sk sk-title"></p>
+                                <div class="sk-price">
                                     <div class="sk sk-title"></div>
                                     <div class="sk sk-icon"></div>
                                 </div>

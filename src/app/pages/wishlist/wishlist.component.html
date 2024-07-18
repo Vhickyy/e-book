@@ -1,7 +1,10 @@
 
 <app-dashboard-layout>
     <section >
-        @if(!(wishList$ | async)?.length){
+        @if(loading$ | async){
+            <p>loading</p>
+        }
+        @else if(!(wishList$ | async)?.length){
             <p>Wishlist is empty</p>
         }@else{
             <p>Items: {{(wishList$ | async)?.length}}</p>
@@ -14,7 +17,13 @@
                     <p>{{list.author.fullname}}</p>
                     <p>N {{list.price}}</p>
                     <div class="with-btn desk">
-                        <button>Add To Cart</button>
+                        @if(list.inLib){
+                            <button>Read</button>
+                        }@else{
+                            <button [routerLink]="['/dashboard/payment']" 
+                            [queryParams]="{ 'buy-now': true,id :list._id }">Buy Now</button>
+                        }
+                        <!-- <button>Add To Cart</button> -->
                         <img src="../../../assets/edit.svg" alt="delete-icon">
                     </div>
                 </div>
@@ -24,7 +33,7 @@
                         <button>Read</button>
                     }@else{
                         <button [routerLink]="['/dashboard/payment']" 
-                        [queryParams]="{ 'buy-now': true,id :list._id }">Buy</button>
+                        [queryParams]="{ 'buy-now': true,id :list._id }">Buy Now</button>
                     }
                     
                     @if((ids$ | async)?.includes(list._id)){

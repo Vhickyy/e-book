@@ -17,7 +17,7 @@
 .section{
     flex: 1;
     height: 100%;
-    width: min(90%,var(--maxWidth));
+    width: min(95%,var(--maxWidth));
     margin-inline: auto;
     display: flex;
 }
