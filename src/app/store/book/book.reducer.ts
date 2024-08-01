@@ -1,5 +1,5 @@
 import { Store, createReducer, on } from "@ngrx/store";
-import { addBook, addBookSuccess, addId, addWishlist, bookFailure, deleteBook, deleteBookSuccess, editBook, editBookSuccess, getAuthorBooks, getAuthorBooksSuccess, getBook, getBookSuccess, getBooks, getBooksSuccess, hideError, placeInCart, removeId, removeWishlist, reset } from "./book.actions";
+import { addBook, addBookSuccess, addId, addWishlist, bookFailure, deleteBook, deleteBookSuccess, editBook, editBookSuccess, getAuthorBooks, getAuthorBooksSuccess, getBook, getBookSuccess, getBooks, getBooksSuccess, hideError, placeInCart, postReview, postReviewSuccess, removeId, removeWishlist, reset } from "./book.actions";
 import { inject } from "@angular/core";
 import { selectCart } from "../cart/cart.selector";
 import { error } from "../auth/auth.actions";
@@ -95,6 +95,12 @@ export const bookReducer = createReducer(
         return {...state,loading:false,authorBooks}
     }),
 
+    // Write Review
+    on(postReview,(state) => ({...state,loading:true,error:null})),
+    on(postReviewSuccess,(state) => {
+        return {...state,loading:false}
+    }),
+
     // place in cart
     on(placeInCart,(state) => {
         console.log("placing in cart");
@@ -129,6 +135,8 @@ export const bookReducer = createReducer(
         // console.log({books});
         return {...state,books}
     }),
+
+   
 
     on(reset, (state) => (initialState)),
 

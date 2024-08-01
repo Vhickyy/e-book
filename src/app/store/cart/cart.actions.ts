@@ -4,7 +4,7 @@ import { ICart } from "../../Model/Book";
 
 // add cart
 export const addCart = createAction('[Cart] addCart', props<{id:string | null}>());
-export const addCartSuccess = createAction('[Cart] addCartSuccess',props<{message?:string,cart:ICart}>());
+export const addCartSuccess = createAction('[Cart] addCartSuccess',props<{message?:string,cart:ICart,viaLogin?:boolean}>());
 
 // get cart
 export const getCart = createAction('[Cart] getCart')

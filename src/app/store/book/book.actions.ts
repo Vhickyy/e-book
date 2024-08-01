@@ -25,6 +25,10 @@ export const editBookSuccess = createAction('[Book] editBookSuccess', props<{mes
 export const deleteBook = createAction('[Book] deleteBook', props<{id:string}>());
 export const deleteBookSuccess = createAction('[Book] deleteBookSuccess', props<{message: string,id:string}>());
 
+
+export const postReview = createAction('[Book] postReview', props<{review:string,rating:number,id:string}>());
+export const postReviewSuccess = createAction('[Book] postReviewSuccess', props<{message:string}>());
+
 // place in cart
 export const placeInCart = createAction('[Book] placeInCart');
 

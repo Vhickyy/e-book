@@ -12,11 +12,12 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { EditBookComponent } from './pages/edit-book/edit-book.component';
 import { ReadingComponent } from './pages/reading/reading.component';
 import { BecomeAuthorComponent } from './pages/become-author/become-author.component';
+import { notAuthorGuard } from './gaurds/not-author.guard';
 
 
 export const routes: Routes = [
     {path:"add-book", canActivate:[authorGuard],component:AddBookComponent},
-    {path:"edit-book/:id", component:EditBookComponent},
+    {path:"edit-book/:id", canActivate:[authorGuard], component:EditBookComponent},
     {path:"author/edit-profile/:id",canActivate:[authorGuard],component:AuthorEditComponent},
     {path:"author/send-message",component:SendMessageComponent},
     {path:"profile",component:ProfileComponent},
@@ -26,5 +27,5 @@ export const routes: Routes = [
     {path:"library/:id",component:ReadingComponent},
     {path:"payment",component:PaymentComponent},
     {path:"verify-payment",component:VerifyPaymentComponent},
-    {path:"become-author",component:BecomeAuthorComponent},
+    {path:"become-author", canActivate:[notAuthorGuard],component:BecomeAuthorComponent},
 ];

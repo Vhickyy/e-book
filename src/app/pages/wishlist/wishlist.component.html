@@ -2,7 +2,23 @@
 <app-dashboard-layout>
     <section >
         @if(loading$ | async){
-            <p>loading</p>
+            <div  class="grid"  *ngFor="let list of [1,2,3,4]">
+                <div class="img-container ske ske-img">
+                </div>
+                <div class="red">
+                    <p class="ske ske-text"></p>
+                    <p class="ske ske-text"></p>
+                    <div class="with-btn desk">
+                        <button class="ske ske-text"></button>
+                        <div class="ske img"></div>
+                    </div>
+                </div>
+                <p class="ske ske-text"></p>
+                <div class="mobile btn-container">
+                        <button class="ske"></button>
+                        <button class="ske" ></button>
+                </div>
+            </div>
         }
         @else if(!(wishList$ | async)?.length){
             <p>Wishlist is empty</p>
@@ -24,7 +40,7 @@
                             [queryParams]="{ 'buy-now': true,id :list._id }">Buy Now</button>
                         }
                         <!-- <button>Add To Cart</button> -->
-                        <img src="../../../assets/edit.svg" alt="delete-icon">
+                        <img src="../../../assets/edit.svg" alt="delete-icon" (click)="removeWishlist(list._id)">
                     </div>
                 </div>
                 <p>N {{list.price}}</p>

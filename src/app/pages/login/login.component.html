@@ -22,15 +22,6 @@
                 <p routerLink="/register">Don't have an account?</p>
             </div>
             <button type="submit" [disabled]="!loginForm.valid">{{!(loading$ | async) ? 'Sign In' : 'Loading'}}</button>
-            <!-- <div class="or">
-                <div></div>
-                <p>OR</p>
-                <div></div>
-            </div>
-            <button class="google">
-                <img src="../../../assets/logos_google-icon.svg" alt="google-icon">
-                Sign In With Google
-            </button> -->
         </form>
     </section>
     <div class="overlay"></div>

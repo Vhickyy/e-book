@@ -272,13 +272,30 @@ h4{
 }
 
 .ske{
-    background-color: gray;
+    height: 1rem;
+    border-radius: .5rem;
+    animation: load-skeleton 5s linear infinite;
+    background: linear-gradient(90deg, #80808070 25%, #80808085 50%, #80808070 75%);
+    opacity: .7;
+    background-size: 200% 100%;
+    
+}
+.ske-price{
+    width: 50%;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+}
+.ske-img{
     height: 15rem;
-    width: 100%;
 }
 .ske-2{
     height: 10rem;
-    background-color: blanchedalmond;
+}
+
+.buy-ske{
+    height: fit-content;
+    width: 100%;
+    /* place-items: start; */
 }
 @media screen and (min-width: 600px) {
     .author-det{

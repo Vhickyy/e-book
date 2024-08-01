@@ -43,6 +43,13 @@ export class BookService {
     return this.http.delete(`${environment.apiUrl}/api/v1/books/${id}`)
   }
 
+  postReview (data:{rating:number,review:string,id:string}){
+    console.log(data);
+    
+    return this.http.post(`${environment.apiUrl}/api/v1/review/${data.id}`,data)
+    // return this.http.get("/")
+  }
+
 
   
 }

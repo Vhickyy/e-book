@@ -23,16 +23,30 @@
         </aside>
         <aside class="aside-2">
             <div class="books">
-                <h4>Best Selling Books</h4>
-                <div class="book-row">     
-                    <div *ngFor="let book of bestSelling" class="book-card">
-                        <img [src]="book.img" alt="">
+                <h4>Popular Books</h4>
+                @if(loading$ | async){
+                    @for(i of [1,2,3,4,5]; track i){
+                        <div  class="book-card">
+                            <div class="sk sk-img"></div>
+                            <div class="detail">
+                                <p class="sk sk-title"></p>
+                                <p class="sk sk-title"></p>
+                                <div class="sk-price">
+                                    <div class="sk sk-title"></div>
+                                    <div class="sk sk-icon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                <div class="book-row">
+                    <div *ngFor="let book of (books$ | async)?.slice(0,4)" class="book-card">
+                        <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
                         <div class="detail">
                             <p class="title">{{book.title}}</p>
-                            <p class="author">{{book.author}}</p>
+                            <p class="author">{{book.author.fullname}}</p>
                             <div class="price">
                                 <p class="title">{{book.price}}</p>
-                                <!-- <img src="../../../assets/Vector.svg" alt=""> -->
                             </div>
                         </div>
                     </div>
@@ -40,15 +54,14 @@
             </div>
             <div class="books">
                 <h4>Best Selling Books</h4>
-                <div class="book-row">     
-                    <div *ngFor="let book of bestSelling" class="book-card">
-                        <img [src]="book.img" alt="">
+                <div class="book-row">
+                    <div *ngFor="let book of (books$ | async)?.slice(1,5)?.reverse()" class="book-card">
+                        <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
                         <div class="detail">
                             <p class="title">{{book.title}}</p>
-                            <p class="author">{{book.author}}</p>
+                            <p class="author">{{book.author.fullname}}</p>
                             <div class="price">
                                 <p class="title">{{book.price}}</p>
-                                <!-- <img src="../../../assets/Vector.svg" alt=""> -->
                             </div>
                         </div>
                     </div>
@@ -56,19 +69,18 @@
             </div>
             <div class="books">
                 <h4>Best Selling Books</h4>
-                <div class="book-row">     
-                    <div *ngFor="let book of bestSelling" class="book-card">
-                        <img [src]="book.img" alt="">
-                        <div class="detail">
-                            <p class="title">{{book.title}}</p>
-                            <p class="author">{{book.author}}</p>
-                            <div class="price">
-                                <p class="title">{{book.price}}</p>
-                                <!-- <img src="../../../assets/Vector.svg" alt=""> -->
+                <div class="book-row">
+                        <div *ngFor="let book of (books$ | async)?.slice(0,4)" class="book-card">
+                            <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">
+                            <div class="detail">
+                                <p class="title">{{book.title}}</p>
+                                <p class="author">{{book.author.fullname}}</p>
+                                <div class="price">
+                                    <p class="title">{{book.price}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </aside>
         <aside class="aside-3">

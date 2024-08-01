@@ -4,14 +4,14 @@
             <h3>Write a review</h3>
             <p class="close" (click)="onCloseReview()">x</p>
         </div>
-        <form>
+        <form #reviewForm="ngForm" (ngSubmit)="reviewBook(reviewForm)">
             <div>
                 <label for="rate">Enter Rate</label>
-                <input id="rate" type="number" defaultValue="1" min="1" max="5">
+                <input id="rate" type="text" name="rate" ngModel>
             </div>
             <p>0/50</p>
-            <textarea name="review" id="review" placeholder="write a review"></textarea>
-            <button>Submit Review</button>
+            <textarea name="review" id="review" placeholder="write a review" ngModel></textarea>
+            <button type="submit">Submit Review</button>
         </form>
     </div>
 </section>

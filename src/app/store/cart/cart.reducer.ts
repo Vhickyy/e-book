@@ -33,10 +33,14 @@ export const cartReducer = createReducer(
 
     // add cart
     on(addCart,(state) => ({...state,loading:true,error:null})),
-    on(addCartSuccess,(state,{message,cart}) => {
-        console.log(state,state.cart?.items?.length,state.cart,{cart});
-        
-        const count = state.cart?.items?.length ? state.cart.items.length + 1 : 1;
+    on(addCartSuccess,(state,{message,cart,viaLogin}) => {
+        // console.log( {initialState},{state},state.cart?.items?.length,state.cart,{cart});
+        let count;
+        if(viaLogin){
+            count = cart.items.length;
+        }else{
+            count = state.cart?.items?.length ? state.cart.items.length + 1 : 1;
+        }
         // const count = state.cart?.items?.length ? state.cart.items.length + 1 : (cart?.items?.length || 0);
         return {...state,loading:false,message,cartLength:count,cart}
     }),
@@ -139,8 +143,11 @@ export const cartReducer = createReducer(
 
 
     on(cartError,(state,action)=> {
+        let err = action.error.message;
+        console.log({err});
         
-        return {...state,loading:false,error:{message:action.error.message}}
+        if(err.includes("Unauthorized") || err.includes("Route")) err = ""
+        return {...state,loading:false,error:{message:err}}
     }),
 
     on(hideError, (state) => {

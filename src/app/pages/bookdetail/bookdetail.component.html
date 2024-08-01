@@ -3,24 +3,79 @@
     @if((loadingBook$ | async)){
         <section class="top-section">
             <div >
-              <div class="ske"></div>
+              <div class="ske ske-img"></div>
               <div  class="img-container">
                   <div class="ske ske-2"></div>
                   <div class="ske ske-2"></div>
               </div>
             </div>
-            <div class="buy">
-              <div></div>
-            </div>
-            <div >
+            <div class="">
               <div class="ske"></div>
-              <div  class="img-container">
-                  <div class="ske ske-2"></div>
-                  <div class="ske ske-2"></div>
-              </div>
+              <div class="ske"></div>
+              <div class="ske"></div>
+              <div class="ske"></div>
             </div>
-      </section>
+            <div class="buy buy-ske">
+                <p class="ske ske-price"></p>
+                <p class="ske"></p>
+                <p class="ske"></p>
+            </div>
+        </section>
+        <section >
+            <aside class="author-info-container">
+                <h4>Author Information</h4>
+                <div class="author-det">
+                    <div class="author-info">
+                        <div class="ske pic"></div>
+                        <div>
+                            <div class="ske"></div>
+                            <div class="ske"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn ske"></button>
+                    </div>
+                </div>
+            </aside>
+        </section>
     }@else{
+        <!-- <section class="top-section">
+            <div >
+              <div class="ske ske-img"></div>
+              <div  class="img-container">
+                  <div class="ske ske-2"></div>
+                  <div class="ske ske-2"></div>
+              </div>
+            </div>
+            <div class="">
+              <div class="ske"></div>
+              <div class="ske"></div>
+              <div class="ske"></div>
+              <div class="ske"></div>
+            </div>
+            <div class="buy buy-ske">
+                <p class="ske ske-price"></p>
+                <p class="ske"></p>
+                <p class="ske"></p>
+            </div>
+        </section>
+        <section >
+            <aside class="author-info-container">
+                <h4>Author Information</h4>
+                <div class="author-det">
+                    <div class="author-info">
+                        <div class="ske pic"></div>
+                        <div>
+                            <div class="ske"></div>
+                            <div class="ske"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn ske"></button>
+                    </div>
+                </div>
+            </aside>
+        </section> -->
         <section class="top-section">
             <aside>
                 <div>
@@ -36,7 +91,7 @@
                     <h3>{{(book$ | async)?.title}}</h3>
                     <!-- <h3>Intergalactic War of The Tidal Maro of Zugal Race, A Book</h3> -->
                     <div class="flex">
-                        <p>rating</p>
+                        <p>{{(book$ | async)?.averageRating}} rating</p>
                         <p>{{(book$ | async)?.reviews?.length }} review</p>
                         <p>{{(book$ | async)?.sold}} sold</p>
                     </div>
@@ -188,4 +243,4 @@
 </main>
 <app-footer></app-footer>
 
-<app-review *ngIf="showReview" (closeReview)="onCloseReview()" [showReview]="showReview"></app-review>
+<app-review *ngIf="showReview" (closeReview)="onCloseReview()" [showReview]="showReview" [id]="id"></app-review>

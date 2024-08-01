@@ -7,6 +7,7 @@ import { BookService } from "../../services/book.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Store } from "@ngrx/store";
 import { selectCart } from "../cart/cart.selector";
+import { error } from "../auth/auth.actions";
 
 
 export const addBookEffect = createEffect((actions$ = inject(Actions),bookService = inject(BookService), router = inject(Router)) => {
@@ -136,3 +137,22 @@ export const deleteBookEffect = createEffect((actions$ = inject(Actions),bookSer
         })
     )
 },{functional:true});
+
+
+export const postReviewEffect = createEffect((actions$ = inject(Actions), bookService = inject(BookService), store = inject(Store)) => {
+    return actions$.pipe(
+        ofType(bookAction.postReview),
+        switchMap((data) => {
+            return bookService.postReview(data).pipe(
+                map(data => {
+                    console.log(data);
+                    return bookAction.postReviewSuccess({message:"hi"})
+                }),
+                catchError((error:HttpErrorResponse) => {
+                    console.log({error});
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
+                })
+            )
+        })
+    )
+},{functional:true})

@@ -3,7 +3,8 @@ import { IUser } from "./User"
 export interface IBook {
     _id: string
     title: string
-    author: IUser
+    author: IUser,
+    averageRating: number,
     frontCover: {
         image: string
     }

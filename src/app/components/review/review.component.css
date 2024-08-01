@@ -9,7 +9,7 @@ section{
 
 .main{
     background-color: white;
-    width: min(80%, 40rem);
+    width: min(90%, 40rem);
     padding:  2rem ;
     border-radius: .5rem
 }
