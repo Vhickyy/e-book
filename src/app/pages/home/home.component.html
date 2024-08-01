@@ -25,20 +25,24 @@
             <div class="books">
                 <h4>Popular Books</h4>
                 @if(loading$ | async){
-                    @for(i of [1,2,3,4,5]; track i){
-                        <div  class="book-card">
-                            <div class="sk sk-img"></div>
-                            <div class="detail">
-                                <p class="sk sk-title"></p>
-                                <p class="sk sk-title"></p>
-                                <div class="sk-price">
-                                    <div class="sk sk-title"></div>
-                                    <div class="sk sk-icon"></div>
+                    <div class="book-row">
+                        @for(i of [1,2,3,4]; track i){
+                            <div  class="book-card">
+                                <div class="sk sk-img"></div>
+                                <div class="detail">
+                                    <p class="sk sk-title"></p>
+                                    <p class="sk sk-title"></p>
+                                    <div class="sk-price">
+                                        <div class="sk sk-title"></div>
+                                        <div class="sk sk-icon"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 }
+               
+                
                 <div class="book-row">
                     <div *ngFor="let book of (books$ | async)?.slice(0,4)" class="book-card">
                         <img [src]="book.frontCover.image" class="bookimg" [routerLink]="'/books/science/' + book._id" alt="">

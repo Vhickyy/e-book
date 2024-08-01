@@ -167,6 +167,40 @@ a{
     inset: 0;
 }
 
+/* ======= Skeleton Loader */
+.sk{
+    height: 1rem;
+    border-radius: .5rem;
+    animation: load-skeleton 5s linear infinite;
+    background: linear-gradient(90deg, #80808070 25%, #80808085 50%, #80808070 75%);
+    opacity: .7;
+    background-size: 200% 100%;
+}
+.sk-img{
+    height: 9rem;
+    border-radius: .3rem;
+}
+.sk-title{
+    width: 70%;
+}
+.sk-price{
+    /* display: flex;
+    gap: 2rem; */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 8rem;
+    margin-top: 1rem;
+}
+
+@keyframes load-skeleton {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
 @media screen and (min-width:700px) {
     .dive > p {
         font-size: 2.5rem;
