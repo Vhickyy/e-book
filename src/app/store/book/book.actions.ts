@@ -25,9 +25,13 @@ export const editBookSuccess = createAction('[Book] editBookSuccess', props<{mes
 export const deleteBook = createAction('[Book] deleteBook', props<{id:string}>());
 export const deleteBookSuccess = createAction('[Book] deleteBookSuccess', props<{message: string,id:string}>());
 
-
+// Add Review
 export const postReview = createAction('[Book] postReview', props<{review:string,rating:number,id:string}>());
 export const postReviewSuccess = createAction('[Book] postReviewSuccess', props<{message:string}>());
+
+// Get All Reviews
+export const getReviews = createAction('[Book] getAllReviews', props<{id:string}>())
+export const getReviewsSuccess = createAction('[Book] getAllReviewsSuccess', props<{reviews:any}>())
 
 // place in cart
 export const placeInCart = createAction('[Book] placeInCart');
@@ -41,7 +45,6 @@ export const removeId = createAction('[Book] removeId',props<{id:string}>());
 export const addWishlist = createAction('[Book] addWishlist',props<{id:string}>())
 export const removeWishlist = createAction('[Book] removeWishlist',props<{id:string}>())
 
-// Add Review
 
 // error
 export const bookFailure = createAction('[Book] bookFailure', props<{error: {message:string}}>());

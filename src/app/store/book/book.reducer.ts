@@ -1,5 +1,5 @@
 import { Store, createReducer, on } from "@ngrx/store";
-import { addBook, addBookSuccess, addId, addWishlist, bookFailure, deleteBook, deleteBookSuccess, editBook, editBookSuccess, getAuthorBooks, getAuthorBooksSuccess, getBook, getBookSuccess, getBooks, getBooksSuccess, hideError, placeInCart, postReview, postReviewSuccess, removeId, removeWishlist, reset } from "./book.actions";
+import { addBook, addBookSuccess, addId, addWishlist, bookFailure, deleteBook, deleteBookSuccess, editBook, editBookSuccess, getAuthorBooks, getAuthorBooksSuccess, getBook, getBookSuccess, getBooks, getBooksSuccess, getReviews, getReviewsSuccess, hideError, placeInCart, postReview, postReviewSuccess, removeId, removeWishlist, reset } from "./book.actions";
 import { inject } from "@angular/core";
 import { selectCart } from "../cart/cart.selector";
 import { error } from "../auth/auth.actions";
@@ -22,7 +22,6 @@ export interface IBookState{
     // book: IBook[] | null,
     books: IBook[]
     loading: boolean,
-    // error: {message:string} | null,
     error: {message:string} | null,
     message: string | null,
     reviews: null,
@@ -101,6 +100,13 @@ export const bookReducer = createReducer(
         return {...state,loading:false}
     }),
 
+    on(getReviews, (state) => ({...state,loading:true,error:null})),
+    on(getReviewsSuccess, (state,{reviews}) => {
+        return {...state,reviews,loading:false}
+    }),
+
+    
+
     // place in cart
     on(placeInCart,(state) => {
         console.log("placing in cart");
@@ -124,8 +130,6 @@ export const bookReducer = createReducer(
         const books: IBook[] = state.books?.map((book: IBook) => {
             return book._id == id ? {...book,inWishlist:true} : book
         });
-        // console.log({books});
-        
         return {...state,books}
     }),
 
@@ -136,8 +140,6 @@ export const bookReducer = createReducer(
         return {...state,books}
     }),
 
-   
-
     on(reset, (state) => (initialState)),
 
 
@@ -145,6 +147,7 @@ export const bookReducer = createReducer(
     on(bookFailure, (state,action) => {
        return {...state,loading:false,error: {message:action.error.message}}
     }),
+
     on(hideError, (state) => {
         console.log("hii");
         

@@ -179,7 +179,7 @@
             <aside>
                 <div class="middle-header">
                     <p>Description</p>
-                    <p>Reviews</p>
+                    <p (click)="getBookReviews()">Reviews</p>
                 </div>
                 <hr/>
                 <div class="content">
@@ -219,7 +219,7 @@
             </aside>
         </section>
         @if((user$ | async)?._id !== (book$ | async)?.author?._id){
-        <section>
+            <section>
                 <div class="top-card">
                     <h4>More Science Books</h4>
                     <p>More</p>

@@ -44,10 +44,11 @@ export class BookService {
   }
 
   postReview (data:{rating:number,review:string,id:string}){
-    console.log(data);
-    
     return this.http.post(`${environment.apiUrl}/api/v1/review/${data.id}`,data)
-    // return this.http.get("/")
+  }
+
+  getReviews (id:string){
+    return this.http.get(`${environment.apiUrl}/api/v1/review/${id}`)
   }
 
 

@@ -79,7 +79,6 @@ export class BooksComponent implements OnInit {
       
     } else {
       this.renderer.addClass(this.main.nativeElement, 'main2');
-      
     }
   }
 

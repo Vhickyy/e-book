@@ -123,8 +123,6 @@ export const deleteBookEffect = createEffect((actions$ = inject(Actions),bookSer
         switchMap(({id})=>{
             return bookService.deleteBook(id).pipe(
                 map((data: any)=>{
-                    console.log(data);
-                    // router.navigate(["/"])
                     store.dispatch(bookAction.removeId({id}))
                     return bookAction.deleteBookSuccess({message:data.message,id})
                 }),
@@ -147,6 +145,27 @@ export const postReviewEffect = createEffect((actions$ = inject(Actions), bookSe
                 map(data => {
                     console.log(data);
                     return bookAction.postReviewSuccess({message:"hi"})
+                }),
+                catchError((error:HttpErrorResponse) => {
+                    console.log({error});
+                    return of(bookAction.bookFailure({error:{message:error.error || error.statusText}}))
+                })
+            )
+        })
+    )
+},{functional:true})
+
+
+
+export const getReviewsEffect = createEffect((actions$ = inject(Actions), bookService = inject(BookService), store = inject(Store)) => {
+    return actions$.pipe(
+        ofType(bookAction.getReviews),
+        switchMap(({id}) => {
+            return bookService.getReviews(id).pipe(
+                map(data => {
+                    console.log({data});
+                    
+                    return bookAction.getReviewsSuccess({reviews:["hi","hmm"]})
                 }),
                 catchError((error:HttpErrorResponse) => {
                     console.log({error});
